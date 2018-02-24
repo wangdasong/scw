@@ -1,0 +1,52 @@
+<br/>
+<li id="li{{element.id}}" class="" ng-repeat="element in elements" bindonce elementId="{{element.id}}" widgetId="{{id}}" canEditFlag="elementEditElement">
+	<a id="a{{element.id}}" 
+      		href="{{element.url}}"
+      		data-url="{{element.url}}"
+			class="{{element.folder && 'dropdown-toggle'||''}}"
+      		target="_self"
+			ng-click="menuClick(element.url, !element.folder, element.id)">
+		<i id="i{{element.id}}" class="{{element.icon}}"></i>
+		<span id="span{{element.id}}" class="menu-text">{{element.label}}</span>
+		<b id="b{{element.id}}" ng-show="element.folder" class="arrow icon-angle-down"></b>
+	</a>
+	<ul id="ul{{element.id}}" bo-if="element.folder" class="submenu">
+		<li id="li{{elementSub1.id}}" class="" ng-repeat="elementSub1 in element.childElements" bindonce elementId="{{elementSub1.id}}" widgetId="{{id}}" canEditFlag="elementEditElement">
+			<a id="a{{elementSub1.id}}"
+				class="{{elementSub1.folder && 'dropdown-toggle' || ''}}"
+				href="{{elementSub1.url}}"
+				ng-click="menuClick(elementSub1.url, !elementSub1.folder, elementSub1.id)"
+				target="_self">
+				<i id="i{{elementSub1.id}}" class="icon-double-angle-right"></i>
+				<span id="span{{elementSub1.id}}" class="">{{elementSub1.label}}</span>
+				<b id="b{{elementSub1.id}}" ng-show="elementSub1.folder" class="arrow icon-angle-down"></b>
+			</a>
+			<ul id="ul{{elementSub1.id}}" bo-if="elementSub1.folder" class="submenu">
+				<li id="li{{elementSub1.id}}" class="" ng-repeat="elementSub2 in elementSub1.childElements" bindonce elementId="{{elementSub2.id}}" widgetId="{{id}}" canEditFlag="elementEditElement">
+					<a id="a{{elementSub2.id}}"
+					class="{{elementSub2.folder && 'dropdown-toggle' || ''}}"
+					href="{{elementSub2.url}}"
+					ng-click="menuClick(elementSub2.url, !elementSub2.folder, elementSub2.id)"
+					target="_self">
+						<i id="i{{elementSub2.id}}" class="icon-double-angle-right"></i>
+						<span id="span{{elementSub2.id}}" class="">{{elementSub2.label}}</span>
+						<b id="b{{elementSub2.id}}" ng-show="elementSub2.folder" class="arrow icon-angle-down"></b>
+					</a>
+					<ul id="ul{{elementSub2.id}}" bo-if="elementSub2.folder" class="submenu">
+						<li id="li{{elementSub2.id}}" class="" ng-repeat="elementSub3 in elementSub2.childElements" bindonce elementId="{{elementSub3.id}}" canEditFlag="elementEditElement">
+							<a id="a{{elementSub3.id}}"
+							class="{{elementSub3.folder && 'dropdown-toggle' || ''}}"
+							href="{{elementSub3.url}}"
+							ng-click="menuClick(elementSub3.url, !elementSub3.folder, elementSub3.id)"
+							target="_self">
+								<i id="i{{elementSub3.id}}" class="icon-double-angle-right"></i>
+								<span id="span{{elementSub3.id}}" class="">{{elementSub3.label}}</span>
+								<b id="b{{elementSub3.id}}" ng-show="elementSub3.folder" class="arrow icon-angle-down"></b>
+							</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</li>
+	</ul>
+</li>

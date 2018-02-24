@@ -1,0 +1,22 @@
+<div class="form-horizontal form-group col-lg-{{width}} col-md-{{width}} col-sm-{{width}}" widgetId="{{id}}" canEditFlag="widgetEditElement">
+	<label class="control-label input-sm col-lg-4 col-md-4 col-sm-4 field-title no-padding-right blue" for="{{id}}">
+		{{label}}
+	</label>
+	<div class="col-lg-8 col-md-8 col-sm-8 field-input">
+		<form enctype="multipart/form-data">
+			<input type="file" id="input{{id}}" name="file" value="{{initvalue}}" placeholder="{{name}}" class="col-xs-12" />
+		</form>
+		<input type="hidden" id="hidden{{id}}" name="{{name}}" value="{{initvalue}}"/>
+		<div id="progress{{id}}" class="progress" data-percent="{{progress}}%" style="display:none;">
+			<div id="progressbar{{id}}" class="progress-bar" style="width:{{progress}}%;"></div>
+		</div>
+    </div>
+</div>
+
+<style>
+ 	.ace-file-input {
+	    height: 30px;
+	    line-height: 30px;
+	    margin-bottom: 0px;
+	}
+</style>

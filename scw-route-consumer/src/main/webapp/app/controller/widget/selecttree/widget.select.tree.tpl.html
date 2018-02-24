@@ -1,0 +1,17 @@
+<div class="form-horizontal form-group col-lg-{{width}} col-md-{{width}} col-sm-{{width}}" widgetId="{{id}}" canEditFlag="widgetEditElement">
+	<label class="control-label input-sm col-lg-4 col-md-4 col-sm-4 field-title no-padding-right blue" for="{{id}}">
+		{{label}}
+	</label>
+	<div class="input-group col-lg-8 col-md-8 col-sm-8 field-input dropdown" style="padding-left:15px;padding-right:15px">
+		<input type="text" id="text{{id}}" placeholder="{{name}}" class="col-xs-12 dropdown-toggle" data-toggle="dropdown"/>
+		<span class="input-group-addon" ng-click="clearData()" style="cursor:pointer">
+			<i class="icon-trash"></i>
+		</span>
+		<input type="hidden" id="hid{{id}}" name="{{name}}"/>
+		<div class="dropdown-menu widget-body">
+			<div class="widget-main padding-8">
+				<div id="tree{{id}}" class="tree"></div>
+			</div>
+		</div>
+    </div>
+</div>

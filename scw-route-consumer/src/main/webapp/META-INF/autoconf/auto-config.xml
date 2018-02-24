@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+<!-- 	<group>
+		<property name="jdbc_driverClassName" defaultValue="com.mysql.jdbc.Driver" description="" />
+		<property name="jdbc_url" defaultValue="" description="" />
+		<property name="jdbc_username" defaultValue="" description="" />
+		<property name="jdbc_password" defaultValue="" description="" />
+		
+	</group> -->
+	<script>
+		<generate template="WEB-INF/web.xml" charset="UTF-8"/>
+		<generate template="WEB-INF/classes/conf/config.properties" charset="UTF-8"/>
+	</script>
+</config>

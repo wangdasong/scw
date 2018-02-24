@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.github.wangdasong.scwproviderwebeditor.dao.persistence.ContainerMapper" >
+  <resultMap id="BaseResultMap" type="com.github.wangdasong.scwproviderwebeditor.dao.entity.Container" >
+    <id column="CTR_ID" property="id" />
+    <result column="CTR_CODE" property="code" />
+    <result column="CTR_NAME" property="name" />
+    <result column="CTR_TYPE" property="type" />
+    <result column="CTR_SORT" property="sort" />
+    <result column="CTR_WIDTH" property="width" />
+    <result column="CTR_SUB_COUNT" property="subCount" />
+    <result column="CTR_PAGE_ID" property="pageId" />
+    <result column="CTR_CONTAINER_ID" property="containerId" />
+    <result column="CTR_TMP_FLG" property="tmpFlg" />
+    <result column="CTR_CREATE_DATE" property="createDate" />
+    <result column="CTR_CREATE_USER_ID" property="createUserId" />
+    <result column="CTR_UPDATE_DATE" property="updateDate" />
+    <result column="CTR_UPDATE_USER_ID" property="updateUserId" />
+    <collection property="widgets" resultMap="com.github.wangdasong.scwproviderwebeditor.dao.persistence.WidgetMapper.BaseResultMap"></collection>
+    <collection property="containers" resultMap="com.github.wangdasong.scwproviderwebeditor.dao.persistence.ContainerMapper.SubResultMap"></collection>
+    <collection property="attConfigs" resultMap="com.github.wangdasong.scwproviderwebeditor.dao.persistence.AttConfigMapper.BaseResultMap"></collection>
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    CTR.ID AS CTR_ID,
+    CTR.CODE AS CTR_CODE,
+    CTR.NAME AS CTR_NAME,
+    CTR.TYPE AS CTR_TYPE,
+    CTR.SORT AS CTR_SORT,
+    CTR.WIDTH AS CTR_WIDTH,
+    CTR.PAGE_ID AS CTR_PAGE_ID,
+    CTR.CONTAINER_ID AS CTR_CONTAINER_ID,
+    CTR.TMP_FLG AS CTR_TMP_FLG,
+    CTR.CREATE_DATE AS CTR_CREATE_DATE,
+    CTR.CREATE_USER_ID AS CTR_CREATE_USER_ID,
+    CTR.UPDATE_DATE AS CTR_UPDATE_DATE,
+    CTR.UPDATE_USER_ID AS CTR_UPDATE_USER_ID
+  </sql>
+  <resultMap id="SubResultMap" type="com.github.wangdasong.scwproviderwebeditor.dao.entity.Container" >
+    <id column="SCTR_ID" property="id" />
+    <result column="SCTR_CODE" property="code" />
+    <result column="SCTR_NAME" property="name" />
+    <result column="SCTR_TYPE" property="type" />
+    <result column="SCTR_SORT" property="sort" />
+    <result column="SCTR_WIDTH" property="width" />
+    <result column="SCTR_PAGE_ID" property="pageId" />
+    <result column="SCTR_CONTAINER_ID" property="containerId" />
+    <result column="SCTR_TMP_FLG" property="tmpFlg" />
+    <result column="SCTR_CREATE_DATE" property="createDate" />
+    <result column="SCTR_CREATE_USER_ID" property="createUserId" />
+    <result column="SCTR_UPDATE_DATE" property="updateDate" />
+    <result column="SCTR_UPDATE_USER_ID" property="updateUserId" />
+  </resultMap>
+  <sql id="Sub_Column_List" >
+    SCTR.ID AS SCTR_ID,
+    SCTR.CODE AS SCTR_CODE,
+    SCTR.NAME AS SCTR_NAME,
+    SCTR.TYPE AS SCTR_TYPE,
+    SCTR.SORT AS SCTR_SORT,
+    SCTR.WIDTH AS SCTR_WIDTH,
+    SCTR.PAGE_ID AS SCTR_PAGE_ID,
+    SCTR.CONTAINER_ID AS SCTR_CONTAINER_ID,
+    SCTR.TMP_FLG AS SCTR_TMP_FLG,
+    SCTR.CREATE_DATE AS SCTR_CREATE_DATE,
+    SCTR.CREATE_USER_ID AS SCTR_CREATE_USER_ID,
+    SCTR.UPDATE_DATE AS SCTR_UPDATE_DATE,
+    SCTR.UPDATE_USER_ID AS SCTR_UPDATE_USER_ID
+  </sql>
+  
+  <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select   <include refid="Base_Column_List" />
+    from SMS_CONTAINER CTR
+    where CTR.ID= #{id}
+  </select>
+  <select id="getDetailById" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select   <include refid="Base_Column_List" />,
+    <include refid="com.github.wangdasong.scwproviderwebeditor.dao.persistence.WidgetMapper.Base_Column_List" />,
+    <include refid="com.github.wangdasong.scwproviderwebeditor.dao.persistence.AttConfigMapper.Base_Column_List" />
+    from SMS_CONTAINER CTR 
+    LEFT JOIN SMS_ATT_CONFIG ACG ON CTR.ID = ACG.BELONG_ID
+    LEFT JOIN SMS_WIDGET WDT ON CTR.ID = WDT.CONTAINER_ID
+    where CTR.ID = #{id}
+    order by CTR.SORT, WDT.SORT
+  </select>
+  
+  <select id="getListByParentId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select   <include refid="Base_Column_List" />,
+    <if test="@com.github.wangdasong.scwproviderwebeditor.dao.entity.Container@dbDialog=='oracle'">
+    NVL
+    </if>
+    <if test="@com.github.wangdasong.scwproviderwebeditor.dao.entity.Container@dbDialog=='mysql'">
+    IFNULL
+    </if>
+    (SCTRC.SUB_COUNT, 0) AS CTR_SUB_COUNT,
+    <include refid="com.github.wangdasong.scwproviderwebeditor.dao.persistence.WidgetMapper.Base_Column_List" />
+    from SMS_CONTAINER CTR
+    LEFT JOIN SMS_WIDGET WDT ON CTR.ID = WDT.CONTAINER_ID
+	LEFT JOIN (select count(SCTR.ID) SUB_COUNT,SCTR.CONTAINER_ID 
+		from SMS_CONTAINER SCTR 
+		where SCTR.CONTAINER_ID != SCTR.ID 
+		group by SCTR.CONTAINER_ID) SCTRC ON CTR.ID = SCTRC.CONTAINER_ID
+    where CTR.CONTAINER_ID= #{containerId}
+    order by CTR.SORT, WDT.SORT
+  </select>
+
+  <delete id="deleteById" parameterType="java.lang.String" >
+    delete from SMS_CONTAINER
+    where ID = #{id}
+  </delete>
+
+  <insert id="save" parameterType="com.github.wangdasong.scwproviderwebeditor.dao.entity.Container" >
+    <selectKey keyProperty="id" resultType="java.lang.String" order="BEFORE">
+        <if test="@com.github.wangdasong.scwproviderwebeditor.dao.entity.Container@dbDialog=='oracle'">
+            SELECT SYS_GUID() AS ID FROM DUAL
+        </if>
+        <if test="@com.github.wangdasong.scwproviderwebeditor.dao.entity.Container@dbDialog=='mysql'">
+            SELECT REPLACE(UUID(),'-','') FROM DUAL;
+        </if>
+    </selectKey>
+    insert into SMS_CONTAINER
+    	<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="id != null" >
+                    ID,
+            </if>
+			<if test="code != null" >
+                    CODE,
+            </if>
+			<if test="name != null" >
+                    NAME,
+            </if>
+			<if test="type != null" >
+                    TYPE,
+            </if>
+	        <if test="sort != null" > 
+	                SORT,
+	        </if>
+	        <if test="width != null" > 
+	                WIDTH,
+	        </if>
+			<if test="pageId != null" >
+                    PAGE_ID,
+            </if>
+			<if test="containerId != null" >
+                    CONTAINER_ID,
+            </if>
+			<if test="tmpFlg != null" >
+                    TMP_FLG,
+            </if>
+			<if test="createDate != null" >
+                    CREATE_DATE,
+            </if>
+			<if test="createUserId != null" >
+                    CREATE_USER_ID,
+            </if>
+			<if test="updateDate != null" >
+                    UPDATE_DATE,
+            </if>
+			<if test="updateUserId != null" >
+                    UPDATE_USER_ID,
+            </if>
+        </trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="id != null" >
+                    #{id},
+            </if>
+			<if test="code != null" >
+                    #{code},
+            </if>
+			<if test="name != null" >
+                    #{name},
+            </if>
+			<if test="type != null" >
+                    #{type},
+            </if>
+	        <if test="sort != null" > 
+	                #{sort},
+	        </if>
+	        <if test="width != null" > 
+	                #{width},
+	        </if>
+			<if test="pageId != null" >
+                    #{pageId},
+            </if>
+			<if test="containerId != null" >
+                    #{containerId},
+            </if>
+			<if test="tmpFlg != null" >
+                    #{tmpFlg},
+            </if>
+			<if test="createDate != null" >
+                    #{createDate},
+            </if>
+			<if test="createUserId != null" >
+                    #{createUserId},
+            </if>
+			<if test="updateDate != null" >
+                    #{updateDate},
+            </if>
+			<if test="updateUserId != null" >
+                    #{updateUserId},
+            </if>
+         </trim>  
+  </insert>
+
+  <update id="update" parameterType="com.github.wangdasong.scwproviderwebeditor.dao.entity.Container" >
+    update SMS_CONTAINER
+    <set>
+      <if test="code != null" > 
+        CODE = #{code},
+      </if> 
+      <if test="name != null" > 
+        NAME = #{name},
+      </if> 
+      <if test="type != null" > 
+        TYPE = #{type},
+      </if> 
+      <if test="pageId != null" > 
+        PAGE_ID = #{pageId},
+      </if>
+      <if test="sort != null" > 
+        SORT = #{sort},
+      </if> 
+      <if test="width != null" > 
+        WIDTH = #{width},
+      </if>
+      <if test="containerId != null" > 
+        CONTAINER_ID = #{containerId},
+      </if> 
+      <if test="tmpFlg != null" > 
+        TMP_FLG = #{tmpFlg},
+      </if> 
+      <if test="createDate != null" > 
+        CREATE_DATE = #{createDate},
+      </if> 
+      <if test="createUserId != null" > 
+        CREATE_USER_ID = #{createUserId},
+      </if> 
+      <if test="updateDate != null" > 
+        UPDATE_DATE = #{updateDate},
+      </if> 
+      <if test="updateUserId != null" > 
+        UPDATE_USER_ID = #{updateUserId},
+      </if> 
+    </set>
+    where ID = #{id}
+  </update>
+
+</mapper>

@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.github.wangdasong.scwproviderwebeditor.dao.persistence.AttConfigMapper" >
+  <resultMap id="BaseResultMap" type="com.github.wangdasong.scwproviderwebeditor.dao.entity.AttConfig" >
+    <id column="ACG_ID" property="id" />
+    <result column="ACG_CODE" property="code" />
+    <result column="ACG_NAME" property="name" />
+    <result column="ACG_TYPE" property="type" />
+    <result column="ACG_ATT_VALUE" property="attValue" />
+    <result column="ACG_NULL_ABLE" property="nullAble" />
+    <result column="ACG_ATT_DEFAULT" property="attDefault" />
+    <result column="ACG_ATT_COMMENT" property="attComment" />
+    <result column="ACG_BELONG_TYPE" property="belongType" />
+    <result column="ACG_BELONG_ID" property="belongId" />
+    <result column="ACG_CREATE_DATE" property="createDate" />
+    <result column="ACG_CREATE_USER_ID" property="createUserId" />
+    <result column="ACG_UPDATE_DATE" property="updateDate" />
+    <result column="ACG_UPDATE_USER_ID" property="updateUserId" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    ACG.ID AS ACG_ID,
+    ACG.CODE AS ACG_CODE,
+    ACG.NAME AS ACG_NAME,
+    ACG.TYPE AS ACG_TYPE,
+    ACG.ATT_VALUE AS ACG_ATT_VALUE,
+    ACG.NULL_ABLE AS ACG_NULL_ABLE,
+    ACG.ATT_DEFAULT AS ACG_ATT_DEFAULT,
+    ACG.ATT_COMMENT AS ACG_ATT_COMMENT,
+    ACG.BELONG_TYPE AS ACG_BELONG_TYPE,
+    ACG.BELONG_ID AS ACG_BELONG_ID,
+    ACG.CREATE_DATE AS ACG_CREATE_DATE,
+    ACG.CREATE_USER_ID AS ACG_CREATE_USER_ID,
+    ACG.UPDATE_DATE AS ACG_UPDATE_DATE,
+    ACG.UPDATE_USER_ID AS ACG_UPDATE_USER_ID
+  </sql>
+
+  <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select   <include refid="Base_Column_List" />
+    from SMS_ATT_CONFIG ACG
+    where ACG.ID= #{id}
+  </select>
+  <select id="getByBelongId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select   <include refid="Base_Column_List" />
+    from SMS_ATT_CONFIG ACG
+    where ACG.BELONG_ID= #{belongId}
+  </select>
+
+  <delete id="deleteById" parameterType="java.lang.String" >
+    delete from SMS_ATT_CONFIG
+    where ID = #{id}
+  </delete>
+
+  <insert id="save" parameterType="com.github.wangdasong.scwproviderwebeditor.dao.entity.AttConfig" >
+      <selectKey keyProperty="id" resultType="java.lang.String" order="BEFORE">
+          <if test="@com.github.wangdasong.scwproviderwebeditor.dao.entity.AttConfig@dbDialog=='oracle'">
+              SELECT SYS_GUID() AS ID FROM DUAL
+          </if>
+          <if test="@com.github.wangdasong.scwproviderwebeditor.dao.entity.AttConfig@dbDialog=='mysql'">
+              SELECT REPLACE(UUID(),'-','') FROM DUAL;
+          </if>
+      </selectKey>
+    insert into SMS_ATT_CONFIG
+    	<trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                    ID,
+            </if>
+			<if test="code != null" >
+                    CODE,
+            </if>
+			<if test="name != null" >
+                    NAME,
+            </if>
+			<if test="type != null" >
+                    TYPE,
+            </if>
+			<if test="attValue != null" >
+                    ATT_VALUE,
+            </if>
+			<if test="nullAble != null" >
+                    NULL_ABLE,
+            </if>
+			<if test="attDefault != null" >
+                    ATT_DEFAULT,
+            </if>
+			<if test="attComment != null" >
+                    ATT_COMMENT,
+            </if>
+			<if test="belongType != null" >
+                    BELONG_TYPE,
+            </if>
+			<if test="belongId != null" >
+                    BELONG_ID,
+            </if>
+			<if test="createDate != null" >
+                    CREATE_DATE,
+            </if>
+			<if test="createUserId != null" >
+                    CREATE_USER_ID,
+            </if>
+			<if test="updateDate != null" >
+                    UPDATE_DATE,
+            </if>
+			<if test="updateUserId != null" >
+                    UPDATE_USER_ID,
+            </if>
+        </trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                    #{id},
+            </if>
+			<if test="code != null" >
+                    #{code},
+            </if>
+			<if test="name != null" >
+                    #{name},
+            </if>
+			<if test="type != null" >
+                    #{type},
+            </if>
+			<if test="attValue != null" >
+                    #{attValue},
+            </if>
+			<if test="nullAble != null" >
+                    #{nullAble},
+            </if>
+			<if test="attDefault != null" >
+                    #{attDefault},
+            </if>
+			<if test="attComment != null" >
+                    #{attComment},
+            </if>
+			<if test="belongType != null" >
+                    #{belongType},
+            </if>
+			<if test="belongId != null" >
+                    #{belongId},
+            </if>
+			<if test="createDate != null" >
+                    #{createDate},
+            </if>
+			<if test="createUserId != null" >
+                    #{createUserId},
+            </if>
+			<if test="updateDate != null" >
+                    #{updateDate},
+            </if>
+			<if test="updateUserId != null" >
+                    #{updateUserId},
+            </if>
+         </trim>  
+  </insert>
+
+  <update id="update" parameterType="com.github.wangdasong.scwproviderwebeditor.dao.entity.AttConfig" >
+    update SMS_ATT_CONFIG
+    <set>
+    <if test="code != null" >
+        CODE = #{code},
+      </if> 
+      <if test="name != null" > 
+        NAME = #{name},
+      </if> 
+      <if test="type != null" > 
+        TYPE = #{type},
+      </if> 
+      <if test="attValue != null" > 
+        ATT_VALUE = #{attValue},
+      </if> 
+      <if test="nullAble != null" > 
+        NULL_ABLE = #{nullAble},
+      </if> 
+      <if test="attDefault != null" > 
+        ATT_DEFAULT = #{attDefault},
+      </if> 
+      <if test="attComment != null" > 
+        ATT_COMMENT = #{attComment},
+      </if> 
+      <if test="belongType != null" > 
+        BELONG_TYPE = #{belongType},
+      </if> 
+      <if test="belongId != null" > 
+        BELONG_ID = #{belongId},
+      </if> 
+      <if test="createDate != null" > 
+        CREATE_DATE = #{createDate},
+      </if> 
+      <if test="createUserId != null" > 
+        CREATE_USER_ID = #{createUserId},
+      </if> 
+      <if test="updateDate != null" > 
+        UPDATE_DATE = #{updateDate},
+      </if> 
+      <if test="updateUserId != null" > 
+        UPDATE_USER_ID = #{updateUserId},
+      </if> 
+    </set>
+    where ID = #{id}
+  </update>
+
+
+	<sql id="Find_Page_Base_Sql" >
+		FROM SMS_ATT_CONFIG ACG
+		<where>
+            <trim prefixOverrides="AND |OR ">
+                <if test="options.code!=null">
+                    AND ACG.CODE='${options.code}'   
+                </if>
+                 <if test="options.name!=null">
+                    AND ACG.NAME='${options.name}'
+                </if>
+                 <if test="options.belongId!=null">
+                    AND ACG.BELONG_ID='${options.belongId}'
+                </if>
+            </trim>
+        </where>
+	</sql>
+	<sql id="Sort_Page_Base_Sql" >
+		<if test="pageSort!=null">
+			order by 
+			<foreach item="item" index="index" collection="pageSortArray" separator="," >
+				<if test="item=='code'">
+                    CODE
+                </if>
+				<if test="item=='code desc'">
+                    CODE DESC
+                </if>
+				<if test="item=='name'">
+                    NAME
+                </if>
+				<if test="item=='name desc'">
+                    NAME DESC
+                </if>
+            </foreach>
+		</if>
+	</sql>
+	<select id="findPageData" parameterType="com.github.wangdasong.scwbasecore.utils.paging.Pagination" resultMap="BaseResultMap">
+        <if test="@com.github.wangdasong.scwproviderwebeditor.dao.entity.AttConfig@dbDialog=='oracle'">
+        	<include refid="oraclesplit_prefix" />
+        </if>
+	    <if test="@com.github.wangdasong.scwproviderwebeditor.dao.entity.AttConfig@dbDialog=='mysql'">
+        	select
+        </if>
+        <include refid="Base_Column_List" />
+        <include refid="Find_Page_Base_Sql" />
+		<include refid="Sort_Page_Base_Sql" />
+		<if test="@com.github.wangdasong.scwproviderwebeditor.dao.entity.AttConfig@dbDialog=='oracle'">
+        	<include refid="oraclesplit_suffix" />
+        </if>
+		<if test="@com.github.wangdasong.scwproviderwebeditor.dao.entity.AttConfig@dbDialog=='mysql'">
+        	<include refid="mysqlsplit_suffix" />
+        </if>
+    </select>
+    <sql id="oraclesplit_prefix">
+        select * from ( select row_.*, rownum rownum_ from (select 
+    </sql>
+    <sql id="oraclesplit_suffix">
+        )row_ where rownum &lt;= #{oracle_maxrow}) where rownum_ > #{oracle_minrow}
+    </sql>
+    <sql id="mysqlsplit_suffix">
+    	limit #{oracle_minrow}, #{pageSize}
+    </sql>
+    
+    
+    <select id="getCount" parameterType="com.github.wangdasong.scwbasecore.utils.paging.Pagination" resultType="int">
+        select count(*) 
+        <include refid="Find_Page_Base_Sql" />
+    </select>
+</mapper>

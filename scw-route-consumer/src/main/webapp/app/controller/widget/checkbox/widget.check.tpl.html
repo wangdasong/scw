@@ -1,0 +1,13 @@
+<div class="form-horizontal form-group col-lg-{{width}} col-md-{{width}} col-sm-{{width}}" widgetId="{{id}}" addElement=true canEditFlag="widgetEditElement">
+	<label class="control-label input-sm col-lg-4 col-md-4 col-sm-4 field-title no-padding-right blue">{{label}}</label>
+	<div class="col-lg-8 col-md-8 col-sm-8 field-input">
+		<label ng-repeat="element in elements">
+			<div class="checkbox" style="padding-top:0px;">
+				<label elementId="{{element.id}}" canEditFlag="elementEditElement">
+					<input type="checkbox" id="input{{element.id}}" name="{{name}}" ng-checked="element.checked" value="{{element.value}}" class="ace" ng-click="changeValue(element.id)"/>
+					<span class="lbl" id="span{{element.id}}">{{element.label}}</span>
+				</label>
+			</div>
+		</label>
+	</div>
+</div>

@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.github.wangdasong.scwproviderwebeditor.dao.persistence.ElementMapper">
+    <resultMap id="BaseResultMap" type="com.github.wangdasong.scwproviderwebeditor.dao.entity.Element">
+        <id column="ELT_ID" property="id"/>
+        <result column="ELT_CODE" property="code"/>
+        <result column="ELT_NAME" property="name"/>
+        <result column="ELT_PARENT_ID" property="parentId"/>
+        <result column="ELT_WIDGET_ID" property="widgetId"/>
+        <result column="ELT_CREATE_DATE" property="createDate"/>
+        <result column="ELT_CREATE_USER_ID" property="createUserId"/>
+        <result column="ELT_UPDATE_DATE" property="updateDate"/>
+        <result column="ELT_UPDATE_USER_ID" property="updateUserId"/>
+        <result column="ELT_SUB_COUNT" property="subCount"/>
+        <collection property="childElements" resultMap="Sub1ResultMap"></collection>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    ELT.ID AS ELT_ID,
+    ELT.CODE AS ELT_CODE,
+    ELT.NAME AS ELT_NAME,
+    ELT.PARENT_ID AS ELT_PARENT_ID,
+    ELT.WIDGET_ID AS ELT_WIDGET_ID,
+    ELT.CREATE_DATE AS ELT_CREATE_DATE,
+    ELT.CREATE_USER_ID AS ELT_CREATE_USER_ID,
+    ELT.UPDATE_DATE AS ELT_UPDATE_DATE,
+    ELT.UPDATE_USER_ID AS ELT_UPDATE_USER_ID
+  </sql>
+    <!-- sub1 -->
+    <resultMap id="Sub1ResultMap" type="com.github.wangdasong.scwproviderwebeditor.dao.entity.Element">
+        <id column="ELT_SUB1_ID" property="id"/>
+        <result column="ELT_SUB1_CODE" property="code"/>
+        <result column="ELT_SUB1_PARENT_ID" property="parentId"/>
+        <result column="ELT_SUB1_NAME" property="name"/>
+        <result column="ELT_SUB1_WIDGET_ID" property="widgetId"/>
+        <result column="ELT_SUB1_CREATE_DATE" property="createDate"/>
+        <result column="ELT_SUB1_CREATE_USER_ID" property="createUserId"/>
+        <result column="ELT_SUB1_UPDATE_DATE" property="updateDate"/>
+        <result column="ELT_SUB1_UPDATE_USER_ID" property="updateUserId"/>
+        <collection property="childElements" resultMap="Sub2ResultMap"></collection>
+    </resultMap>
+
+    <sql id="Sub1_Column_List">
+    ELTSUB1.ID AS ELT_SUB1_ID,
+    ELTSUB1.CODE AS ELT_SUB1_CODE,
+    ELTSUB1.NAME AS ELT_SUB1_NAME,
+    ELTSUB1.PARENT_ID AS ELT_SUB1_PARENT_ID,
+    ELTSUB1.WIDGET_ID AS ELT_SUB1_WIDGET_ID,
+    ELTSUB1.CREATE_DATE AS ELT_SUB1_CREATE_DATE,
+    ELTSUB1.CREATE_USER_ID AS ELT_SUB1_CREATE_USER_ID,
+    ELTSUB1.UPDATE_DATE AS ELT_SUB1_UPDATE_DATE,
+    ELTSUB1.UPDATE_USER_ID AS ELT_SUB1_UPDATE_USER_ID
+  </sql>
+    <!-- sub1 end-->
+    <!-- sub2 -->
+    <resultMap id="Sub2ResultMap" type="com.github.wangdasong.scwproviderwebeditor.dao.entity.Element">
+        <id column="ELT_SUB2_ID" property="id"/>
+        <result column="ELT_SUB2_CODE" property="code"/>
+        <result column="ELT_SUB2_NAME" property="name"/>
+        <result column="ELT_SUB2_PARENT_ID" property="parentId"/>
+        <result column="ELT_SUB2_WIDGET_ID" property="widgetId"/>
+        <result column="ELT_SUB2_CREATE_DATE" property="createDate"/>
+        <result column="ELT_SUB2_CREATE_USER_ID" property="createUserId"/>
+        <result column="ELT_SUB2_UPDATE_DATE" property="updateDate"/>
+        <result column="ELT_SUB2_UPDATE_USER_ID" property="updateUserId"/>
+        <collection property="childElements" resultMap="Sub3ResultMap"></collection>
+    </resultMap>
+
+    <sql id="Sub2_Column_List">
+    ELTSUB2.ID AS ELT_SUB2_ID,
+    ELTSUB2.CODE AS ELT_SUB2_CODE,
+    ELTSUB2.NAME AS ELT_SUB2_NAME,
+    ELTSUB2.PARENT_ID AS ELT_SUB2_PARENT_ID,
+    ELTSUB2.WIDGET_ID AS ELT_SUB2_WIDGET_ID,
+    ELTSUB2.CREATE_DATE AS ELT_SUB2_CREATE_DATE,
+    ELTSUB2.CREATE_USER_ID AS ELT_SUB2_CREATE_USER_ID,
+    ELTSUB2.UPDATE_DATE AS ELT_SUB2_UPDATE_DATE,
+    ELTSUB2.UPDATE_USER_ID AS ELT_SUB2_UPDATE_USER_ID
+  </sql>
+    <!-- sub2 end-->
+
+    <!-- sub3 -->
+    <resultMap id="Sub3ResultMap" type="com.github.wangdasong.scwproviderwebeditor.dao.entity.Element">
+        <id column="ELT_SUB3_ID" property="id"/>
+        <result column="ELT_SUB3_CODE" property="code"/>
+        <result column="ELT_SUB3_NAME" property="name"/>
+        <result column="ELT_SUB3_PARENT_ID" property="parentId"/>
+        <result column="ELT_SUB3_WIDGET_ID" property="widgetId"/>
+        <result column="ELT_SUB3_CREATE_DATE" property="createDate"/>
+        <result column="ELT_SUB3_CREATE_USER_ID" property="createUserId"/>
+        <result column="ELT_SUB3_UPDATE_DATE" property="updateDate"/>
+        <result column="ELT_SUB3_UPDATE_USER_ID" property="updateUserId"/>
+    </resultMap>
+
+    <sql id="Sub3_Column_List">
+    ELTSUB3.ID AS ELT_SUB3_ID,
+    ELTSUB3.CODE AS ELT_SUB3_CODE,
+    ELTSUB3.NAME AS ELT_SUB3_NAME,
+    ELTSUB3.PARENT_ID AS ELT_SUB3_PARENT_ID,
+    ELTSUB3.WIDGET_ID AS ELT_SUB3_WIDGET_ID,
+    ELTSUB3.CREATE_DATE AS ELT_SUB3_CREATE_DATE,
+    ELTSUB3.CREATE_USER_ID AS ELT_SUB3_CREATE_USER_ID,
+    ELTSUB3.UPDATE_DATE AS ELT_SUB3_UPDATE_DATE,
+    ELTSUB3.UPDATE_USER_ID AS ELT_SUB3_UPDATE_USER_ID
+  </sql>
+    <!-- sub3 end-->
+
+
+    <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from SMS_ELEMENT ELT
+        where ELT.ID= #{id}
+    </select>
+
+    <select id="getElementsByParentId" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select<include refid="Base_Column_List"/>,
+
+        <if test="@com.github.wangdasong.scwproviderwebeditor.dao.entity.Element@dbDialog=='oracle'">
+            NVL
+        </if>
+        <if test="@com.github.wangdasong.scwproviderwebeditor.dao.entity.Element@dbDialog=='mysql'">
+            IFNULL
+        </if>
+        (ELTSUB1.COUNT_ID, 0) as ELT_SUB_COUNT
+        from SMS_ELEMENT ELT
+        LEFT JOIN (select PARENT_ID, count(ID) AS COUNT_ID from SMS_ELEMENT group by PARENT_ID) ELTSUB1
+        ON ELT.ID = ELTSUB1.PARENT_ID
+        where ELT.PARENT_ID= #{parentId}
+    </select>
+
+    <delete id="deleteById" parameterType="java.lang.String">
+    delete from SMS_ELEMENT
+    where ID = #{id}
+  </delete>
+
+    <insert id="save" parameterType="com.github.wangdasong.scwproviderwebeditor.dao.entity.Element">
+        <selectKey keyProperty="id" resultType="java.lang.String" order="BEFORE">
+            <if test="@com.github.wangdasong.scwproviderwebeditor.dao.entity.Element@dbDialog=='oracle'">
+                SELECT SYS_GUID() AS ID FROM DUAL
+            </if>
+            <if test="@com.github.wangdasong.scwproviderwebeditor.dao.entity.Element@dbDialog=='mysql'">
+                SELECT REPLACE(UUID(),'-','') FROM DUAL;
+            </if>
+        </selectKey>
+        insert into SMS_ELEMENT
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                ID,
+            </if>
+            <if test="code != null">
+                CODE,
+            </if>
+            <if test="name != null">
+                NAME,
+            </if>
+            <if test="widgetId != null">
+                WIDGET_ID,
+            </if>
+            <if test="parentId != null">
+                PARENT_ID,
+            </if>
+            <if test="createDate != null">
+                CREATE_DATE,
+            </if>
+            <if test="createUserId != null">
+                CREATE_USER_ID,
+            </if>
+            <if test="updateDate != null">
+                UPDATE_DATE,
+            </if>
+            <if test="updateUserId != null">
+                UPDATE_USER_ID,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id},
+            </if>
+            <if test="code != null">
+                #{code},
+            </if>
+            <if test="name != null">
+                #{name},
+            </if>
+            <if test="widgetId != null">
+                #{widgetId},
+            </if>
+            <if test="parentId != null">
+                #{parentId},
+            </if>
+            <if test="createDate != null">
+                #{createDate},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate},
+            </if>
+            <if test="updateUserId != null">
+                #{updateUserId}
+            </if>
+        </trim>
+    </insert>
+
+    <update id="update" parameterType="com.github.wangdasong.scwproviderwebeditor.dao.entity.Element">
+        update SMS_ELEMENT
+        <set>
+            <if test="code != null">
+                CODE = #{code},
+            </if>
+            <if test="name != null">
+                NAME = #{name},
+            </if>
+            <if test="widgetId != null">
+                WIDGET_ID = #{widgetId},
+            </if>
+            <if test="parentId != null">
+                PARENT_ID = #{parentId},
+            </if>
+            <if test="createDate != null">
+                CREATE_DATE = #{createDate},
+            </if>
+            <if test="createUserId != null">
+                CREATE_USER_ID = #{createUserId},
+            </if>
+            <if test="updateDate != null">
+                UPDATE_DATE = #{updateDate},
+            </if>
+            <if test="updateUserId != null">
+                UPDATE_USER_ID = #{updateUserId},
+            </if>
+        </set>
+        where ID = #{id}
+    </update>
+
+</mapper>

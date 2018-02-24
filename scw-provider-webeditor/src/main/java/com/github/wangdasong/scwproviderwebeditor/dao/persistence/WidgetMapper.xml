@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.github.wangdasong.scwproviderwebeditor.dao.persistence.WidgetMapper" >
+  <resultMap id="BaseResultMap" type="com.github.wangdasong.scwproviderwebeditor.dao.entity.Widget" >
+    <id column="WDT_ID" property="id" />
+    <result column="WDT_CODE" property="code" />
+    <result column="WDT_NAME" property="name" />
+    <result column="WDT_TYPE" property="type" />
+    <result column="WDT_SORT" property="sort" />
+    <result column="WDT_CONTAINER_ID" property="containerId" />
+    <result column="WDT_TMP_FLG" property="tmpFlg" />
+    <result column="WDT_CREATE_DATE" property="createDate" />
+    <result column="WDT_CREATE_USER_ID" property="createUserId" />
+    <result column="WDT_UPDATE_DATE" property="updateDate" />
+    <result column="WDT_UPDATE_USER_ID" property="updateUserId" />    
+    <collection property="elements" resultMap="com.github.wangdasong.scwproviderwebeditor.dao.persistence.ElementMapper.BaseResultMap"></collection>
+    <collection property="attConfigs" resultMap="com.github.wangdasong.scwproviderwebeditor.dao.persistence.AttConfigMapper.BaseResultMap"></collection>
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    WDT.ID AS WDT_ID,
+    WDT.CODE AS WDT_CODE,
+    WDT.NAME AS WDT_NAME,
+    WDT.TYPE AS WDT_TYPE,
+    WDT.SORT AS WDT_SORT,
+    WDT.CONTAINER_ID AS WDT_CONTAINER_ID,
+    WDT.TMP_FLG AS WDT_TMP_FLG,
+    WDT.CREATE_DATE AS WDT_CREATE_DATE,
+    WDT.CREATE_USER_ID AS WDT_CREATE_USER_ID,
+    WDT.UPDATE_DATE AS WDT_UPDATE_DATE,
+    WDT.UPDATE_USER_ID AS WDT_UPDATE_USER_ID
+  </sql>
+
+  <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select   <include refid="Base_Column_List" />
+    from SMS_WIDGET WDT
+    where WDT.ID= #{id}
+  </select>
+<!-- 
+  <select id="getDetailById" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select   <include refid="Base_Column_List" />,
+    <include refid="com.github.wangdasong.scwproviderwebeditor.dao.persistence.AttConfigMapper.Base_Column_List" />,
+    <include refid="com.github.wangdasong.scwproviderwebeditor.dao.persistence.ElementMapper.Base_Column_List" />
+    from SMS_WIDGET WDT,
+    SMS_ATT_CONFIG ACG,
+    SMS_ELEMENT ELT
+    where WDT.ID= #{id}
+    and WDT.ID = ACG.BELONG_ID(+)
+    and WDT.ID = ELT.WIDGET_ID(+)
+  </select>
+ -->
+  <select id="getDetailById" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select   <include refid="Base_Column_List" />,
+    <include refid="com.github.wangdasong.scwproviderwebeditor.dao.persistence.AttConfigMapper.Base_Column_List" />,
+    <include refid="com.github.wangdasong.scwproviderwebeditor.dao.persistence.ElementMapper.Base_Column_List" />,
+    <include refid="com.github.wangdasong.scwproviderwebeditor.dao.persistence.ElementMapper.Sub1_Column_List" />,
+    <include refid="com.github.wangdasong.scwproviderwebeditor.dao.persistence.ElementMapper.Sub2_Column_List" />,
+    <include refid="com.github.wangdasong.scwproviderwebeditor.dao.persistence.ElementMapper.Sub3_Column_List" />
+    from SMS_WIDGET WDT
+    LEFT JOIN SMS_ATT_CONFIG ACG ON WDT.ID = ACG.BELONG_ID
+    LEFT JOIN (SELECT ELT.*, ACG.ATT_VALUE FROM SMS_ELEMENT ELT LEFT JOIN SMS_ATT_CONFIG ACG ON ELT.ID = ACG.BELONG_ID AND ACG.TYPE = 'order') ELT ON WDT.ID = ELT.WIDGET_ID AND ELT.PARENT_ID = ELT.WIDGET_ID
+    LEFT JOIN (SELECT ELT.*, ACG.ATT_VALUE FROM SMS_ELEMENT ELT LEFT JOIN SMS_ATT_CONFIG ACG ON ELT.ID = ACG.BELONG_ID AND ACG.TYPE = 'order') ELTSUB1 ON ELT.ID = ELTSUB1.PARENT_ID
+    LEFT JOIN (SELECT ELT.*, ACG.ATT_VALUE FROM SMS_ELEMENT ELT LEFT JOIN SMS_ATT_CONFIG ACG ON ELT.ID = ACG.BELONG_ID AND ACG.TYPE = 'order') ELTSUB2 ON ELTSUB1.ID = ELTSUB2.PARENT_ID
+    LEFT JOIN (SELECT ELT.*, ACG.ATT_VALUE FROM SMS_ELEMENT ELT LEFT JOIN SMS_ATT_CONFIG ACG ON ELT.ID = ACG.BELONG_ID AND ACG.TYPE = 'order') ELTSUB3 ON ELTSUB2.ID = ELTSUB3.PARENT_ID
+    where WDT.ID= #{id}
+    order by ELT.ATT_VALUE, ELTSUB1.ATT_VALUE, ELTSUB2.ATT_VALUE, ELTSUB3.ATT_VALUE
+  </select>
+  <select id="getListByCondition" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select   <include refid="Base_Column_List" />
+    <include refid="Find_List_Base_Sql" />
+  </select>
+    <sql id="Find_List_Base_Sql" >
+        FROM SMS_WIDGET WDT
+        <where>
+            <trim prefixOverrides="AND |OR ">
+                <if test="id!=null">
+                    WDT.ID= #{id}
+                </if>
+                <if test="name!=null">
+                    AND WDT.NAME='${name}'
+                </if>
+                <if test="code!=null">
+                    AND WDT.CODE='${code}'
+                </if>
+                <if test="type!=null">
+                    AND WDT.TYPE='${type}'
+                </if>
+            </trim>
+        </where>
+    </sql>
+    
+  <delete id="deleteById" parameterType="java.lang.String" >
+    delete from SMS_WIDGET
+    where ID = #{id}
+  </delete>
+
+  <insert id="save" parameterType="com.github.wangdasong.scwproviderwebeditor.dao.entity.Widget" >
+    <selectKey keyProperty="id" resultType="java.lang.String" order="BEFORE">
+        <if test="@com.github.wangdasong.scwproviderwebeditor.dao.entity.Widget@dbDialog=='oracle'">
+            SELECT sys_guid() AS ID FROM DUAL
+        </if>
+        <if test="@com.github.wangdasong.scwproviderwebeditor.dao.entity.Widget@dbDialog=='mysql'">
+            SELECT REPLACE(UUID(),'-','') FROM DUAL;
+        </if>
+    </selectKey>
+    insert into SMS_WIDGET
+    	<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="id != null" >
+                    ID,
+            </if>
+			<if test="code != null" >
+                    CODE,
+            </if>
+			<if test="name != null" >
+                    NAME,
+            </if>
+			<if test="type != null" >
+                    TYPE,
+            </if>
+			<if test="sort != null" >
+                    SORT,
+            </if>
+			<if test="containerId != null" >
+                    CONTAINER_ID,
+            </if>
+			<if test="tmpFlg != null" >
+                    TMP_FLG,
+            </if>
+			<if test="createDate != null" >
+                    CREATE_DATE,
+            </if>
+			<if test="createUserId != null" >
+                    CREATE_USER_ID,
+            </if>
+			<if test="updateDate != null" >
+                    UPDATE_DATE,
+            </if>
+			<if test="updateUserId != null" >
+                    UPDATE_USER_ID,
+            </if>
+        </trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="id != null" >
+                    #{id},
+            </if>
+			<if test="code != null" >
+                    #{code},
+            </if>
+			<if test="name != null" >
+                    #{name},
+            </if>
+			<if test="type != null" >
+                    #{type},
+            </if>
+			<if test="sort != null" >
+                    #{sort},
+            </if>
+			<if test="containerId != null" >
+                    #{containerId},
+            </if>
+			<if test="tmpFlg != null" >
+                    #{tmpFlg},
+            </if>
+			<if test="createDate != null" >
+                    #{createDate},
+            </if>
+			<if test="createUserId != null" >
+                    #{createUserId},
+            </if>
+			<if test="updateDate != null" >
+                    #{updateDate},
+            </if>
+			<if test="updateUserId != null" >
+                    #{updateUserId},
+            </if>
+         </trim>  
+  </insert>
+
+  <update id="update" parameterType="com.github.wangdasong.scwproviderwebeditor.dao.entity.Widget" >
+    update SMS_WIDGET
+    <set>
+      <if test="code != null" > 
+        CODE = #{code},
+      </if> 
+      <if test="name != null" > 
+        NAME = #{name},
+      </if> 
+      <if test="type != null" > 
+        TYPE = #{type},
+      </if> 
+      <if test="sort != null" > 
+        SORT = #{sort},
+      </if> 
+      <if test="containerId != null" > 
+        CONTAINER_ID = #{containerId},
+      </if> 
+      <if test="tmpFlg != null" > 
+        TMP_FLG = #{tmpFlg},
+      </if> 
+      <if test="createDate != null" > 
+        CREATE_DATE = #{createDate},
+      </if> 
+      <if test="createUserId != null" > 
+        CREATE_USER_ID = #{createUserId},
+      </if> 
+      <if test="updateDate != null" > 
+        UPDATE_DATE = #{updateDate},
+      </if> 
+      <if test="updateUserId != null" > 
+        UPDATE_USER_ID = #{updateUserId},
+      </if> 
+    </set>
+    where ID = #{id}
+  </update>
+
+</mapper>

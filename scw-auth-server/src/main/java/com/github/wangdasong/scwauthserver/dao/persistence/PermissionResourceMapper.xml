@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.github.wangdasong.scwauthserver.dao.persistence.PermissionResourceMapper" >
+  <resultMap id="BaseResultMap" type="com.github.wangdasong.scwauthserver.dao.entity.PermissionResource" >
+    <id column="PRE_ID" property="id" />
+    <result column="PRE_PERMISSION_ID" property="permissionId" />
+    <result column="PRE_RESOURCE_ID" property="resourceId" />
+    <association property="permission" javaType="com.github.wangdasong.scwauthserver.dao.entity.Permission" resultMap="com.github.wangdasong.scwauthserver.dao.persistence.PermissionMapper.BaseResultMap"/>
+    <association property="resource" javaType="com.github.wangdasong.scwauthserver.dao.entity.Resource" resultMap="com.github.wangdasong.scwauthserver.dao.persistence.ResourceMapper.BaseResultMap"/>
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    PRE.ID AS PRE_ID,
+    PRE.PERMISSION_ID AS PRE_PERMISSION_ID,
+    PRE.RESOURCE_ID AS PRE_RESOURCE_ID
+  </sql>
+
+  <select id="getResourceList" resultMap="com.github.wangdasong.scwauthserver.dao.persistence.ResourceMapper.BaseResultMap" parameterType="java.lang.String" >
+    select <include refid="com.github.wangdasong.scwauthserver.dao.persistence.ResourceMapper.Base_Column_List" />
+    from SYS_PERMISSION_RESOURCE PRE
+         LEFT JOIN VB_RESOURCE_TREE RSU ON PRE.RESOURCE_ID = RSU.ID
+    where PRE.PERMISSION_ID = #{pid}
+  </select>
+  
+  
+  <select id="getPermissionByResId" resultType="java.lang.String" parameterType="java.lang.String" >
+    select PRE.PERMISSION_ID
+    from SYS_PERMISSION_RESOURCE PRE
+    where PRE.RESOURCE_ID = #{rid}
+  </select>
+  
+  
+  <insert id="create" parameterType="com.github.wangdasong.scwauthserver.dao.entity.PermissionResource" >
+    <selectKey keyProperty="id" resultType="java.lang.String" order="BEFORE">
+        <if test="@com.github.wangdasong.scwauthserver.dao.entity.PermissionResource@dbDialog=='oracle'">
+            SELECT SYS_GUID() AS ID FROM DUAL
+        </if>
+        <if test="@com.github.wangdasong.scwauthserver.dao.entity.PermissionResource@dbDialog=='mysql'">
+            SELECT REPLACE(UUID(),'-','') FROM DUAL;
+        </if>
+    </selectKey>
+    insert into SYS_PERMISSION_RESOURCE
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                    ID,
+            </if>
+            <if test="permissionId != null" >
+                    PERMISSION_ID,
+            </if>
+            <if test="resourceId != null" >
+                    RESOURCE_ID,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                    #{id},
+            </if>
+            <if test="permissionId != null" >
+                    #{permissionId},
+            </if>
+            <if test="resourceId != null" >
+                    #{resourceId},
+            </if>
+        </trim>
+  </insert>
+  
+  
+  
+  
+  
+  
+  <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select   <include refid="Base_Column_List" />
+    from SYS_PERMISSION_RESOURCE PRE
+    where PRE.ID= #{id}
+  </select>
+
+  <delete id="deleteById" parameterType="java.lang.String" >
+    delete from SYS_PERMISSION_RESOURCE
+    where ID = #{id}
+  </delete>
+  <delete id="deleteByPermissionId" parameterType="java.lang.String" >
+    delete from SYS_PERMISSION_RESOURCE
+    where PERMISSION_ID = #{permissionId}
+  </delete>
+
+  <insert id="save" parameterType="com.github.wangdasong.scwauthserver.dao.entity.PermissionResource" >
+    <selectKey keyProperty="id" resultType="java.lang.String" order="BEFORE">
+        SELECT SYS_GUID() AS ID FROM DUAL
+    </selectKey>
+    insert into SYS_PERMISSION_RESOURCE
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                    ID,
+            </if>
+            <if test="permissionId != null" >
+                    PERMISSION_ID,
+            </if>
+            <if test="resourceId != null" >
+                    RESOURCE_ID,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                    #{id},
+            </if>
+            <if test="permissionId != null" >
+                    #{permissionId},
+            </if>
+            <if test="resourceId != null" >
+                    #{resourceId},
+            </if>
+        </trim>
+  </insert>
+
+  <update id="update" parameterType="com.github.wangdasong.scwauthserver.dao.entity.PermissionResource" >
+    update SYS_PERMISSION_RESOURCE
+    <set>
+      <if test="permissionId != null" > 
+        PERMISSION_ID = #{permissionId},
+      </if> 
+      <if test="resourceId != null" > 
+        RESOURCE_ID = #{resourceId},
+      </if> 
+    </set>
+    where ID = #{id}
+  </update>
+
+    <sql id="Find_Page_Base_Sql" >
+        FROM SYS_PERMISSION_RESOURCE AS PRE
+        <where>
+            <trim prefixOverrides="AND |OR ">
+                <if test="options.id!=null">
+                    AND PRE.ID='${options.id}'
+                </if>
+                <if test="options.permissionId!=null">
+                    AND PRE.PERMISSION_ID='${options.permissionId}'
+                </if>
+                <if test="options.resourceId!=null">
+                    AND PRE.RESOURCE_ID='${options.resourceId}'
+                </if>
+            </trim>
+        </where>
+    </sql>
+
+    <sql id="Sort_Page_Base_Sql" >
+        <if test="pageSort!=null">
+            order by 
+            <foreach item="item" index="index" collection="pageSortArray" separator="," >
+                <if test="item=='id'">
+                    ID
+                </if>
+                <if test="item=='id desc'">
+                    ID DESC
+                </if>
+                <if test="item=='permissionId'">
+                    PERMISSION_ID
+                </if>
+                <if test="item=='permissionId desc'">
+                    PERMISSION_ID DESC
+                </if>
+                <if test="item=='resourceId'">
+                    RESOURCE_ID
+                </if>
+                <if test="item=='resourceId desc'">
+                    RESOURCE_ID DESC
+                </if>
+            </foreach>
+        </if>
+    </sql>
+	<select id="findPageData" parameterType="com.github.wangdasong.scwbasecore.utils.paging.Pagination" resultMap="BaseResultMap">
+        <if test="@com.github.wangdasong.scwauthserver.dao.entity.PermissionResource@dbDialog=='oracle'">
+        	<include refid="oraclesplit_prefix" />
+        </if>
+	    <if test="@com.github.wangdasong.scwauthserver.dao.entity.PermissionResource@dbDialog=='mysql'">
+        	select
+        </if>
+        <include refid="Base_Column_List" />
+        <include refid="Find_Page_Base_Sql" />
+		<include refid="Sort_Page_Base_Sql" />
+		<if test="@com.github.wangdasong.scwauthserver.dao.entity.PermissionResource@dbDialog=='oracle'">
+        	<include refid="oraclesplit_suffix" />
+        </if>
+		<if test="@com.github.wangdasong.scwauthserver.dao.entity.PermissionResource@dbDialog=='mysql'">
+        	<include refid="mysqlsplit_suffix" />
+        </if>
+    </select>
+    <sql id="oraclesplit_prefix">
+        select * from ( select row_.*, rownum rownum_ from (select 
+    </sql>
+    <sql id="oraclesplit_suffix">
+        )row_ where rownum &lt;= #{oracle_maxrow}) where rownum_ > #{oracle_minrow}
+    </sql>
+    <sql id="mysqlsplit_suffix">
+    	limit #{oracle_minrow}, #{pageSize}
+    </sql>
+    <select id="getCount" parameterType="com.github.wangdasong.scwbasecore.utils.paging.Pagination" resultType="int">
+        select count(*) 
+        <include refid="Find_Page_Base_Sql" />
+    </select>
+
+
+</mapper>

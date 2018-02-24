@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.github.wangdasong.scwauthserver.dao.persistence.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.github.wangdasong.scwauthserver.dao.entity.CommonUser" >
+    <id column="USR_ID" property="id" />
+    <result column="USR_USERNAME" property="username" />
+    <result column="USR_PASSWORD" property="password" />
+    <result column="USR_STATE" property="state" />
+    <result column="USR_FULLNAME" property="fullname" />
+    <result column="USR_MOBILEPHONE" property="mobilephone" />
+    <result column="USR_EMAIL" property="email" />
+    <result column="USR_BIRTHDAY" property="birthday" />
+    <result column="USR_CREATE_DATE" property="createDate" />
+    <result column="USR_CREATE_USER_ID" property="createUserId" />
+    <result column="USR_UPDATE_DATE" property="updateDate" />
+    <result column="USR_UPDATE_USER_ID" property="updateUserId" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    USR.ID AS USR_ID,
+    USR.USERNAME AS USR_USERNAME,
+    USR.PASSWORD AS USR_PASSWORD,
+    USR.STATE AS USR_STATE,
+    USR.FULLNAME AS USR_FULLNAME,
+    USR.MOBILEPHONE AS USR_MOBILEPHONE,
+    USR.EMAIL AS USR_EMAIL,
+    USR.BIRTHDAY AS USR_BIRTHDAY,
+    USR.CREATE_DATE AS USR_CREATE_DATE,
+    USR.CREATE_USER_ID AS USR_CREATE_USER_ID,
+    USR.UPDATE_DATE AS USR_UPDATE_DATE,
+    USR.UPDATE_USER_ID AS USR_UPDATE_USER_ID
+  </sql>
+
+  
+  
+  
+
+    <select id="selectByUsernamePassword" resultMap="BaseResultMap" parameterType="com.github.wangdasong.scwauthserver.dao.entity.CommonUser" >
+        select   <include refid="Base_Column_List" />
+	    from SYS_USER USR
+	    where trim(both from USR.USERNAME)= #{username}
+	    and trim(both from USR.PASSWORD)= #{password}
+    </select>
+
+    <select id="selectByUsername" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select   <include refid="Base_Column_List" />
+	    from SYS_USER USR
+	    where trim(both from USR.USERNAME)= #{username}
+    </select>
+    
+
+  <insert id="createUser" parameterType="com.github.wangdasong.scwauthserver.dao.entity.CommonUser" >
+      <selectKey keyProperty="id" resultType="java.lang.String" order="BEFORE">
+          <if test="@com.github.wangdasong.scwauthserver.dao.entity.CommonUser@dbDialog=='oracle'">
+              SELECT SYS_GUID() AS ID FROM DUAL
+          </if>
+          <if test="@com.github.wangdasong.scwauthserver.dao.entity.CommonUser@dbDialog=='mysql'">
+              SELECT REPLACE(UUID(),'-','') FROM DUAL;
+          </if>
+      </selectKey>
+    insert into SYS_USER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="username != null" >
+        USERNAME,
+      </if>
+      <if test="password != null" >
+        PASSWORD,
+      </if>
+      <if test="state != null" >
+        STATE,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="fullname != null" >
+        FULLNAME,
+      </if>
+      <if test="mobilephone != null" >
+        MOBILEPHONE,
+      </if>
+      <if test="email != null" >
+        EMAIL,
+      </if>
+      <if test="birthday != null" >
+        BIRTHDAY,
+      </if>
+
+     </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id},
+      </if>
+      <if test="username != null" >
+        #{username},
+      </if>
+      <if test="password != null" >
+        #{password},
+      </if>
+      <if test="state != null" >
+        #{state},
+      </if>
+      <if test="createDate != null" >
+        #{createDate},
+      </if>
+      <if test="fullname != null" >
+        #{fullname},
+      </if>
+      <if test="mobilephone != null" >
+        #{mobilephone},
+      </if>
+      <if test="email != null" >
+        #{email},
+      </if>
+      <if test="birthday != null" >
+        #{birthday},
+      </if>
+
+    </trim>
+  </insert>
+  
+  
+  <update id="editPwd" parameterType="com.github.wangdasong.scwauthserver.dao.entity.CommonUser" >
+    update SYS_USER
+    <set>
+      <if test="password != null" > 
+        PASSWORD = #{password},
+      </if> 
+    </set>
+    where USERNAME= #{username}
+  </update>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+
+  <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select   <include refid="Base_Column_List" />
+    from SYS_USER USR
+    where USR.ID= #{id}
+  </select>
+
+  <select id="getListByCondition" resultMap="BaseResultMap" parameterType="com.github.wangdasong.scwauthserver.dao.entity.CommonUser" >
+    select 
+    <include refid="Base_Column_List" />
+	FROM SYS_USER USR
+	<where>
+           <trim prefixOverrides="AND |OR ">
+               <if test="username!=null">
+                   AND USR.USERNAME = '${username}'
+               </if>
+                <if test="state!=null">
+                   AND USR.STATE='${state}'
+               </if>
+           </trim>
+       </where>
+  </select>
+
+  <delete id="deleteById" parameterType="java.lang.String" >
+    delete from SYS_USER
+    where ID = #{id}
+  </delete>
+  
+  
+
+  <insert id="save" parameterType="com.github.wangdasong.scwauthserver.dao.entity.CommonUser" >
+    <selectKey keyProperty="id" resultType="java.lang.String" order="BEFORE">
+        SELECT SYS_GUID() AS ID FROM DUAL
+    </selectKey>
+    insert into SYS_USER
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                    ID,
+            </if>
+            <if test="username != null" >
+                    USERNAME,
+            </if>
+            <if test="password != null" >
+                    PASSWORD,
+            </if>
+            <if test="state != null" >
+                    STATE,
+            </if>
+            <if test="fullname != null" >
+                    FULLNAME,
+            </if>
+            <if test="mobilephone != null" >
+                    MOBILEPHONE,
+            </if>
+            <if test="email != null" >
+                    EMAIL,
+            </if>
+            <if test="birthday != null" >
+                    BIRTHDAY,
+            </if>
+            <if test="createDate != null" >
+                    CREATE_DATE,
+            </if>
+            <if test="createUserId != null" >
+                    CREATE_USER_ID,
+            </if>
+            <if test="updateDate != null" >
+                    UPDATE_DATE,
+            </if>
+            <if test="updateUserId != null" >
+                    UPDATE_USER_ID,
+            </if>
+            
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                    #{id},
+            </if>
+            <if test="username != null" >
+                    #{username},
+            </if>
+            <if test="password != null" >
+                    #{password},
+            </if>
+            <if test="state != null" >
+                    #{state},
+            </if>
+            <if test="fullname != null" >
+                    #{fullname},
+            </if>
+            <if test="mobilephone != null" >
+                    #{mobilephone},
+            </if>
+            <if test="email != null" >
+                    #{email},
+            </if>
+            <if test="birthday != null" >
+                    #{birthday},
+            </if>
+            <if test="createDate != null" >
+                    #{createDate},
+            </if>
+            <if test="createUserId != null" >
+                    #{createUserId},
+            </if>
+            <if test="updateDate != null" >
+                    #{updateDate},
+            </if>
+            <if test="updateUserId != null" >
+                    #{updateUserId},
+            </if>
+           
+        </trim>
+  </insert>
+
+  <update id="update" parameterType="com.github.wangdasong.scwauthserver.dao.entity.CommonUser" >
+    update SYS_USER
+    <set>
+      <if test="username != null" > 
+        USERNAME = #{username},
+      </if> 
+      <if test="password != null" > 
+        PASSWORD = #{password},
+      </if> 
+      <if test="state != null" > 
+        STATE = #{state},
+      </if> 
+      <if test="fullname != null" > 
+        FULLNAME = #{fullname},
+      </if> 
+      <if test="mobilephone != null" > 
+        MOBILEPHONE = #{mobilephone},
+      </if> 
+      <if test="email != null" > 
+        EMAIL = #{email},
+      </if> 
+      <if test="birthday != null" > 
+        BIRTHDAY = #{birthday},
+      </if> 
+      <if test="createDate != null" > 
+        CREATE_DATE = #{createDate},
+      </if> 
+      <if test="createUserId != null" > 
+        CREATE_USER_ID = #{createUserId},
+      </if> 
+      <if test="updateDate != null" > 
+        UPDATE_DATE = #{updateDate},
+      </if> 
+      <if test="updateUserId != null" > 
+        UPDATE_USER_ID = #{updateUserId},
+      </if> 
+    </set>
+    where ID = #{id}
+  </update>
+
+  
+  
+  
+  
+  
+	<sql id="Find_Page_Base_Sql" >
+		FROM SYS_USER USR
+		<where>			
+            <trim prefixOverrides="AND |OR ">
+                <if test="options.username!=null">
+                    AND USR.USERNAME='${options.username}'   
+                </if>
+                <if test="options.fullname!=null">
+                    AND USR.FULLNAME='${options.fullname}'   
+                </if>
+                <if test="options.mobilephone!=null">
+                    AND USR.MOBILEPHONE='${options.mobilephone}'   
+                </if>
+            </trim>
+        </where>
+	</sql>
+	<sql id="Sort_Page_Base_Sql" >
+		<if test="pageSort!=null">
+			order by 
+			<foreach item="item" index="index" collection="pageSortArray" separator="," >
+				<if test="item=='username'">
+                    USERNAME
+                </if>
+				<if test="item=='username desc'">
+                    USERNAME DESC
+                </if>
+				<if test="item=='createDate'">
+                    CREATE_DATE
+                </if>
+				<if test="item=='createDate desc'">
+                    CREATE_DATE DESC
+                </if>
+            </foreach>
+		</if>
+	</sql>
+	<select id="findPageData" parameterType="com.github.wangdasong.scwbasecore.utils.paging.Pagination" resultMap="BaseResultMap">
+        <if test="@com.github.wangdasong.scwauthserver.dao.entity.CommonUser@dbDialog=='oracle'">
+        	<include refid="oraclesplit_prefix" />
+        </if>
+	    <if test="@com.github.wangdasong.scwauthserver.dao.entity.CommonUser@dbDialog=='mysql'">
+        	select
+        </if>
+        <include refid="Base_Column_List" />
+        <include refid="Find_Page_Base_Sql" />
+		<include refid="Sort_Page_Base_Sql" />
+		<if test="@com.github.wangdasong.scwauthserver.dao.entity.CommonUser@dbDialog=='oracle'">
+        	<include refid="oraclesplit_suffix" />
+        </if>
+		<if test="@com.github.wangdasong.scwauthserver.dao.entity.CommonUser@dbDialog=='mysql'">
+        	<include refid="mysqlsplit_suffix" />
+        </if>
+    </select>
+    <sql id="oraclesplit_prefix">
+        select * from ( select row_.*, rownum rownum_ from (select 
+    </sql>
+    <sql id="oraclesplit_suffix">
+        )row_ where rownum &lt;= #{oracle_maxrow}) where rownum_ > #{oracle_minrow}
+    </sql>
+    <sql id="mysqlsplit_suffix">
+    	limit #{oracle_minrow}, #{pageSize}
+    </sql>
+    
+    <select id="getCount" parameterType="com.github.wangdasong.scwbasecore.utils.paging.Pagination" resultType="int">
+        select count(*) 
+        <include refid="Find_Page_Base_Sql" />
+    </select>
+
+</mapper>

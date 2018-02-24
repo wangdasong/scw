@@ -1,0 +1,26 @@
+<div class="col-xs-12" parentContainerId="{{id}}" pageId="{{pageId}}" canEditFlag="elementContainerAddElement">
+&nbsp;
+	<div ng-repeat="container in containers" ng-if="container.type=='3'" class="dd-item col-lg-12 col-md-12 col-sm-12 " data-id="{{$index}}" style="float:left">
+		<div class="dd-handle col-xs-12" style="border:0px">
+			<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne{{$index}}" onclick="return false;">
+				&nbsp;{{container.name}}
+			</a>
+		</div>
+		<div class="col-xs-12 form-group panel-collapse collapse in" id="#collapseOne{{$index}}" style="border:1px solid #dae2ea" containerId="{{container.id}}" canEditFlag="elementContainerEditElement">
+			<div class="panel-body" id="container{{container.id}}">
+				<div ng-repeat="widget in container.widgets">
+					<widget-text ng-if="widget.type == 'text'"  elementpanel="Panel" id="{{widget.id}}" initvalue="{{widget.initvalue}}"></widget-text>
+					<widget-file ng-if="widget.type == 'file'"  elementpanel="Panel" id="{{widget.id}}" initvalue="{{widget.initvalue}}"></widget-file>
+					<widget-radio ng-if="widget.type == 'radio'"  elementpanel="Panel" id="{{widget.id}}" initvalue="{{widget.initvalue}}"></widget-radio>
+					<widget-check ng-if="widget.type == 'check'"  elementpanel="Panel" id="{{widget.id}}" initvalue="{{widget.initvalue}}"></widget-check>
+					<widget-select ng-if="widget.type == 'select'"  elementpanel="Panel" id="{{widget.id}}" initvalue="{{widget.initvalue}}"></widget-select>
+					<widget-select-tree ng-if="widget.type == 'selecttree'"  elementpanel="Panel" id="{{widget.id}}" initvalue="{{widget.initvalue}}"></widget-select-tree>
+					<widget-date ng-if="widget.type == 'datepicker'"  elementpanel="Panel" id="{{widget.id}}" initvalue="{{widget.initvalue}}"></widget-date>
+					<widget-date-range ng-if="widget.type == 'daterangepicker'"  elementpanel="Panel" id="{{widget.id}}" initvalue="{{widget.initvalue}}"></widget-date-range>
+					<widget-data-table ng-if="widget.type == 'datatable'"  elementpanel="Panel" id="{{widget.id}}" initvalue="{{widget.initvalue}}"></widget-data-table>
+					<widget-button ng-if="widget.type == 'button'"  elementpanel="Panel" id="{{widget.id}}" initvalue="{{widget.initvalue}}"></widget-button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

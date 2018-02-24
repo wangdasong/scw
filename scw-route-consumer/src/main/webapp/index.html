@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html ng-app="app"  class="no-js"> <!--<![endif]-->
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta charset="utf-8"/>
+    <title>中邮物流信息化平台</title>
+
+    <meta name="description" content="User login page"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+    
+    <link rel="bookmark"  type="image/x-icon"  href="thirdparty/assets/avatars/ico.png"/>
+	<link rel="shortcut icon" href="thirdparty/assets/avatars/ico.png"> 
+	<link rel="icon" href="thirdparty/assets/avatars/ico.png">
+    
+
+	<link rel="stylesheet" href="app/util/css/edit.css" />
+	<link rel="stylesheet" href="app/util/css/manage.css" />
+    <!-- bootstrap & fontawesome -->
+	<link rel="stylesheet" href="thirdparty/bootstrap/css/bootstrap-select.min.css" />
+    <link rel="stylesheet" href="thirdparty/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="thirdparty/font-awesome/css/font-awesome.css"/>
+    <!-- jquery ui -->
+    <link rel="stylesheet" href="thirdparty/jquery/css/jquery-ui.css"/>
+    <link rel="stylesheet" href="thirdparty/jquery/css/chosen.css"/>
+    
+    <!-- ace styles -->
+	<!--[if lte IE 8]>
+	  <link rel="stylesheet" href="thirdparty/assets/css/ace-ie.min.css" />
+	<![endif]-->
+	<link rel="stylesheet" href="thirdparty/assets/css/font-awesome.min.css" />
+	<!--[if IE 7]>
+	  <link rel="stylesheet" href="thirdparty/assets/css/font-awesome-ie7.min.css" />
+	<![endif]-->
+	<link rel="stylesheet" href="thirdparty/assets/css/bootstrap-datetimepicker.min.css" />
+	<link rel="stylesheet" href="thirdparty/assets/css/daterangepicker.css" />
+	<link rel="stylesheet" href="thirdparty/assets/css/ui.jqgrid.css" />
+	<link rel="stylesheet" href="thirdparty/assets/css/ace.min.css" />
+	<link rel="stylesheet" href="thirdparty/assets/css/ace-rtl.min.css" />
+	<link rel="stylesheet" href="thirdparty/assets/css/ace-skins.min.css" />
+    <link rel="stylesheet" href="thirdparty/web-code-generate/css/layoutit.css"/>
+
+	<!-- inline styles related to this page -->
+
+	<!-- ace settings handler -->
+
+	<script src="thirdparty/assets/js/ace-extra.min.js"></script>
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	<script src="thirdparty/assets/js/html5shiv.js"></script>
+	<script src="thirdparty/assets/js/respond.min.js"></script>
+	<![endif]-->
+    
+    <style>
+        .placeholder { color: #aaa }
+    </style>
+
+<!-- basic scripts -->
+
+<!--[if !IE]> -->
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='thirdparty/jquery/js/jquery.min.js'>" + "<" + "/script>");
+</script>
+
+<!-- <![endif]-->
+
+<!--[if IE]>
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='thirdparty/jquery/js/jquery1x.min.js'>" + "<" + "/script>");
+</script>
+<![endif]-->
+
+<script type="text/javascript">
+    if ('ontouchstart' in document.documentElement) document.write("<script src='thirdparty/jquery/js/jquery.mobile.custom.js'>" + "<" + "/script>");
+</script>
+<script src="thirdparty/bootstrap/js/bootstrap.min.js"></script>
+
+<script src="thirdparty/jquery/js/jquery-ui.min.js"></script>
+<script src="thirdparty/jquery/js/jquery.ui.touch-punch.js"></script>
+<script src="thirdparty/jquery/js/jquery.autosize.js"></script>
+<script src="thirdparty/jquery/js/jquery.inputlimiter.1.3.1.js"></script>
+<script src="thirdparty/jquery/js/jquery.knob.js"></script>
+<script src="thirdparty/jquery/js/jquery.fileupload.js"></script>
+<script src="thirdparty/jquery/js/jquery.iframe-transport.js"></script>
+<script src="thirdparty/bootstrap/js/bootbox.js"></script>
+<script src="thirdparty/bootstrap/js/bootstrap-tag.js"></script>
+<script src="thirdparty/bootstrap/js/bootstrap-select.min.js"></script>
+<script src="thirdparty/bootstrap/js/select-zh_CN.min.js"></script>
+<script src="thirdparty/jquery/js/qrcode.min.js"></script>
+<script src="thirdparty/jstree/dist/jstree.min.js"></script>
+<script src="thirdparty/jquery/js/chosen.jquery.js"></script>
+<script src="thirdparty/blueimp-gallery/js/jquery.blueimp-gallery.min.js"></script>
+
+<!-- datetimepicker -->
+<script src="thirdparty/moment/moment.js"></script>
+<script src="thirdparty/moment/locale/zh-cn.js"></script>
+
+<!-- for angularjs -->
+<script src="thirdparty/assets/js/typeahead-bs2.min.js"></script>
+<script src="thirdparty/angularjs/angular/angular.min.js"></script>
+<script src="thirdparty/angularjs/angular-route/angular-route.min.js"></script>
+<script src="thirdparty/angularjs/bindonce/bindonce.min.js"></script>
+<script src="thirdparty/angularjs/restangular/dist/restangular.min.js"></script>
+<script src="thirdparty/angularjs/angular-resource/angular-resource.min.js"></script>
+<script src="thirdparty/lodash_2.4.1/dist/lodash.min.js"></script>
+<script src="thirdparty/jquery/jquery-form/jquery.form.js"></script>
+<!-- for angularjs end -->
+
+<!-- ace scripts -->
+<script src="thirdparty/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
+<script src="thirdparty/assets/js/jquery.ui.touch-punch.min.js"></script>
+<script src="thirdparty/assets/js/jquery.slimscroll.min.js"></script>
+<script src="thirdparty/assets/js/date-time/bootstrap-datepicker.min.js"></script>
+<script src="thirdparty/assets/js/date-time/bootstrap-datetimepicker.js"></script>
+<script src="thirdparty/assets/js/date-time/bootstrap-datetimepicker.zh-CN.js"></script>
+<script src="thirdparty/assets/js/date-time/bootstrap-timepicker.min.js"></script>
+<script src="thirdparty/assets/js/date-time/moment.min.js"></script>
+<script src="thirdparty/assets/js/date-time/daterangepicker.min.js"></script>
+<script src="thirdparty/assets/js/jquery.easy-pie-chart.min.js"></script>
+<script src="thirdparty/assets/js/jquery.sparkline.min.js"></script>
+<script src="thirdparty/assets/js/flot/jquery.flot.min.js"></script>
+<script src="thirdparty/assets/js/flot/jquery.flot.pie.min.js"></script>
+<script src="thirdparty/assets/js/flot/jquery.flot.resize.min.js"></script>
+<script src="thirdparty/assets/js/jqGrid/jquery.jqGrid.min.js"></script>
+<script src="thirdparty/assets/js/jqGrid/i18n/grid.locale-cn.js"></script>
+<script src="thirdparty/assets/js/fuelux/fuelux.tree.min.js"></script>
+<script src="thirdparty/assets/js/jquery.nestable.min.js"></script>
+<script type="text/javascript" src="thirdparty/web-code-generate/ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="thirdparty/web-code-generate/ckeditor/config.js"></script>
+<script id="reloadAceElement" src="thirdparty/assets/js/ace-elements.min.js"></script>
+<script id="reloadAce" src="thirdparty/assets/js/ace.min.js"></script>
+
+<!-- ace scripts end-->
+
+
+
+<!-- for app -->
+<script src="app/controller/ctr.module.js"></script>
+<script src="app/controller/ctr.route.js"></script>
+
+<script src="app/application.js"></script>
+<script src="app/session.js"></script>
+
+<script src="app/controller/webpage/webpage.js"></script>
+<script src="app/controller/container/container.js"></script>
+<script src="app/controller/container/elementpanel.js"></script>
+<script src="app/controller/widget/text/widget.text.js"></script>
+<script src="app/controller/widget/fileupload/widget.file.js"></script>
+<script src="app/controller/widget/radiobox/widget.radio.js"></script>
+<script src="app/controller/widget/radiobox/widget.radio.element.js"></script>
+<script src="app/controller/widget/checkbox/widget.check.js"></script>
+<script src="app/controller/widget/checkbox/widget.check.element.js"></script>
+<script src="app/controller/widget/datepicker/widget.date.js"></script>
+<script src="app/controller/widget/daterangepicker/widget.date.range.js"></script>
+<script src="app/controller/widget/select/widget.select.js"></script>
+<script src="app/controller/widget/selecttree/widget.select.tree.js"></script>
+<script src="app/controller/widget/treeview/widget.tree.view.js"></script>
+<script src="app/controller/widget/datatable/widget.datatable.js"></script>
+<script src="app/controller/widget/button/widget.button.js"></script>
+<script src="app/controller/widget/menu/widget.menu.js"></script>
+<script src="app/controller/edit/edit.page.tools.js"></script>
+<script src="app/controller/widget/daocreator/widget.dao.creator.js"></script>
+
+<script src="app/service/data.js"></script>
+<script src="app/service/dialog.js"></script>
+<script src="app/service/loading.js"></script>
+<script src="app/util/visual.edit.js"></script>
+<script src="app/util/common.js"></script>
+<script id="visualEdit" src="app/util/visual.edit.operation.js"></script>
+
+<!-- for app end-->
+<!-- basic scripts -->
+<!--[if IE]>
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='thirdparty/js/jquery1x.min.js'>" + "<" + "/script>");
+</script>
+<![endif]-->
+<script type="text/javascript">
+    if ('ontouchstart' in document.documentElement) document.write("<script src='thirdparty/js/jquery.mobile.custom.js'>" + "<" + "/script>");  
+</script>
+<!-- inline scripts related to this page -->
+
+
+</head>
+<body>
+<div class="tabbable">
+	<div class="navbar navbar-default" id="navbar">
+		<script type="text/javascript">
+			try{ace.settings.check('navbar' , 'fixed')}catch(e){}
+		</script>
+
+		<div class="navbar-container" id="navbar-container">
+			<div class="navbar-header pull-left">
+				<a href="#" onclick='gotoSubsys("/api-webeditor/subsys/change?subsysCode=common")' class="navbar-brand">
+					<small id="subsys_logo">
+					<i class="icon-desktop"></i>
+					</small>
+					<small id="subsys_name">
+						NSW信息化平台
+					</small>
+				</a><!-- /.brand -->
+			</div><!-- /.navbar-header -->
+			<div class="navbar-header">
+				<ul class="nav nav-tabs" style="margin-top:16px" id="myTabs">
+				</ul>
+			</div>
+			<div class="navbar-header pull-right" role="navigation">
+				<ul class="nav ace-nav">
+					<li class="light-blue">
+						<a data-toggle="dropdown"  class="dropdown-toggle">
+							<img class="nav-user-photo" src="thirdparty/assets/avatars/user03.jpg" alt="Jason's Photo" />
+							<span class="user-info">
+								<small>欢迎光临,</small>
+								<span name="login_username" id="login_username"> </span>
+							</span>
+
+							<i class="icon-caret-down"></i>
+						</a>
+
+						<ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+							<li>
+								<a onclick="testPermission()">
+									<i class="icon-cog"></i>
+									权限管理
+								</a>
+							</li>
+<!-- 
+							<li>
+								<a  onclick="testResource()">
+									<i class="icon-user"></i>
+									个人资料
+								</a>
+							</li> -->
+
+							<li class="divider"></li>
+
+							<li>
+								<a  onclick="preLogout()" >
+									<i class="icon-off"></i>
+									退出
+								</a>
+							</li>
+						</ul>
+					</li>
+				</ul><!-- /.ace-nav -->
+			</div>
+		</div><!-- /.container -->
+	</div>
+
+	<div class="main-container demo ui-sortable" style="min-height: 300px;" id="main-container">
+		<script type="text/javascript">
+			try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+		</script>
+
+		<div class="main-container-inner">
+			<a class="menu-toggler" id="menu-toggler" href="#">
+				<span class="menu-text"></span>
+			</a>
+			<div webpage-container id="systemmenu" pageid="systemmenu"></div>
+			<div ng-view="">
+			</div>
+			<!-- /.main-content -->
+			<div class="ace-settings-container" id="ace-settings-container">
+				<div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">
+					<i class="icon-cog bigger-150"></i>
+				</div>
+
+				<div class="ace-settings-box" id="ace-settings-box">
+					<div>
+						<div class="pull-left">
+							<select id="skin-colorpicker" class="hide">
+								<option data-skin="default" value="#438EB9">#438EB9</option>
+								<option data-skin="skin-1" value="#222A2D">#222A2D</option>
+								<option data-skin="skin-2" value="#C6487E">#C6487E</option>
+								<option data-skin="skin-3" value="#D0D0D0">#D0D0D0</option>
+							</select>
+						</div>
+						<span>&nbsp; 选择皮肤</span>
+					</div>
+
+					<div>
+						<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-navbar" />
+						<label class="lbl" for="ace-settings-navbar"> 固定导航条</label>
+					</div>
+
+					<div>
+						<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-sidebar" />
+						<label class="lbl" for="ace-settings-sidebar"> 固定滑动条</label>
+					</div>
+
+					<div>
+						<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-breadcrumbs" />
+						<label class="lbl" for="ace-settings-breadcrumbs">固定面包屑</label>
+					</div>
+
+					<div>
+						<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-rtl" />
+						<label class="lbl" for="ace-settings-rtl">切换到左边</label>
+					</div>
+
+					<div>
+						<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-add-container" />
+						<label class="lbl" for="ace-settings-add-container">
+							切换窄屏
+							<b></b>
+						</label>
+					</div>
+				</div>
+			</div>
+			<!-- /#ace-settings-container -->
+			
+		</div><!-- /.main-container-inner -->
+
+		<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+			<i class="icon-double-angle-up icon-only bigger-110"></i>
+		</a>
+	</div>
+	
+<!-- ##############################################从这里开始是编辑工具栏################################################ -->
+<div edit-tools class="row-fluid dialog" id="editTools" style="display:none;"></div>
+<!-- ################################################编辑工具栏到此结束################################################## -->
+</div>
+</body>
+<script type="text/javascript">
+
+angular.element(document).ready(function () {
+    try {
+        ace.settings.navbar_fixed(null, true);
+        ace.settings.sidebar_fixed(null, true);
+        ace.settings.breadcrumbs_fixed(null, true);
+    } catch (e) {
+    }
+});
+var reloadJs = function(id){
+    var jsObj = document.getElementById(id);
+    var src = jsObj.src;
+    delete jsObj;
+    //重新加载
+    var script = document.createElement('script');
+    script.src = src;
+    document.body.appendChild(script);
+};
+</script>
+
+
+
+
+
+
+<script type="text/javascript" src="/webjars/js-cookie/2.1.0/js.cookie.js"></script>
+
+
+
+<script src="../../thirdparty/layer/layer.js"></script>
+
+<script type="text/javascript">
+function preLogout(){
+	layer.msg('确定要退出本系统吗？', {
+	  time: 0 //不自动关闭
+	  ,btn: ['确定','取消，留在本页']
+	  ,yes: function(index){
+	    layer.close(index);
+	    logout();
+	  }
+	});
+}
+$.ajaxSetup({
+    beforeSend : function(xhr, settings) {
+        if (settings.type == 'POST' || settings.type == 'PUT'
+            || settings.type == 'DELETE') {
+            if (!(/^http:.*/.test(settings.url) || /^https:.*/
+                    .test(settings.url))) {
+                // Only send the token to relative URLs i.e. locally.
+                xhr.setRequestHeader("X-XSRF-TOKEN",
+                    Cookies.get('XSRF-TOKEN'));
+            }
+        }
+    }
+});
+function logout(){
+//    var url = "/logout";
+//    $.get(
+//        url,
+//        null,
+//        function(data){
+//            alert(data);
+//            window.location.href="/";
+//        });
+    window.location.href="/api-auth/uaa/user/logout";
+//    window.location.href="/logout";
+}
+
+        
+        
+        
+        
+        
+
+
+$(function(){  
+    var username=GetUsername();
+    var timeCount = 0;
+	var timer = setInterval(function(){
+		//取得用户信息后渲染用户信息显示标签
+		if(GetUsername() != "用户"){
+			clearInterval(timer);
+			username = GetUsername();
+		}
+		timeCount ++;
+		//加载数据超时(5秒)，直接返回，不进行表格渲染
+		if(timeCount == 10){
+			alert("加载登录用户超时！");
+			clearInterval(timer);
+			return;
+		}
+	},500);
+	getSubsysList();
+    
+    $(login_username).html(username);
+    
+});  
+
+
+
+
+
+var results = "用户";  
+function GetUsername(){
+	var url = "/api-auth/uaa/user/detailInfo";
+    $.ajax({
+        type: "POST",  
+        url: url,
+        data: null,   
+        dataType: 'text',   
+        async: false,  
+        success: function(data){
+        	if(data.code == null & typeof(data.code) == "undefined"){
+	            if(data){
+	            	results = $.trim(JSON.parse(data).username)
+	            	return results; 
+	            }
+        	}
+        }    
+    }); 
+	
+    return results;
+
+}
+
+function getSubsysList(){
+	var requrl = "/api-webeditor/subsys/list?t=" + new Date().getTime();
+    $.ajax({
+        type: "POST",
+        url: requrl,
+        data: null,
+        dataType: 'text',
+        async: false,  
+        success: function(data){
+        	if(data.code == null & typeof(data.code) == "undefined"){	
+	            if(data){
+	            	results = JSON.parse(data);
+	            	for(var i = 0; i < results.list.length; i ++ ){
+	            		var currSubsysConfig = results.list[i];
+	            		var code = currSubsysConfig.code;
+	            		var name = currSubsysConfig.name;
+	            		var logo = currSubsysConfig.logo;
+	            		var active = currSubsysConfig.active;
+	            		var activeStr = "";
+	            		if(active){
+	            			activeStr = "active";
+	            		}
+	            		var currNodeHtml = '<li class="' + activeStr + '"><a data-toggle="tab" onclick=gotoSubsys("/api-webeditor/subsys/change?subsysCode=' + code + '") href="#"><i class="green ' + logo + ' bigger-110"></i>' + name + '</a></li>';
+	            		$("#myTabs").append(currNodeHtml);
+	            	}
+	            }
+        	}
+        }  
+    });
+}
+function gotoSubsys(gotourl){
+    $.ajax({
+        type: "POST",
+        url: gotourl,
+        data: null,
+        dataType: 'json',
+        async: false,  
+        success: function(data){
+        	if(data.code != ""){
+                window.location.reload();
+        	}
+        }  
+    });
+}
+
+
+
+var curPath=window.document.location.href;  
+var pathName=window.document.location.pathname;  
+var pos=curPath.indexOf(pathName);  
+var basePath=curPath.substring(0,pos); 
+
+
+function testPermission(){
+	var url = "/rest/login/testPermission";
+	
+     $.ajax({
+        cache: true,
+        type: "POST",
+        url:url,
+        data:null,
+        async: false,
+        error: function(request) {
+            window.location.href = basePath + "/rest/forward/500";
+        },
+        success: function(data,status) {
+        	if(data.code != null & typeof(data.code) != "undefined"){
+	        	var errorCode = $.trim(data.code);
+	        	
+	        	 if(errorCode == "401"){
+	        		//window.location.href = basePath + "/rest/forward/4012"
+	        		
+	        		layer.msg('很抱歉！您没有访问该模块的权限。</br>请联系管理员修改或提升账户权限或检查您登陆的账户是否有误。谢谢。', {
+	        		  time: 0 //不自动关闭
+	        		  ,btn: ['OK']
+	        		  ,yes: function(index){
+	        		    layer.close(index);
+	        		    
+	        		  }
+	        		});
+	        		
+	        		
+	        	}else{
+	        		window.location.href = basePath + "/rest/forward/500";
+	        	} 
+        		
+        	}else{
+        		//这里弹出或跳转到权限管理页面，进行权限操作
+        		
+        		layer.msg('权限模块管理页面正在建设中...</br>敬请期待...</br>如有权限提升需求请联系开发人员进行后台修改。谢谢。', {
+        		  time: 0 //不自动关闭
+        		  ,btn: ['OK']
+        		  ,yes: function(index){
+        		    layer.close(index);
+        		    
+        		  }
+        		});
+        	}
+        }
+    });
+	
+}
+
+function testResource(){
+	var url =  "/rest/resource/findPermissionsByResourceId";
+
+    $.post(
+            url,
+            null,
+            function(data,status){
+              alert("数据：" + data + "\n状态：" + status);
+            });
+
+}
+</script>
+
+<script src="thirdparty/assets/js/ace.min.js"></script>
+
+</html>

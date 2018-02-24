@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html ng-app="app"  class="no-js"> <!--<![endif]-->
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta charset="utf-8"/>
+    <title>Popup Page</title>
+
+    <meta name="description" content="popup page"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+
+	<link rel="stylesheet" href="/app/util/css/edit.css" />
+	<link rel="stylesheet" href="/app/util/css/manage.css" />
+    <!-- bootstrap & fontawesome -->
+    <link rel="stylesheet" href="/thirdparty/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/thirdparty/font-awesome/css/font-awesome.css"/>
+
+    <!-- jquery ui -->
+    <link rel="stylesheet" href="/thirdparty/jquery/css/jquery-ui.css"/>
+    <link rel="stylesheet" href="/thirdparty/jquery/css/chosen.css"/>
+    
+    <!-- ace styles -->
+	<!--[if lte IE 8]>
+	  <link rel="stylesheet" href="/thirdparty/assets/css/ace-ie.min.css" />
+	<![endif]-->
+	<link rel="stylesheet" href="/thirdparty/assets/css/font-awesome.min.css" />
+	<!--[if IE 7]>
+	  <link rel="stylesheet" href="/thirdparty/assets/css/font-awesome-ie7.min.css" />
+	<![endif]-->
+	<link rel="stylesheet" href="/thirdparty/assets/css/bootstrap-datetimepicker.min.css" />
+	<link rel="stylesheet" href="/thirdparty/assets/css/daterangepicker.css" />
+	<link rel="stylesheet" href="/thirdparty/assets/css/ui.jqgrid.css" />
+	<link rel="stylesheet" href="/thirdparty/assets/css/ace.min.css" />
+	<link rel="stylesheet" href="/thirdparty/assets/css/ace-rtl.min.css" />
+	<link rel="stylesheet" href="/thirdparty/assets/css/ace-skins.min.css" />
+
+	<!-- inline styles related to this page -->
+
+	<!-- ace settings handler -->
+
+	<script src="/thirdparty/assets/js/ace-extra.min.js"></script>
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	<script src="/thirdparty/assets/js/html5shiv.js"></script>
+	<script src="/thirdparty/assets/js/respond.min.js"></script>
+	<![endif]-->
+    
+    <style>
+        .placeholder { color: #aaa }
+    </style>
+
+<!-- basic scripts -->
+
+<!--[if !IE]> -->
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='/thirdparty/jquery/js/jquery.min.js'>" + "<" + "/script>");
+</script>
+
+<!-- <![endif]-->
+
+<!--[if IE]>
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='/thirdparty/jquery/js/jquery1x.min.js'>" + "<" + "/script>");
+</script>
+<![endif]-->
+
+<script type="text/javascript">
+    if ('ontouchstart' in document.documentElement) document.write("<script src='/thirdparty/jquery/js/jquery.mobile.custom.js'>" + "<" + "/script>");
+</script>
+<script src="/thirdparty/bootstrap/js/bootstrap.min.js"></script>
+
+<script src="/thirdparty/jquery/js/jquery-ui.min.js"></script>
+<script src="/thirdparty/jquery/js/jquery.ui.touch-punch.js"></script>
+<script src="/thirdparty/jquery/js/jquery.autosize.js"></script>
+<script src="/thirdparty/jquery/js/jquery.inputlimiter.1.3.1.js"></script>
+<script src="/thirdparty/jquery/js/jquery.knob.js"></script>
+<script src="/thirdparty/jquery/js/jquery.fileupload.js"></script>
+<script src="/thirdparty/jquery/js/jquery.iframe-transport.js"></script>
+<script src="/thirdparty/bootstrap/js/bootbox.js"></script>
+<script src="/thirdparty/bootstrap/js/bootstrap-tag.js"></script>
+<script src="/thirdparty/jquery/js/qrcode.min.js"></script>
+<script src="/thirdparty/jstree/dist/jstree.min.js"></script>
+<script src="/thirdparty/jquery/js/chosen.jquery.js"></script>
+<script src="/thirdparty/blueimp-gallery/js/jquery.blueimp-gallery.min.js"></script>
+
+<!-- datetimepicker -->
+<script src="/thirdparty/moment/moment.js"></script>
+<script src="/thirdparty/moment/locale/zh-cn.js"></script>
+
+<!-- for angularjs -->
+<script src="/thirdparty/assets/js/typeahead-bs2.min.js"></script>
+<script src="/thirdparty/angularjs/angular/angular.min.js"></script>
+<script src="/thirdparty/angularjs/angular-route/angular-route.min.js"></script>
+<script src="/thirdparty/angularjs/bindonce/bindonce.min.js"></script>
+<script src="/thirdparty/angularjs/restangular/dist/restangular.min.js"></script>
+<script src="/thirdparty/angularjs/angular-resource/angular-resource.min.js"></script>
+<script src="/thirdparty/lodash_2.4.1/dist/lodash.min.js"></script>
+<script src="/thirdparty/jquery/jquery-form/jquery.form.js"></script>
+<!-- for angularjs end -->
+
+<!-- ace scripts -->
+<script src="/thirdparty/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
+<script src="/thirdparty/assets/js/jquery.ui.touch-punch.min.js"></script>
+<script src="/thirdparty/assets/js/jquery.slimscroll.min.js"></script>
+<script src="/thirdparty/assets/js/date-time/bootstrap-datepicker.min.js"></script>
+<script src="/thirdparty/assets/js/date-time/bootstrap-datetimepicker.js"></script>
+<script src="/thirdparty/assets/js/date-time/bootstrap-datetimepicker.zh-CN.js"></script>
+<script src="/thirdparty/assets/js/date-time/bootstrap-timepicker.min.js"></script>
+<script src="/thirdparty/assets/js/date-time/moment.min.js"></script>
+<script src="/thirdparty/assets/js/date-time/daterangepicker.min.js"></script>
+<script src="/thirdparty/assets/js/jquery.easy-pie-chart.min.js"></script>
+<script src="/thirdparty/assets/js/jquery.sparkline.min.js"></script>
+<script src="/thirdparty/assets/js/flot/jquery.flot.min.js"></script>
+<script src="/thirdparty/assets/js/flot/jquery.flot.pie.min.js"></script>
+<script src="/thirdparty/assets/js/flot/jquery.flot.resize.min.js"></script>
+<script src="/thirdparty/assets/js/jqGrid/jquery.jqGrid.min.js"></script>
+<script src="/thirdparty/assets/js/jqGrid/i18n/grid.locale-cn.js"></script>
+<script src="/thirdparty/assets/js/fuelux/fuelux.tree.min.js"></script>
+<script src="/thirdparty/assets/js/jquery.nestable.min.js"></script>
+<script id="reloadAceElement" src="/thirdparty/assets/js/ace-elements.min.js"></script>
+<script id="reloadAce" src="/thirdparty/assets/js/ace.min.js"></script>
+
+<!-- ace scripts end-->
+
+
+
+<!-- for app -->
+<script src="/app/controller/ctr.module.js"></script>
+<script src="/app/controller/ctr.route.js"></script>
+
+<script src="/app/application.js"></script>
+<script src="/app/session.js"></script>
+
+<script src="/app/controller/webpage/webpage.js"></script>
+<script src="/app/controller/container/container.js"></script>
+<script src="/app/controller/container/elementpanel.js"></script>
+<script src="/app/controller/widget/text/widget.text.js"></script>
+<script src="/app/controller/widget/radiobox/widget.radio.js"></script>
+<script src="/app/controller/widget/fileupload/widget.file.js"></script>
+<script src="/app/controller/widget/radiobox/widget.radio.element.js"></script>
+<script src="/app/controller/widget/checkbox/widget.check.js"></script>
+<script src="/app/controller/widget/checkbox/widget.check.element.js"></script>
+<script src="/app/controller/widget/datepicker/widget.date.js"></script>
+<script src="/app/controller/widget/daterangepicker/widget.date.range.js"></script>
+<script src="/app/controller/widget/select/widget.select.js"></script>
+<script src="/app/controller/widget/selecttree/widget.select.tree.js"></script>
+<script src="/app/controller/widget/treeview/widget.tree.view.js"></script>
+<script src="/app/controller/widget/datatable/widget.datatable.js"></script>
+<script src="/app/controller/widget/button/widget.button.js"></script>
+<script src="/app/controller/widget/menu/widget.menu.js"></script>
+<script src="/app/controller/widget/daocreator/widget.dao.creator.js"></script>
+<script src="/app/controller/edit/edit.page.tools.js"></script>
+
+<script src="/app/service/data.js"></script>
+<script src="/app/service/dialog.js"></script>
+<script src="/app/service/loading.js"></script>
+<script src="/app/util/visual.edit.js"></script>
+<script src="/app/util/common.js"></script>
+<script id="visualEdit" src="/app/util/visual.edit.operation.js"></script>
+
+<!-- for app end-->
+<!-- basic scripts -->
+<!--[if IE]>
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='/thirdparty/js/jquery1x.min.js'>" + "<" + "/script>");
+</script>
+<![endif]-->
+<script type="text/javascript">
+    if ('ontouchstart' in document.documentElement) document.write("<script src='/thirdparty/js/jquery.mobile.custom.js'>" + "<" + "/script>");
+</script>
+<!-- inline scripts related to this page -->
+
+
+</head>
+<body ng-controller="WebPageController">
+	<div class="navbar navbar-default" id="navbar">
+		<script type="text/javascript">
+			try{ace.settings.check('navbar' , 'fixed')}catch(e){}
+		</script>
+
+		<div class="navbar-container" id="navbar-container">
+			<div class="navbar-header pull-left">
+				<a href="#" class="navbar-brand">
+					<small>
+						<i class="icon-leaf"></i>
+						{{popupTitle}}
+					</small>
+				</a><!-- /.brand -->
+			</div><!-- /.navbar-header -->
+		</div><!-- /.container -->
+	</div>
+
+	<div class="main-container" id="main-container">
+		<script type="text/javascript">
+			try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+		</script>
+		<div>&nbsp;</div>
+		<input type="hidden" id="providerCode" name="providerCode" value="{{providerCode}}"/>
+		<div webpage-container id="{{popupContainerId}}" pageId="{{popupPageId}}"></div>
+	</div>
+</body>
+<script type="text/javascript">
+var reloadJs = function(id){
+    var jsObj = document.getElementById(id);
+    var src = jsObj.src;
+    delete jsObj;
+    //重新加载
+    var script = document.createElement('script');
+    script.src = src;
+    document.body.appendChild(script);
+};
+</script>
+</html>

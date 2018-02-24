@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="scw-auth-server" />
+        <module name="scw-base-core" />
+        <module name="scw-eureka-server" />
+        <module name="scw-provider-webeditor" />
+        <module name="scw-route-consumer" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="scw-auth-server" target="1.7" />
+      <module name="scw-base-core" target="1.7" />
+      <module name="scw-eureka-server" target="1.7" />
+      <module name="scw-provider-webeditor" target="1.7" />
+      <module name="scw-route-consumer" target="1.7" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

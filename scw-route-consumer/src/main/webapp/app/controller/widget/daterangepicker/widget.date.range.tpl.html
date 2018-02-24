@@ -1,0 +1,11 @@
+<div class="form-horizontal form-group col-lg-{{width}} col-md-{{width}} col-sm-{{width}}" widgetId="{{id}}" canEditFlag="widgetEditElement">
+	<label class="control-label input-sm col-lg-4 col-md-4 col-sm-4 field-title no-padding-right blue" for="{{id}}">{{label}}</label>
+	<div class="input-group col-lg-8 col-md-8 col-sm-8 field-input" style="padding-left:15px;padding-right:15px">
+		<input id="input{{id}}" class="date-picker col-xs-12" type="text" data-date-format="{{format}}" value="{{initvalue}}"/>
+		<input id="input{{id}}Start" type="hidden" value="" name="{{name}}Start"/>
+		<input id="input{{id}}End" type="hidden" value="" name="{{name}}End"/>
+		<span class="input-group-addon" ng-click="clearData();" style="cursor:pointer" title="clear data">
+			<i class="icon-calendar"></i>
+		</span>
+	</div>
+</div>

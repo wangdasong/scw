@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.github.wangdasong.scwauthserver.dao.persistence.UserRoleMapper" >
+  <resultMap id="BaseResultMap" type="com.github.wangdasong.scwauthserver.dao.entity.UserRole" >
+    <id column="UR_ID" property="id" />
+    <result column="UR_USER_ID" property="userId" />
+    <result column="UR_ROLE_ID" property="roleId" />
+    <association property="role" javaType="com.github.wangdasong.scwauthserver.dao.entity.Role" resultMap="com.github.wangdasong.scwauthserver.dao.persistence.RoleMapper.BaseResultMap"/>
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    UR.ID AS UR_ID,
+    UR.USER_ID AS UR_USER_ID,
+    UR.ROLE_ID AS UR_ROLE_ID
+  </sql>
+  
+  
+
+  <select id="getRoleId" resultType="java.lang.String" parameterType="java.lang.String" >
+    select UR.ROLE_ID
+    from SYS_USER_ROLE UR
+    where UR.USER_ID= #{userId}
+  </select>
+  
+  
+  
+  <insert id="create" parameterType="com.github.wangdasong.scwauthserver.dao.entity.UserRole" >
+    <selectKey keyProperty="id" resultType="java.lang.String" order="BEFORE">
+        SELECT SYS_GUID() AS ID FROM DUAL
+    </selectKey>
+    insert into SYS_USER_ROLE
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                    ID,
+            </if>
+            <if test="userId != null" >
+                    USER_ID,
+            </if>
+            <if test="roleId != null" >
+                    ROLE_ID,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                    #{id},
+            </if>
+            <if test="userId != null" >
+                    #{userId},
+            </if>
+            <if test="roleId != null" >
+                    #{roleId},
+            </if>
+        </trim>
+  </insert>
+  
+  <update id="updateById" parameterType="com.github.wangdasong.scwauthserver.dao.entity.UserRole" >
+    update SYS_USER_ROLE
+    <set>
+      <if test="userId != null" > 
+        USER_ID = #{userId},
+      </if> 
+      <if test="roleId != null" > 
+        ROLE_ID = #{roleId},
+      </if> 
+    </set>
+    where ID = #{id}
+  </update>
+
+  <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select   <include refid="Base_Column_List" />
+    from SYS_USER_ROLE UR
+    where UR.ID= #{id}
+  </select>
+
+  <delete id="deleteById" parameterType="java.lang.String" >
+    delete from SYS_USER_ROLE
+    where ID = #{id}
+  </delete>
+
+  <insert id="save" parameterType="com.github.wangdasong.scwauthserver.dao.entity.UserRole" >
+    <selectKey keyProperty="id" resultType="java.lang.String" order="BEFORE">
+        <if test="@com.github.wangdasong.scwauthserver.dao.entity.UserRole@dbDialog=='oracle'">
+            SELECT SYS_GUID() AS ID FROM DUAL
+        </if>
+        <if test="@com.github.wangdasong.scwauthserver.dao.entity.UserRole@dbDialog=='mysql'">
+            SELECT REPLACE(UUID(),'-','') FROM DUAL;
+        </if>
+    </selectKey>
+    insert into SYS_USER_ROLE
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                    ID,
+            </if>
+            <if test="userId != null" >
+                    USER_ID,
+            </if>
+            <if test="roleId != null" >
+                    ROLE_ID,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                    #{id},
+            </if>
+            <if test="userId != null" >
+                    #{userId},
+            </if>
+            <if test="roleId != null" >
+                    #{roleId},
+            </if>
+        </trim>
+  </insert>
+
+  <update id="update" parameterType="com.github.wangdasong.scwauthserver.dao.entity.UserRole" >
+    update SYS_USER_ROLE
+    <set>
+      <if test="userId != null" > 
+        USER_ID = #{userId},
+      </if> 
+      <if test="roleId != null" > 
+        ROLE_ID = #{roleId},
+      </if> 
+    </set>
+    where ID = #{id}
+  </update>
+    <sql id="Find_Page_Base_Sql" >
+        FROM SYS_USER_ROLE UR
+        LEFT JOIN SYS_ROLE ROLE ON UR.ROLE_ID = ROLE.ID
+        <where>
+            <trim prefixOverrides="AND |OR ">
+                <if test="options.id!=null">
+                    AND UR.ID='${options.id}'
+                </if>
+                <if test="options.userId!=null">
+                    AND UR.USER_ID='${options.userId}'
+                </if>
+                <if test="options.roleId!=null">
+                    AND UR.ROLE_ID='${options.roleId}'
+                </if>
+            </trim>
+        </where>
+    </sql>
+
+    <sql id="Sort_Page_Base_Sql" >
+        <if test="pageSort!=null">
+            order by 
+            <foreach item="item" index="index" collection="pageSortArray" separator="," >
+                <if test="item=='id'">
+                    ID
+                </if>
+                <if test="item=='id desc'">
+                    ID DESC
+                </if>
+                <if test="item=='userId'">
+                    USER_ID
+                </if>
+                <if test="item=='userId desc'">
+                    USER_ID DESC
+                </if>
+                <if test="item=='roleId'">
+                    ROLE_ID
+                </if>
+                <if test="item=='roleId desc'">
+                    ROLE_ID DESC
+                </if>
+            </foreach>
+        </if>
+    </sql>
+
+    <select id="findPageData" parameterType="com.github.wangdasong.scwbasecore.utils.paging.Pagination" resultMap="BaseResultMap">
+        <if test="@com.github.wangdasong.scwauthserver.dao.entity.UserRole@dbDialog=='oracle'">
+        	<include refid="oraclesplit_prefix" />
+        </if>
+	    <if test="@com.github.wangdasong.scwauthserver.dao.entity.UserRole@dbDialog=='mysql'">
+        	select
+        </if>
+        <include refid="Base_Column_List" />
+        <include refid="Find_Page_Base_Sql" />
+		<include refid="Sort_Page_Base_Sql" />
+		<if test="@com.github.wangdasong.scwauthserver.dao.entity.UserRole@dbDialog=='oracle'">
+        	<include refid="oraclesplit_suffix" />
+        </if>
+		<if test="@com.github.wangdasong.scwauthserver.dao.entity.UserRole@dbDialog=='mysql'">
+        	<include refid="mysqlsplit_suffix" />
+        </if>
+    </select>
+    <sql id="oraclesplit_prefix">
+        select * from ( select row_.*, rownum rownum_ from (select 
+    </sql>
+    <sql id="oraclesplit_suffix">
+        )row_ where rownum &lt;= #{oracle_maxrow}) where rownum_ > #{oracle_minrow}
+    </sql>
+    <sql id="mysqlsplit_suffix">
+    	limit #{oracle_minrow}, #{pageSize}
+    </sql>
+    <select id="getCount" parameterType="com.github.wangdasong.scwbasecore.utils.paging.Pagination" resultType="int">
+        select count(*) 
+        <include refid="Find_Page_Base_Sql" />
+    </select>
+</mapper>

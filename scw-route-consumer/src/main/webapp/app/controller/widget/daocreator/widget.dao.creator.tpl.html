@@ -1,0 +1,26 @@
+	<div id="daoDiv{{id}}" widgetId="{{id}}" addElement=true canEditFlag="widgetEditElement" class="col-xs-12 col-sm-6 widget-container-span">
+		<div class="widget-box">
+			<div class="widget-header header-color-red">
+				<h5 class="bigger lighter">
+					<i class="icon-table"></i>
+					{{label}}
+				</h5>
+				<div class="widget-toolbar no-border">
+					<ul class="nav nav-tabs" id="myTab">
+						<li ng-repeat="element in elements" id="li{{element.id}}" class="">
+							<a data-toggle="tab" id="a{{element.id}}" href="#tab{{element.id}}" onclick="return false;"></a>
+						</li>
+					</ul>
+				</div>
+			</div>	
+			<div class="widget-body col-xs-12">
+				<div class="widget-main no-padding">
+					<div class="tab-content">
+						<div ng-repeat="element in elements"  id="tab{{element.id}}" class="tab-pane">
+							<div elementpanel-container id="{{element.id}}" pageId="{{element.id}}"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div><!-- /span -->

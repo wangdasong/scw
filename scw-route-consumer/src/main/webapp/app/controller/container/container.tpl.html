@@ -1,0 +1,112 @@
+<div ng-if="container.type=='2'" ng-repeat="container in containers">
+	<div ng-if="container.type=='2'" class="sidebar" id="sidebar">
+		<script type="text/javascript">
+			try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
+		</script>
+		<div class="sidebar-shortcuts" id="sidebar-shortcuts">
+			<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+				<button class="btn btn-success" ng-click="showPageList()">
+					<i class="icon-reorder"></i>
+				</button>
+	
+				<button class="btn btn-info" ng-click="reflushVisualEdit()">
+					<i class="icon-pencil"></i>
+				</button>
+	
+				<button class="btn btn-warning">
+					<i class="icon-group"></i>
+				</button>
+	
+				<button class="btn btn-danger" ng-click="toolsButton()">
+					<i class="icon-cogs"></i>
+				</button>
+			</div>
+			<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+				<span class="btn btn-success"></span>
+	
+				<span class="btn btn-info"></span>
+	
+				<span class="btn btn-warning"></span>
+	
+				<span class="btn btn-danger"></span>
+			</div>
+		</div><!-- #sidebar-shortcuts -->
+		<div id="{{widget.id}}" widget-menu ng-repeat="widget in container.widgets" ng-if="widget.type == 'menu'" ng-if="widget.code == cookieSubsysCode" class="nav nav-list" widgetId="{{widget.id}}" addElement=true canEditFlag="widgetEditElement">
+		</div><!-- /.nav-list -->
+		<div class="sidebar-collapse" id="sidebar-collapse">
+			<i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
+		</div>
+	
+		<script type="text/javascript">
+			try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
+		</script>
+	</div>
+</div>
+<div ng-if="id !='systemmenu'" class="col-xs-12 pageTopContainer" parentContainerId="{{id}}" pageId="{{pageId}}" canEditFlag="containerAddElement">
+	<div ng-repeat="container in containers" ng-if="container.type=='3'" class="col-xs-{{container.width}} col-sm-{{container.width}} widget-container-span" style="padding-bottom:30px">
+		<div class="widget-box">
+			<div class="widget-header widget-header-small">
+				<h5>&nbsp;{{container.name}}</h5>
+				<div class="widget-toolbar">
+					<a href="javascript:void(0);" data-action="collapse">
+						<i class="icon-chevron-up"></i>
+					</a>
+					<a href="javascript:void(0);" data-action="close">
+						<i class="icon-remove"></i>
+					</a>
+				</div>
+			</div>
+			<div class="widget-container-span widget-body" containerId="{{container.id}}" canEditFlag="containerEditElement">
+				<div class="widget-main panel-body column" style="min-height:100px;" parentContainerId="{{id}}" id="container{{container.id}}">
+					<div ng-repeat="widget in container.widgets" >
+						<widget-text ng-if="widget.type == 'text'"  id="{{widget.id}}" initvalue="{{widget.initvalue}}"></widget-text>
+						<widget-file ng-if="widget.type == 'file'"  id="{{widget.id}}" initvalue="{{widget.initvalue}}"></widget-file>
+						<widget-radio ng-if="widget.type == 'radio'"  id="{{widget.id}}" initvalue="{{widget.initvalue}}"></widget-radio>
+						<widget-check ng-if="widget.type == 'check'"  id="{{widget.id}}" initvalue="{{widget.initvalue}}"></widget-check>
+						<widget-select ng-if="widget.type == 'select'"  id="{{widget.id}}" initvalue="{{widget.initvalue}}"></widget-select>
+						<widget-select-tree ng-if="widget.type == 'selecttree'"  id="{{widget.id}}" initvalue="{{widget.initvalue}}"></widget-select-tree>
+						<widget-tree-view ng-if="widget.type == 'treeview'"  id="{{widget.id}}" initvalue="{{widget.initvalue}}"></widget-tree-view>
+						<widget-date ng-if="widget.type == 'datepicker'"  id="{{widget.id}}" initvalue="{{widget.initvalue}}"></widget-date>
+						<widget-date-range ng-if="widget.type == 'daterangepicker'"  id="{{widget.id}}" initvalue="{{widget.initvalue}}"></widget-date-range>
+						<widget-data-table ng-if="widget.type == 'datatable'"  parentContainerId="{{id}}" id="{{widget.id}}" initvalue="{{widget.initvalue}}"></widget-data-table>
+						<widget-button ng-if="widget.type == 'button'"  id="{{widget.id}}" initvalue="{{widget.initvalue}}"></widget-button>
+						<widget-daocreator ng-if="widget.type == 'daocreator'"  id="{{widget.id}}" initvalue="{{widget.initvalue}}"></widget-daocreator>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<!-- 
+	<div class="dd" id="nestable" onmousedown="reloadNestable();" style="max-width:none">
+		<ol class="dd-list" id="accordion">
+			<li ng-repeat="container in containers" ng-if="container.type=='3'" class="dd-item col-lg-12 col-md-12 col-sm-12 " data-id="{{$index}}" style="float:left">
+				<div class="dd-handle col-xs-12" style="border:0px">
+					<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne{{$index}}" onclick="return false;">
+						<i class="icon-angle-down bigger-110" data-icon-hide="icon-angle-down" data-icon-show="icon-angle-right"></i>
+						&nbsp;{{container.name}}
+					</a>
+				</div>
+				<div class="col-xs-12 form-group panel-collapse collapse in" id="#collapseOne{{$index}}" style="border:1px solid #dae2ea" containerId="{{container.id}}" canEditFlag="containerEditElement">
+					<div class="panel-body" parentContainerId="{{id}}" id="container{{container.id}}">
+						<div ng-repeat="widget in container.widgets" >
+							<widget-text ng-if="widget.type == 'text'"  id="{{widget.id}}" initvalue="{{widget.initvalue}}"></widget-text>
+							<widget-file ng-if="widget.type == 'file'"  id="{{widget.id}}" initvalue="{{widget.initvalue}}"></widget-file>
+							<widget-radio ng-if="widget.type == 'radio'"  id="{{widget.id}}" initvalue="{{widget.initvalue}}"></widget-radio>
+							<widget-check ng-if="widget.type == 'check'"  id="{{widget.id}}" initvalue="{{widget.initvalue}}"></widget-check>
+							<widget-select ng-if="widget.type == 'select'"  id="{{widget.id}}" initvalue="{{widget.initvalue}}"></widget-select>
+							<widget-select-tree ng-if="widget.type == 'selecttree'"  id="{{widget.id}}" initvalue="{{widget.initvalue}}"></widget-select-tree>
+							<widget-date ng-if="widget.type == 'datepicker'"  id="{{widget.id}}" initvalue="{{widget.initvalue}}"></widget-date>
+							<widget-date-range ng-if="widget.type == 'daterangepicker'"  id="{{widget.id}}" initvalue="{{widget.initvalue}}"></widget-date-range>
+							<widget-data-table ng-if="widget.type == 'datatable'"  id="{{widget.id}}" initvalue="{{widget.initvalue}}"></widget-data-table>
+							<widget-button ng-if="widget.type == 'button'"  id="{{widget.id}}" initvalue="{{widget.initvalue}}"></widget-button>
+							<widget-daocreator ng-if="widget.type == 'daocreator'"  id="{{widget.id}}" initvalue="{{widget.initvalue}}"></widget-daocreator>
+						</div>
+					</div>
+				</div>
+			</li>
+			&nbsp;
+		</ol>
+	</div>
+ -->
+</div>

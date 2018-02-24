@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.github.wangdasong.scwauthserver.dao.persistence.ResourceMapper" >
+  <resultMap id="BaseResultMap" type="com.github.wangdasong.scwauthserver.dao.entity.Resource" >
+    <id column="RSU_ID" property="id" />
+    <result column="RSU_NAME" property="name" />
+    <result column="RSU_CODE" property="code" />
+    <result column="RSU_TYPE" property="type" />
+    <result column="RSU_PARENT_ID" property="parentId" />
+    <result column="RSU_SORT" property="sort" />
+    <result column="RSU_HAS_RES" property="hasRes" />
+    <result column="RSU_SUB_COUNT" property="subCount" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    RSU.ID AS RSU_ID,
+    RSU.NAME AS RSU_NAME,
+    RSU.CODE AS RSU_CODE,
+    RSU.TYPE AS RSU_TYPE,
+    RSU.PARENT_ID AS RSU_PARENT_ID,
+    RSU.SORT AS RSU_SORT
+  </sql>
+
+  <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select   <include refid="Base_Column_List" />
+    from VB_RESOURCE_TREE RSU
+    where RSU.ID= #{id}
+  </select>
+
+
+
+
+
+    <sql id="Find_Page_Base_Sql" >
+        FROM VB_RESOURCE_TREE AS RSU
+        <where>
+            <trim prefixOverrides="AND |OR ">
+                <if test="options.id!=null">
+                    AND RSU.ID='${options.id}'
+                </if>
+                <if test="options.name!=null">
+                    AND RSU.NAME='${options.name}'
+                </if>
+                <if test="options.code!=null">
+                    AND RSU.CODE='${options.code}'
+                </if>
+                <if test="options.type!=null">
+                    AND RSU.TYPE='${options.type}'
+                </if>
+                <if test="options.parentId!=null">
+                    AND RSU.PARENT_ID='${options.parentId}'
+                </if>
+                <if test="options.sort!=null">
+                    AND RSU.SORT='${options.sort}'
+                </if>
+            </trim>
+        </where>
+    </sql>
+
+    <sql id="Sort_Page_Base_Sql" >
+        <if test="pageSort!=null">
+            order by 
+            <foreach item="item" index="index" collection="pageSortArray" separator="," >
+                <if test="item=='id'">
+                    ID
+                </if>
+                <if test="item=='id desc'">
+                    ID DESC
+                </if>
+                <if test="item=='name'">
+                    NAME
+                </if>
+                <if test="item=='name desc'">
+                    NAME DESC
+                </if>
+                <if test="item=='code'">
+                    CODE
+                </if>
+                <if test="item=='code desc'">
+                    CODE DESC
+                </if>
+                <if test="item=='type'">
+                    TYPE
+                </if>
+                <if test="item=='type desc'">
+                    TYPE DESC
+                </if>
+                <if test="item=='parentId'">
+                    PARENT_ID
+                </if>
+                <if test="item=='parentId desc'">
+                    PARENT_ID DESC
+                </if>
+                <if test="item=='sort'">
+                    SORT
+                </if>
+                <if test="item=='sort desc'">
+                    SORT DESC
+                </if>
+            </foreach>
+        </if>
+    </sql>
+
+    <select id="findPageData" parameterType="com.github.wangdasong.scwbasecore.utils.paging.Pagination" resultMap="BaseResultMap">
+        <if test="@com.github.wangdasong.scwauthserver.dao.entity.Resource@dbDialog=='oracle'">
+        	<include refid="oraclesplit_prefix" />
+        </if>
+	    <if test="@com.github.wangdasong.scwauthserver.dao.entity.Resource@dbDialog=='mysql'">
+        	select
+        </if>
+        <include refid="Base_Column_List" />
+        <include refid="Find_Page_Base_Sql" />
+		<include refid="Sort_Page_Base_Sql" />
+		<if test="@com.github.wangdasong.scwauthserver.dao.entity.Resource@dbDialog=='oracle'">
+        	<include refid="oraclesplit_suffix" />
+        </if>
+		<if test="@com.github.wangdasong.scwauthserver.dao.entity.Resource@dbDialog=='mysql'">
+        	<include refid="mysqlsplit_suffix" />
+        </if>
+    </select>
+    <sql id="oraclesplit_prefix">
+        select * from ( select row_.*, rownum rownum_ from (select 
+    </sql>
+    <sql id="oraclesplit_suffix">
+        )row_ where rownum &lt;= #{oracle_maxrow}) where rownum_ > #{oracle_minrow}
+    </sql>
+    <sql id="mysqlsplit_suffix">
+    	limit #{oracle_minrow}, #{pageSize}
+    </sql>
+    <select id="getCount" parameterType="com.github.wangdasong.scwbasecore.utils.paging.Pagination" resultType="int">
+        select count(*) 
+        <include refid="Find_Page_Base_Sql" />
+    </select>
+
+    <sql id="Find_List_Base_Sql" >
+        FROM VB_RESOURCE_TREE RSU
+	    <if test="permissionId!=null">
+	    	LEFT JOIN (SELECT RSUS.PARENT_ID, COUNT(ID) AS SUB_COUNT
+	    	FROM VB_RESOURCE_TREE RSUS
+	    	GROUP BY RSUS.PARENT_ID) RSUS ON RSU.ID = RSUS.PARENT_ID
+	    	LEFT JOIN SYS_PERMISSION_RESOURCE PRE ON RSU.ID = PRE.RESOURCE_ID AND PRE.PERMISSION_ID = '${permissionId}'
+	    </if>
+        <where>
+            <trim prefixOverrides="AND |OR ">
+                <if test="id!=null">
+                    AND RSU.ID='${id}'
+                </if>
+                <if test="name!=null">
+                    AND RSU.NAME='${name}'
+                </if>
+                <if test="code!=null">
+                    AND RSU.CODE='${code}'
+                </if>
+                <if test="type!=null">
+                    AND RSU.TYPE='${type}'
+                </if>
+                <if test="parentId!=null">
+                    AND RSU.PARENT_ID='${parentId}'
+                </if>
+                <if test="sort!=null">
+                    AND RSU.SORT='${sort}'
+                </if>
+            </trim>
+        </where>
+    </sql>
+
+  <select id="getListByCondition" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select   <include refid="Base_Column_List" />
+		    <if test="permissionId!=null">
+                <if test="@com.github.wangdasong.scwauthserver.dao.entity.Resource@dbDialog=='oracle'">
+                    , DECODE(PRE.PERMISSION_ID, NULL, 0, 1) AS RSU_HAS_RES
+                </if>
+                <if test="@com.github.wangdasong.scwauthserver.dao.entity.Resource@dbDialog=='mysql'">
+                    , IF(PRE.PERMISSION_ID=NULL, 0, 1) AS RSU_HAS_RES
+                </if>
+		    , RSUS.SUB_COUNT AS RSU_SUB_COUNT
+		    </if>
+    <include refid="Find_List_Base_Sql" />
+  </select>
+</mapper>

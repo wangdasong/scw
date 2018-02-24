@@ -1,0 +1,11 @@
+<div ng-hide="isHidden" class="form-horizontal form-group col-lg-{{width}} col-md-{{width}} col-sm-{{width}}" widgetId="{{id}}" canEditFlag="widgetEditElement{{elementpanel}}">
+	<label id="label{{id}}" class="control-label input-sm col-lg-4 col-md-4 col-sm-4 field-title no-padding-right blue" for="input{{id}}">
+		<font ng-if="require == 'true'" color="red">*&nbsp;</font>{{label}}
+	</label>
+	<div class="input-group col-lg-8 col-md-8 col-sm-8 field-input" style="padding-left:15px;padding-right:15px">
+		<input type="text" id="input{{id}}" name="{{name}}" value="{{initvalue}}" ng-readonly="isReadonly" placeholder="{{message}}" class="col-xs-12" onfocus="this.select()"/>
+		<span id="span{{id}}" class="input-group-addon" ng-click="clearData()" style="cursor:pointer" title="{{message}}">
+			<i  id="i{{id}}" class="icon-info-sign"></i>
+		</span>
+    </div>
+</div>
