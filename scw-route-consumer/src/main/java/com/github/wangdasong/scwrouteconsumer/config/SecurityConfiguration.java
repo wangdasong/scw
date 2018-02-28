@@ -6,6 +6,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.stereotype.Component;
 
 @Component
+/**
+ * 设置单点登录服务
+ */
 @EnableOAuth2Sso
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
