@@ -40,17 +40,10 @@ import java.io.IOException;
 public class LoginWebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailsService userServiceImpl;
-    @Bean
-    public PasswordEncoder passwordEncoder(){
-        return new Md5PasswordEncoder();
-    }
-    @Bean
-    public AuthenticationProvider authenticationProvider(){
-        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-        authenticationProvider.setUserDetailsService(userServiceImpl);
-        authenticationProvider.setPasswordEncoder(passwordEncoder());
-        return authenticationProvider;
-    }
+
+    /**
+     * 配置请求规则
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // @formatter:off
@@ -67,6 +60,25 @@ public class LoginWebSecurityConfig extends WebSecurityConfigurerAdapter {
         // @formatter:on
     }
 
+    @Bean
+    public PasswordEncoder passwordEncoder(){
+        return new Md5PasswordEncoder();
+    }
+
+    /**
+     * 构造认证提供者
+     */
+    @Bean
+    public AuthenticationProvider authenticationProvider(){
+        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+        authenticationProvider.setUserDetailsService(userServiceImpl);
+        authenticationProvider.setPasswordEncoder(passwordEncoder());
+        return authenticationProvider;
+    }
+
+    /**
+     * 配置认证提供者
+     */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authenticationProvider());

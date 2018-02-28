@@ -18,7 +18,15 @@ import java.util.Map;
 
 @SpringBootApplication
 @EnableDiscoveryClient
+/**
+ * 工具方法，用来在当前应用context里(必须是一个DispatcherServlet context)
+ * 开启一个授权server(例如AuthorizationEndpoint)和一个TokenEndpoint。
+ */
 @EnableAuthorizationServer
+/**
+ * Oauth2 资源服务器的便利方法，开启了一个spring security的filter，
+ * 这个filter通过一个Oauth2的token进行认证请求。
+ */
 @EnableResourceServer
 @SessionAttributes("authorizationRequest")
 //@EnableRedisHttpSession
@@ -27,16 +35,22 @@ public class ScwAuthServerApplication extends WebMvcConfigurerAdapter  {
 	@Value("${page.resources.path}")
 	String resourcesPath;
 
-	@Override
-	public void addViewControllers(ViewControllerRegistry registry) {
-		registry.addViewController("/login").setViewName("login");
-	}
-
 	public static void main(String[] args) {
 		SpringApplication.run(ScwAuthServerApplication.class, args);
 	}
 
+	@Override
+	/**
+	 * 增加视图，让login指向自定义的页面（FreeMarker）
+	 */
+	public void addViewControllers(ViewControllerRegistry registry) {
+		registry.addViewController("/login").setViewName("login");
+	}
+
 	@Bean
+	/**
+	 * 设置FreeMarker解析器
+	 */
 	public FreeMarkerViewResolver freeMarkerViewResolver() {
 		FreeMarkerViewResolver resolver = new FreeMarkerViewResolver();
 		resolver.setPrefix("");
