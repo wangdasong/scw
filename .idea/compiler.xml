@@ -17,6 +17,7 @@
       <module name="scw-auth-server" target="1.7" />
       <module name="scw-base-core" target="1.7" />
       <module name="scw-eureka-server" target="1.7" />
+      <module name="scw-parent" target="1.7" />
       <module name="scw-provider-webeditor" target="1.7" />
       <module name="scw-route-consumer" target="1.7" />
     </bytecodeTargetLevel>

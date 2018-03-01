@@ -2,12 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/scw.iml" filepath="$PROJECT_DIR$/scw.iml" />
       <module fileurl="file://$PROJECT_DIR$/scw-auth-server/scw-auth-server.iml" filepath="$PROJECT_DIR$/scw-auth-server/scw-auth-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/scw-base-core/scw-base-core.iml" filepath="$PROJECT_DIR$/scw-base-core/scw-base-core.iml" />
       <module fileurl="file://$PROJECT_DIR$/scw-eureka-server/scw-eureka-server.iml" filepath="$PROJECT_DIR$/scw-eureka-server/scw-eureka-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/scw-provider-webeditor/scw-provider-webeditor.iml" filepath="$PROJECT_DIR$/scw-provider-webeditor/scw-provider-webeditor.iml" />
       <module fileurl="file://$PROJECT_DIR$/scw-route-consumer/scw-route-consumer.iml" filepath="$PROJECT_DIR$/scw-route-consumer/scw-route-consumer.iml" />
+      <module fileurl="file://$PROJECT_DIR$//scwparent.iml" filepath="$PROJECT_DIR$//scwparent.iml" />
     </modules>
   </component>
 </project>

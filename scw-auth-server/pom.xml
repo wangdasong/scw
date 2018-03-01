@@ -13,7 +13,7 @@
 
 	<parent>
 		<groupId>com.github.wangdasong</groupId>
-		<artifactId>scw-base-core</artifactId>
+		<artifactId>scw-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath/>
 	</parent>
