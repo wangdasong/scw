@@ -1,5 +1,70 @@
 angular.module('controller.webpage.container.widget.text', [])
     .directive('widgetText', ['DataService','Session', 'APP_CONFIG', function (DataService,Session) {
+
+        var reloadScope = function (scope, element, attrs, data) {
+            var currWidgetId = attrs.id;
+            scope.attConfigs = data.attConfigs;
+            scope.id = currWidgetId;
+            scope.isReadonly = "false";
+            scope.containerId =  data.containerId;
+            var doInitvalue = function(initvalue) {
+                if (initvalue) {
+                    scope.initvalue = initvalue;
+                } else {
+                    scope.initvalue = "";
+                }
+            };
+            scope.$on("widget.reload.initvalue", function (e, data) {
+                doInitvalue(attrs.initvalue);
+                scope.$apply();
+            });
+            doInitvalue(attrs.initvalue);
+            scope.message = "";
+            for (index in data.attConfigs) {
+                var currAttConfig = data.attConfigs[index];
+                var currAttConfigType = currAttConfig.type;
+                if (currAttConfigType == "label") {
+                    scope.label = currAttConfig.attValue;
+                }
+                if (currAttConfigType == "name") {
+                    scope.name = currAttConfig.attValue;
+                }
+                if (currAttConfigType == "type") {
+                    scope.type = currAttConfig.attValue;
+                }
+                if (currAttConfigType == "width") {
+                    scope.width = currAttConfig.attValue;
+                }
+                if (currAttConfigType == "height") {
+                    scope.height = currAttConfig.attValue;
+                }
+                if (currAttConfigType == "regular") {
+                    scope.regular = currAttConfig.attValue;
+                }
+                if (currAttConfigType == "require") {
+                    scope.require = currAttConfig.attValue;
+                }
+                if (currAttConfigType == "message") {
+                    scope.message = currAttConfig.attValue;
+                }
+            }
+            if (scope.type == "readonly") {
+                scope.isReadonly = true;
+            } else {
+                scope.isReadonly = false;
+            }
+            if (scope.type == "hidden") {
+                scope.isHidden = true;
+            } else {
+                scope.isHidden = false;
+            }
+            if (scope.message == "") {
+                scope.message = "请输入正确的" + scope.label;
+            }
+            scope.$apply();
+        }
+
+
         var doLink = function (scope, element, attrs) {
             var currWidgetId = attrs.id;
             scope.template = attrs.template;
@@ -48,65 +113,7 @@ angular.module('controller.webpage.container.widget.text', [])
             });
             DataService.getWidgetDetailById(currWidgetId).then(function (response) {
                 var data = response.plain();
-                scope.attConfigs = data.attConfigs;
-                scope.id = currWidgetId;
-                scope.isReadonly = "false";
-                scope.containerId =  data.containerId;
-                var doInitvalue = function(initvalue) {
-                    if (initvalue) {
-                        scope.initvalue = initvalue;
-                    } else {
-                        scope.initvalue = "";
-                    }
-                };
-                scope.$on("widget.reload.initvalue", function (e, data) {
-                    doInitvalue(attrs.initvalue);
-                    scope.$apply();
-                });
-                doInitvalue(attrs.initvalue);
-                scope.message = "";
-                for (index in data.attConfigs) {
-                    var currAttConfig = data.attConfigs[index];
-                    var currAttConfigType = currAttConfig.type;
-                    if (currAttConfigType == "label") {
-                        scope.label = currAttConfig.attValue;
-                    }
-                    if (currAttConfigType == "name") {
-                        scope.name = currAttConfig.attValue;
-                    }
-                    if (currAttConfigType == "type") {
-                        scope.type = currAttConfig.attValue;
-                    }
-                    if (currAttConfigType == "width") {
-                        scope.width = currAttConfig.attValue;
-                    }
-                    if (currAttConfigType == "height") {
-                        scope.height = currAttConfig.attValue;
-                    }
-                    if (currAttConfigType == "regular") {
-                        scope.regular = currAttConfig.attValue;
-                    }
-                    if (currAttConfigType == "require") {
-                        scope.require = currAttConfig.attValue;
-                    }
-                    if (currAttConfigType == "message") {
-                        scope.message = currAttConfig.attValue;
-                    }
-                }
-                if (scope.type == "readonly") {
-                    scope.isReadonly = true;
-                } else {
-                    scope.isReadonly = false;
-                }
-                if (scope.type == "hidden") {
-                    scope.isHidden = true;
-                } else {
-                    scope.isHidden = false;
-                }
-                if (scope.message == "") {
-                    scope.message = "请输入正确的" + scope.label;
-                }
-                scope.$apply();
+                reloadScope(scope, element, attrs, data);
             });
         }
         return {
@@ -121,11 +128,8 @@ angular.module('controller.webpage.container.widget.text', [])
             link: function (scope, element, attrs) {
                 doLink(scope, element, attrs);
                 scope.updateWidgetAttData = function (widgetId, attCode, attValue) {
-                    Session.updateWidgetAttData(widgetId, attCode, attValue);
-                    doLink(scope, element, attrs);
-                };
-                scope.testalert2 = function () {
-                    alert("attrs.id==" + attrs.id);
+                    var data = Session.updateWidgetAttData(widgetId, attCode, attValue);
+                    reloadScope(scope, element, attrs, data);
                 };
             }
         };

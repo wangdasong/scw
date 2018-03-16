@@ -94,7 +94,7 @@
 .sidebar-nav .box { line-height:25px; width:170px; height:25px; }
 .sidebar-nav .preview { display: block; color:#666; font-size:12px; line-height:22px;}
 .sidebar-nav .preview input { width:90px; padding:0 10px; background:#bbb; font-size:10px; color:#999; line-height:20px; height:20px; position:relative; top:-1px; }
-.sidebar-nav .view { display: none; }
+.sidebar-nav .view { display: none; width: 300px;}
 .sidebar-nav .remove,
 .sidebar-nav .configuration { display: none; }
 

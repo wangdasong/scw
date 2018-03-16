@@ -110,7 +110,7 @@ angular.module('controller.webpage.container', [])
                         scope.$apply();
                         // Portlets (boxes)
                         //让每一个自容器都能排序
-                        $('.widget-main').sortable({
+                        /*$('.widget-main').sortable({
                             connectWith: '.widget-container-span',
                             items:'> .widget-box',
                             handle:'.widget-header',
@@ -120,7 +120,7 @@ angular.module('controller.webpage.container', [])
                             placeholder: 'widget-placeholder',
                             forcePlaceholderSize:true,
                             tolerance:'pointer'
-                        });
+                        });*/
                         //为每一个子容器添加drop事件
                         $(".widget-main").each(function () {
                             var  containerId = $(this).attr("containerId");

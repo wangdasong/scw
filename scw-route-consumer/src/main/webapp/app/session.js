@@ -45,10 +45,11 @@ angular.module('shared.session', [])
             var currWidget = this.getWidgetObjectById(widgetId);
             for(var i = 0; i < currWidget.attConfigs.length; i ++){
                 var currAttConfig =  currWidget.attConfigs[i];
-                if(currAttConfig.getCode() == attrCode){
-                    currAttConfig.attValue = attrValue
+                if(currAttConfig.code == attCode){
+                    currAttConfig.attValue = attValue
                 }
             }
+            return currWidget;
         };
         this.removeWidget = function (widgetId) {
             for(var i = 0; i < this.widgetArray.length; i ++){

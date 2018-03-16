@@ -57,7 +57,7 @@
 				</div>
 			</div>
 			<div class="widget-container-span widget-body" containerId="{{container.id}}" canEditFlag="containerEditElement">
-				<div  id="container{{container.id}}" ng-init="loadSubContainer(container.id)" class="widget-main panel-body column" style="min-height:100px;"  containerId="{{container.id}}" parentContainerId="{{id}}">
+				<div  id="container{{container.id}}" ng-init="loadSubContainer(container.id)" class="widget-main panel-body" style="min-height:100px;"  containerId="{{container.id}}" parentContainerId="{{id}}">
 					<div ng-repeat="widget in container.widgets" class="box box-element ui-draggable">
 						<widget-text ng-if="widget.type == 'text'" template="{{widget.tmpFlg}}" id="{{widget.id}}" initvalue="{{widget.initvalue}}"></widget-text>
 						<widget-file ng-if="widget.type == 'file'" template="{{widget.tmpFlg}}"  id="{{widget.id}}" initvalue="{{widget.initvalue}}"></widget-file>
