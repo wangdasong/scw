@@ -6,6 +6,7 @@ angular.module('shared.session', [])
         this.pageName = null;
         this.widgetId = null;
         this.menuElementId = null;
+        this.widgetArray = new Array();
 /*
         this.domainName = null;
         this.domainId = null;
@@ -28,6 +29,35 @@ angular.module('shared.session', [])
         };
         this.setMenuElementId = function (elementId) {
             this.menuElementId = elementId;
+        };
+        this.addWidget = function (newWidget){
+            this.widgetArray.push(newWidget);
+        };
+        this.getWidgetObjectById = function (widgetId) {
+            for(var i = 0; i < this.widgetArray.length; i ++){
+                if(this.widgetArray[i].id == widgetId){
+                    return this.widgetArray[i];
+                }
+            }
+            return null;
+        };
+        this.updateWidgetAttData = function(widgetId, attCode, attValue){
+            var currWidget = this.getWidgetObjectById(widgetId);
+            for(var i = 0; i < currWidget.attConfigs.length; i ++){
+                var currAttConfig =  currWidget.attConfigs[i];
+                if(currAttConfig.getCode() == attrCode){
+                    currAttConfig.attValue = attrValue
+                }
+            }
+        };
+        this.removeWidget = function (widgetId) {
+            for(var i = 0; i < this.widgetArray.length; i ++){
+                if(this.widgetArray[i].id == widgetId){
+                    this.widgetArray.splice(i,1);
+                    return;
+                }
+            }
+            return;
         };
 /*
         this.setProp = function (property, propId) {

@@ -20,6 +20,7 @@
       <module name="scw-parent" target="1.7" />
       <module name="scw-provider-webeditor" target="1.7" />
       <module name="scw-route-consumer" target="1.7" />
+      <module name="scwparent" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>

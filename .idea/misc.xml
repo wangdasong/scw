@@ -8,6 +8,7 @@
         <option value="$PROJECT_DIR$/scw-base-core/pom.xml" />
         <option value="$PROJECT_DIR$/scw-route-consumer/pom.xml" />
         <option value="$PROJECT_DIR$/scw-auth-server/pom.xml" />
+        <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
   </component>

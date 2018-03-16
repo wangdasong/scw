@@ -1,4 +1,4 @@
-<div ng-if="container.type=='2'" ng-repeat="container in containers">
+<div ng-if="container.type=='2'" ng-repeat="container in containers" ng-click="loadContainer()">
 	<div ng-if="container.type=='2'" class="sidebar" id="sidebar">
 		<script type="text/javascript">
 			try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
@@ -57,20 +57,20 @@
 				</div>
 			</div>
 			<div class="widget-container-span widget-body" containerId="{{container.id}}" canEditFlag="containerEditElement">
-				<div class="widget-main panel-body column" style="min-height:100px;" parentContainerId="{{id}}" id="container{{container.id}}">
-					<div ng-repeat="widget in container.widgets" >
-						<widget-text ng-if="widget.type == 'text'"  id="{{widget.id}}" initvalue="{{widget.initvalue}}"></widget-text>
-						<widget-file ng-if="widget.type == 'file'"  id="{{widget.id}}" initvalue="{{widget.initvalue}}"></widget-file>
-						<widget-radio ng-if="widget.type == 'radio'"  id="{{widget.id}}" initvalue="{{widget.initvalue}}"></widget-radio>
-						<widget-check ng-if="widget.type == 'check'"  id="{{widget.id}}" initvalue="{{widget.initvalue}}"></widget-check>
-						<widget-select ng-if="widget.type == 'select'"  id="{{widget.id}}" initvalue="{{widget.initvalue}}"></widget-select>
-						<widget-select-tree ng-if="widget.type == 'selecttree'"  id="{{widget.id}}" initvalue="{{widget.initvalue}}"></widget-select-tree>
-						<widget-tree-view ng-if="widget.type == 'treeview'"  id="{{widget.id}}" initvalue="{{widget.initvalue}}"></widget-tree-view>
-						<widget-date ng-if="widget.type == 'datepicker'"  id="{{widget.id}}" initvalue="{{widget.initvalue}}"></widget-date>
-						<widget-date-range ng-if="widget.type == 'daterangepicker'"  id="{{widget.id}}" initvalue="{{widget.initvalue}}"></widget-date-range>
-						<widget-data-table ng-if="widget.type == 'datatable'"  parentContainerId="{{id}}" id="{{widget.id}}" initvalue="{{widget.initvalue}}"></widget-data-table>
-						<widget-button ng-if="widget.type == 'button'"  id="{{widget.id}}" initvalue="{{widget.initvalue}}"></widget-button>
-						<widget-daocreator ng-if="widget.type == 'daocreator'"  id="{{widget.id}}" initvalue="{{widget.initvalue}}"></widget-daocreator>
+				<div  id="container{{container.id}}" ng-init="loadSubContainer(container.id)" class="widget-main panel-body column" style="min-height:100px;"  containerId="{{container.id}}" parentContainerId="{{id}}">
+					<div ng-repeat="widget in container.widgets" class="box box-element ui-draggable">
+						<widget-text ng-if="widget.type == 'text'" template="{{widget.tmpFlg}}" id="{{widget.id}}" initvalue="{{widget.initvalue}}"></widget-text>
+						<widget-file ng-if="widget.type == 'file'" template="{{widget.tmpFlg}}"  id="{{widget.id}}" initvalue="{{widget.initvalue}}"></widget-file>
+						<widget-radio ng-if="widget.type == 'radio'" template="{{widget.tmpFlg}}"  id="{{widget.id}}" initvalue="{{widget.initvalue}}"></widget-radio>
+						<widget-check ng-if="widget.type == 'check'" template="{{widget.tmpFlg}}"  id="{{widget.id}}" initvalue="{{widget.initvalue}}"></widget-check>
+						<widget-select ng-if="widget.type == 'select'" template="{{widget.tmpFlg}}"  id="{{widget.id}}" initvalue="{{widget.initvalue}}"></widget-select>
+						<widget-select-tree ng-if="widget.type == 'selecttree'" template="{{widget.tmpFlg}}"  id="{{widget.id}}" initvalue="{{widget.initvalue}}"></widget-select-tree>
+						<widget-tree-view ng-if="widget.type == 'treeview'" template="{{widget.tmpFlg}}"  id="{{widget.id}}" initvalue="{{widget.initvalue}}"></widget-tree-view>
+						<widget-date ng-if="widget.type == 'datepicker'" template="{{widget.tmpFlg}}"  id="{{widget.id}}" initvalue="{{widget.initvalue}}"></widget-date>
+						<widget-date-range ng-if="widget.type == 'daterangepicker'" template="{{widget.tmpFlg}}"  id="{{widget.id}}" initvalue="{{widget.initvalue}}"></widget-date-range>
+						<widget-data-table ng-if="widget.type == 'datatable'" template="{{widget.tmpFlg}}"  parentContainerId="{{id}}" id="{{widget.id}}" initvalue="{{widget.initvalue}}"></widget-data-table>
+						<widget-button ng-if="widget.type == 'button'" template="{{widget.tmpFlg}}"  id="{{widget.id}}" initvalue="{{widget.initvalue}}"></widget-button>
+						<widget-daocreator ng-if="widget.type == 'daocreator'" template="{{widget.tmpFlg}}"  id="{{widget.id}}" initvalue="{{widget.initvalue}}"></widget-daocreator>
 					</div>
 				</div>
 			</div>

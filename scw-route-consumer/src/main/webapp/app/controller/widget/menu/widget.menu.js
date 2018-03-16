@@ -23,7 +23,7 @@ angular.module('controller.webpage.container.widget.menu', [])
                     	});
                     	$("#li" + obj).addClass("active");
                         if(scope.path === path) {
-                            $route.reload();
+                            // $route.reload();
                         }
                         LoadingService.show();
                         scope.path = path;

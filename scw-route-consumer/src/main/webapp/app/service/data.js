@@ -24,10 +24,97 @@ angular.module('service.data', ['ngResource', 'restangular'])
         getApiAuthUrl: function () {
             return this.getRootUrl() + 'api-auth/uaa/';
         },
-
 	    getPreBaseUrl: function (url) {
     		return COMMON.getProviderCode() + "/" + url;
-	    }
+	    },
+        getDataFromSample: function (json) {
+            /**
+             * 使用MyPromise模拟Promise基本功能：
+             * MyPromise新建就立即执行其参数fn，这点比较重要
+             * fn里面必须调用状态函数resolve或者reject之一
+             * 每次.then接受一个处理MyPromise当前状态的回调函数，包括resolve和reject（都是异步执行）
+             * 回调函数里面默认或者显式返回一个新的MyPromise，之后的then中的回调是处理新的MyPromise的状态
+             * 每次resolve或者reject执行就形成了一个新的MyPromise（并立即执行），后续的then会处理其状态，这样就保证默认的状态不会改变
+             *
+             * 使用MyPromise.prototype.events保存时间，其实then链是最先执行的
+             * 每次resolve或者reject都会使得events中的第一个回调出队列
+             *
+             * @param fun
+             * @constructor
+             */
+            function MyPromise(fun){
+                //用于生成MyPromise的id，其实在then执行的时候，都是利用同一个MyPromise将回调保存在events
+                this.id = ++MyPromise.prototype.counts;
+                var that = this;
+                var resolve = function(value){
+                    var events = MyPromise.prototype.events;
+                    if(events.length>0){
+                        console.log("call resolve Promise"+that.id);
+                        var func = events.shift().res;//取出events队列头中的回调
+                        //异步执行，实际上是生成了新的MyPromise
+                        setTimeout(function(){
+                            func(value)
+                        },0);
+                    }
+                };
+                var reject = function(value){
+                    var events = MyPromise.prototype.events;
+                    if(events.length>0){
+                        console.log("call reject Promise"+that.id);
+                        var func = events.shift().rej;//取出events队列头中的回调
+                        //异步执行，实际上是生成了新的MyPromise
+                        setTimeout(function(){func(value)},0);
+                    }
+                };
+                //立即执行
+                fun(resolve,reject);
+
+            }
+
+
+            MyPromise.prototype.counts = 0;
+            MyPromise.prototype.events = [];//回调队列
+            /**
+             * then方法用于保存回调
+             * @param res
+             * @param rej
+             * @returns {MyPromise}
+             */
+            MyPromise.prototype.then = function(res, rej){
+                var events = MyPromise.prototype.events;
+                //默认的状态处理，所以可以不断的调用.then并生成新的MyPromise
+                var _res = function(value){return new MyPromise(function(res,rej){res(value)});};
+                var _rej = function(value){return new MyPromise(function(res,rej){rej(value)});};
+                if(res){
+                    _res = function(value){
+                        var result = res(value);
+                        if(result instanceof MyPromise)return result;
+                        return new MyPromise(function(res,rej){res(value)});
+                    };
+                }
+                if(rej){
+                    _rej = function(value){
+                        var result = rej(value);
+                        if(result instanceof MyPromise)return result;
+                        return new MyPromise(function(res,rej){rej(value)});
+                    };
+                }
+
+                events.push({res:_res,rej:_rej});
+                console.log("call .then, Events Counts"+events.length);
+                return this;
+            };
+
+            return new MyPromise(function(resolve,reject){
+                setTimeout(function(){
+                    if(json=="6"){
+                        reject(("error from 3"));
+                    }else{
+                        resolve(json);
+                    }
+                },100);
+            });
+        }
 	})
 	.config(['URL_CONFIG', 'RestangularProvider',
         function (URL_CONFIG, RestangularProvider) {
@@ -95,8 +182,8 @@ angular.module('service.data', ['ngResource', 'restangular'])
                     return true; // error not handled
                 });
         }])
-    .factory('DataService', ['Restangular', 'URL_CONFIG', '$cacheFactory',
-        function (Restangular, URL_CONFIG, $cacheFactory) {
+    .factory('DataService', ['Restangular','Session', 'URL_CONFIG', '$cacheFactory',
+        function (Restangular, Session, URL_CONFIG, $cacheFactory) {
 
             __GLOBE.BASE_PATH = URL_CONFIG.getRootUrl();
             __GLOBE.ORIGIN = URL_CONFIG.getOrigin();
@@ -135,6 +222,20 @@ angular.module('service.data', ['ngResource', 'restangular'])
                 	return resultData;
                 },
                 getWidgetDetailById: function(widgetId){
+                    var widgetIdList = widgetId.split("_");
+                    var widgetSample = null;
+                    //当前控件为未保存控件
+                    if(widgetIdList[0].substr(0,1) == "@"){
+                        //模板控件上的
+                        if(widgetIdList.length <= 1){
+                            widgetSample = Widget.getWidgetByType(widgetIdList[0], null, null);
+                        }else{
+                            //已经实例化的未保存控件
+                            var windgetObject = Session.getWidgetObjectById(widgetId);
+                            widgetSample = Widget.getWidgetSample("@" + windgetObject.type, windgetObject);
+                        }
+                        return URL_CONFIG.getDataFromSample(widgetSample);
+                    }
                 	var resultData = Restangular.service(URL_CONFIG.getApiWebeditorUrl("widgetDetail")).one(widgetId).get();
                 	return resultData;
                 },

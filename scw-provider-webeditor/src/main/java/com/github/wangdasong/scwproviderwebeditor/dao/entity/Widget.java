@@ -17,7 +17,7 @@ public class Widget extends BaseEntity {
     private String type;
     private int sort = 9999;
     private String containerId;
-    private String tmpFlg;
+    private String tmpFlg = "false";
     private List<AttConfig> attConfigs;
     private List<Element> elements;
 

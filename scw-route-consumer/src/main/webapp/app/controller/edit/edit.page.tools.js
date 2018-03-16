@@ -1,5 +1,5 @@
 angular.module('controller.webpage.edit.tools', [])
-    .directive('editTools', ['DataService', 'APP_CONFIG', '$route', function (DataService, APP_CONFIG) {
+    .directive('editTools', ['DataService', 'Session','APP_CONFIG', '$route', function (DataService,Session, APP_CONFIG) {
         return {
             restrict: 'EA',
             templateUrl: '/app/controller/edit/edit.page.tools.tpl.html',
@@ -280,7 +280,11 @@ angular.module('controller.webpage.edit.tools', [])
         		$scope.removeElm = function () {
         			$(".demo").delegate(".remove", "click", function(e) {
         				e.preventDefault();
-        				$(this).parent().parent().remove();
+        				var currObj = $(this).parent().parent();
+                        var viewObject = $(this).parent().next().next();
+                        var widgetId = viewObject.attr("widgetId");
+                        Session.removeWidget(widgetId);
+                        currObj.remove();
         				if (!$(".demo .lyrow").length > 0) {
         					//$scope.clearDemo();
         				}
@@ -502,26 +506,23 @@ angular.module('controller.webpage.edit.tools', [])
             	});
             	//拖拽组件功能控件
             	$(".sidebar-nav .box").draggable({
-            		connectToSortable: ".column",
+            		// connectToSortable: ".column",
             		helper: "clone",
             		handle: ".drag",
-            		start: function(e,t) {
+            		start: function(e, t) {
             			if (!scope.startdrag) scope.stopsave++;
             			scope.startdrag = 1;
             		},
             		drag: function(e, t) {
-            			t.helper.width(400)
             		},
-            		stop: function() {
+            		stop: function(event, ui) {
             			scope.handleJsIds();
             			if(scope.stopsave>0) scope.stopsave--;
             			scope.startdrag = 0;
-            			var inputDataRangeSample = $(this).find("#inputDataRangeSample");
-            			if(inputDataRangeSample){
-            				scope.loadDateRangeJs(inputDataRangeSample);
-            			}
+            			return;
             		}
             	});
+
             	scope.initContainer();
             	$('body.edit .demo').on("click","[data-target=#editorModal]",function(e) {
             		e.preventDefault();

@@ -66,37 +66,8 @@
                           </div>
                       </li>
                       <li style="display: none;" class="boxes" id="elmBase">
-                          <!-- 文本框 -->
-                          <div class="col-lg-6 col-md-6 col-sm-6 box box-element ui-draggable">
-                              <div class="configuration">
-	                          	<span class="drag label"><i class="icon-move"></i>拖动</span>
-	                              <a href="#close" class="remove label label-important"><i class="icon-remove icon-white"></i>删除</a>
-                                  <button type="button" class="btn btn-minier" data-target="#editorModal" role="button" data-toggle="modal">存档</button>
-                                  <span class="btn-group">
-                                      <a class="btn btn-minier dropdown-toggle" data-toggle="dropdown">属性 <span class="caret"></span></a>
-                                      <ul class="dropdown-menu">
-                                          <li class="active"><a href="#" rel="">默认</a></li>
-                                          <li class=""><a href="#" rel="text-left">靠左</a></li>
-                                          <li class=""><a href="#" rel="text-center">居中</a></li>
-                                          <li class=""><a href="#" rel="text-right">靠右</a></li>
-                                      </ul>
-                                  </span>
-                              </div>
-                              <div class="preview">文本框 <span class="drag label"><i class="icon-move"></i>拖动</span></div>
-                              <div class="view" style="padding-top:0px;">
-                              <div ng-hide="isHidden" class="form-horizontal form-group" widgetid="487A1E2F2E1C0A92E0530100007FC8F5" caneditflag="widgetEditElement">
-									<label id="" class="control-label input-sm col-lg-4 col-md-4 col-sm-4 field-title no-padding-right blue ng-binding" for="">
-										<input class="widget-label-edit" name="a" value="默认文本框"/>
-									</label>
-									<div class="input-group col-lg-8 col-md-8 col-sm-8 field-input" style="padding-left:15px;padding-right:15px">
-										<input id="" name="nameChar" value="" ng-readonly="isReadonly" placeholder="请输入正确的XXXX！" class="col-xs-12" onfocus="this.select()" type="text">
-										<span id="" class="input-group-addon" ng-click="" style="cursor:pointer" title="请输入正确的XXXX！">
-											<i id="" class="icon-info-sign"></i>
-										</span>
-								    </div>
-								</div>
-                              </div>
-                          </div>
+                          <!-- 新文本框 -->
+                          <div widget-text  id="@text" initvalue=""  widgettype="@text" template="true" class="box box-element ui-draggable"></div>
                           <!-- 单选框  -->
                           <div class="col-lg-6 col-md-6 col-sm-6 box box-element ui-draggable">
                               <div class="configuration">
