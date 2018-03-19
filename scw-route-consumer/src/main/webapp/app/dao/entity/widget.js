@@ -1,4 +1,12 @@
 function Widget (){
+    id = "";
+    code = "";
+    name = "",
+    containerId = "";
+    type = "";
+    sort = 0;
+    tmpFlg = "true";
+    attConfigs = new Array();
 };
 Widget.getWidgetByType = function(type, containerId, widgetId) {
     if(type == "@text"){
@@ -20,14 +28,6 @@ Widget.getWidgetSample = function (type, widget) {
 
 Widget.prototype = {
     constructor: Widget,
-    id:"",
-    code: "",
-    name: "",
-    containerId: "",
-    type: "",
-    sort: 0,
-    tmpFlg: "true",
-    attConfigs:[],
     getId: function () {
         return this.id;
     },
@@ -48,6 +48,9 @@ Widget.prototype = {
     },
     getTmpFlg: function(){
         return this.tmpFlg;
+    },
+    getAttConfigs: function () {
+        return this.attConfigs;
     },
     addAttribute: function (attConfig) {
         if(this.attConfigs == null){

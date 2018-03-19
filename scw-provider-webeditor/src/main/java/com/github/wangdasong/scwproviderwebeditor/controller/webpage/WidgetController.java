@@ -6,6 +6,7 @@ import com.github.wangdasong.scwproviderwebeditor.dao.entity.Widget;
 import com.github.wangdasong.scwproviderwebeditor.service.WidgetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -81,6 +82,15 @@ public class WidgetController {
 	@RequestMapping(value = Constants.REST_WIDGET_SOU)
 	@ResponseBody
 	public Widget saveOrUpdate(Widget widget){
+		widget = widgetService.saveOrUpdateWidget(widget);
+		return widget;
+	}
+	/**
+	 * 保存控件数据
+	 */
+	@RequestMapping(value = Constants.REST_WIDGET_SAVE)
+	@ResponseBody
+	public Widget saveOrUpdateForJson(@RequestBody Widget widget){
 		widget = widgetService.saveOrUpdateWidget(widget);
 		return widget;
 	}

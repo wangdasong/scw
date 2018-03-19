@@ -51,6 +51,11 @@ angular.module('shared.session', [])
             }
             return currWidget;
         };
+        this.updateWidgetData = function(widgetId, name, value){
+            var currWidget = this.getWidgetObjectById(widgetId);
+            currWidget[name] = value;
+            return currWidget;
+        };
         this.removeWidget = function (widgetId) {
             for(var i = 0; i < this.widgetArray.length; i ++){
                 if(this.widgetArray[i].id == widgetId){

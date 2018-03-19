@@ -21,6 +21,9 @@ angular.module('service.data', ['ngResource', 'restangular'])
         getApiWebeditorUrl: function (apiName) {
             return 'api-webeditor/api/' + apiName;
         },
+        getWebeditorUrl: function (apiName) {
+            return 'api-webeditor/' + apiName;
+        },
         getApiAuthUrl: function () {
             return this.getRootUrl() + 'api-auth/uaa/';
         },
@@ -238,6 +241,10 @@ angular.module('service.data', ['ngResource', 'restangular'])
                     }
                 	var resultData = Restangular.service(URL_CONFIG.getApiWebeditorUrl("widgetDetail")).one(widgetId).get();
                 	return resultData;
+                },
+                saveWidgetInfo: function (widgetId) {
+                    var widgetInfo = Session.getWidgetObjectById(widgetId);
+                    return Restangular.service(URL_CONFIG.getWebeditorUrl("widget")).one('jasonsave').post('',  widgetInfo, {}, {});
                 },
                 getAttConfigsByBelongId: function(belongId){
                 	var resultData = Restangular.service(URL_CONFIG.getApiWebeditorUrl("attConfigs")).one(belongId).get();

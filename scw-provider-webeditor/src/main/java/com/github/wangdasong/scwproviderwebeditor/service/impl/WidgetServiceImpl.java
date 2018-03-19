@@ -126,8 +126,20 @@ public class WidgetServiceImpl extends BaseServiceImpl<Widget> implements DataSr
 
 	@Override
 	public Widget saveOrUpdateWidget(Widget widget) {
+		//正常插入控件数据到DB
 		if(widget.getId() == null || "".equals(widget.getId())){
 			addEntity(widget);
+		}else if(widget.getId().indexOf("@") > -1){
+			//页面编辑创建控件
+			widget.setId(null);
+			widget.setTmpFlg("false");
+			widget = addEntity(widget);
+			if(widget.getAttConfigs() != null){
+				for(AttConfig ac : widget.getAttConfigs()){
+					ac.setBelongId(widget.getId());
+					attConfigService.addEntity(ac);
+				}
+			}
 		}else{
 			editEntity(widget);
 		}

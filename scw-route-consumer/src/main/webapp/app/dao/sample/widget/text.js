@@ -11,9 +11,10 @@ WidgetTextSample.prototype = {
         this.currWidget = new Widget();
         this.currWidget.id = widgetId;
         this.currWidget.code = "CITY_MNG_INPUT_CITY_CODE";
-        this.currWidget.name = "样例文本框";
+        this.currWidget.name = "nameChar";
         this.currWidget.type = "text";
         this.currWidget.sort = 1;
+        this.currWidget.tmpFlg = "true";
         this.currWidget.containerId = containerId;
         //设置消息
         var attMessage = new AttConfig();

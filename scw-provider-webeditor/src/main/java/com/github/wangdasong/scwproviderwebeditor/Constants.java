@@ -94,6 +94,7 @@ public class Constants {
 	public static final String REST_WIDGET_PREFIX = "/widget";
 	public static final String REST_WIDGET_LIST = "/list";
 	public static final String REST_WIDGET_SOU = "/saveorupdate";
+	public static final String REST_WIDGET_SAVE = "/jasonsave";
 	public static final String REST_WIDGET_COPY_TEMPLETE = "/copytemplete";
 	public static final String REST_WIDGET_EDIT = "/edit";
 	public static final String REST_WIDGET_ADD = "/add";

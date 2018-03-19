@@ -131,6 +131,16 @@ angular.module('controller.webpage.container.widget.text', [])
                     var data = Session.updateWidgetAttData(widgetId, attCode, attValue);
                     reloadScope(scope, element, attrs, data);
                 };
+                scope.updateWidgetData = function (widgetId, name, value) {
+                    var data = Session.updateWidgetData(widgetId, name, value);
+                    reloadScope(scope, element, attrs, data);
+                };
+                scope.saveWidgetInfo = function (widgetId) {
+                    DataService.saveWidgetInfo(widgetId).then(function (response) {
+                        var data = response.plain();
+                        doLink(scope, element, attrs);
+                    });
+                };
             }
         };
     }])
