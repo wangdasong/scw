@@ -93,7 +93,7 @@ VISUALEDIT.delElement = function (id, elementName) {
 
     if (window.confirm("确定删除" + elementName + "?")) {
         COMMON.ing("正在删除……", false);
-        var tempSrcUrl = "/rest/api/element/del";
+        var tempSrcUrl = "/api-webeditor/element/del";
         $.ajax({
             type: "post",
             url: tempSrcUrl,
@@ -114,7 +114,7 @@ VISUALEDIT.delWidget = function (id, widgetName) {
 
     if (window.confirm("确定删除" + widgetName + "?")) {
         COMMON.ing("正在删除……", false);
-        var tempSrcUrl = "/rest/api/widget/del";
+        var tempSrcUrl = "/api-webeditor/widget/del";
         $.ajax({
             type: "post",
             url: tempSrcUrl,
@@ -135,7 +135,7 @@ VISUALEDIT.delContainer = function (id, containerName) {
 
     if (window.confirm("确定删除" + containerName + "?")) {
         COMMON.ing("正在删除……", false);
-        var tempSrcUrl = "/rest/api/container/del";
+        var tempSrcUrl = "/api-webeditor/container/del";
         $.ajax({
             type: "post",
             url: tempSrcUrl,

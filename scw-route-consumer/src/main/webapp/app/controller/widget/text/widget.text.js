@@ -4,6 +4,7 @@ angular.module('controller.webpage.container.widget.text', [])
         var reloadScope = function (scope, element, attrs, data) {
             var currWidgetId = attrs.id;
             scope.attConfigs = data.attConfigs;
+            scope.template = data.tmpFlg;
             scope.id = currWidgetId;
             scope.isReadonly = "false";
             scope.containerId =  data.containerId;
@@ -138,7 +139,7 @@ angular.module('controller.webpage.container.widget.text', [])
                 scope.saveWidgetInfo = function (widgetId) {
                     DataService.saveWidgetInfo(widgetId).then(function (response) {
                         var data = response.plain();
-                        doLink(scope, element, attrs);
+                        reloadScope(scope, element, attrs, data);
                     });
                 };
             }
