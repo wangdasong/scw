@@ -1,4 +1,84 @@
-<div class="form-horizontal form-group col-lg-{{width}} col-md-{{width}} col-sm-{{width}}" widgetId="{{id}}" canEditFlag="widgetEditElement">
+<!--
+模板控件部分代码-----开始
+-->
+<div ng-if="template == 'true'" class="configuration">
+	<span class="drag label"><i class="icon-move"></i>拖动</span>
+	<a href="#close" class="remove label label-important"><i class="icon-remove icon-white"></i>删除</a>
+	<button type="button" class="btn btn-minier" data-target="#editorModal" role="button" data-toggle="modal" ng-click="saveWidgetInfo(id)">存档</button>
+	<span class="btn-group">
+	<a class="btn btn-minier dropdown-toggle" data-toggle="dropdown">属性 <span class="caret"></span></a>
+	<ul class="dropdown-menu  multi-level"  role="menu"  aria-labelledby="dropdownMenu">
+	  <li class="dropdown-submenu">
+		  <a href="javascript:void(0);" rel="">控件标签</a>
+		  <ul class="dropdown-menu">
+			  <form>
+			   <li><input type="text" name=""  ng-model="label"></li>
+			   <li><input type="reset" value="重置">
+				   <input type="button" ng-click="updateWidgetAttData(id, 'INPUT_LABEL', label)" value="确认"/></li>
+			  </form>
+		  </ul>
+	  </li>
+	  <li class="dropdown-submenu">
+		  <a href="javascript:void(0);" rel="">控件名称</a>
+		  <ul class="dropdown-menu">
+			  <form>
+			   <li><input type="text" name="" ng-model="name"></li>
+			   <li><input type="reset" value="重置">
+				   <input type="button" ng-click="updateWidgetAttData(id, 'INPUT_NAME', name)" value="确认"/></li>
+			  </form>
+		  </ul>
+	  </li>
+	  <li class="dropdown-submenu">
+		  <a href="#" rel="">排序</a>
+		  <ul class="dropdown-menu">
+			  <form>
+			   <li><input type="text" name=""  ng-model="sort"></li>
+			   <li><input type="reset" value="重置">
+				   <input type="button" value="确认" ng-click="updateWidgetData(id, 'sort', sort)" /></li>
+			  </form>
+		  </ul>
+	  </li>
+	  <li class="dropdown-submenu">
+		  <a href="javascript:void(0);" rel="">控件长度</a>
+		  <ul class="dropdown-menu">
+			  <form>
+			   <li><input type="text" name=""  ng-model="width"></li>
+			   <li><input type="reset" value="重置">
+				   <input type="button" value="确认" ng-click="updateWidgetAttData(id, 'INPUT_WIDTH', width)" /></li>
+			  </form>
+		  </ul>
+	  </li>
+	  <li class="dropdown-submenu">
+		  <a href="javascript:void(0);" rel="">控件消息</a>
+		  <ul class="dropdown-menu">
+			  <form>
+			   <li><input type="text" name=""  ng-model="message"></li>
+			   <li>
+				   <input type="reset" value="重置">
+				   <input type="button" value="确认" ng-click="updateWidgetAttData(id, 'INPUT_MESSAGE', message)" />
+			   </li>
+			  </form>
+		  </ul>
+	  </li>
+	  <li class="dropdown-submenu">
+		  <a href="javascript:void(0);" rel="">正则匹配</a>
+		  <ul class="dropdown-menu">
+			  <form>
+			   <li><input type="text" name="" ng-model="regular"></li>
+			   <li><input type="reset" value="重置">
+				   <input type="button" value="确认" ng-click="updateWidgetAttData(id, 'INPUT_REGULAR', regular)" /></li>
+			  </form>
+		  </ul>
+	  </li>
+	</ul>
+	</span>
+</div>
+<div  ng-if="template == 'true'" class="preview">日期输入框 <span class="drag label"><i class="icon-move"></i>拖动</span></div>
+<!--
+模板控件部分代码-----结束
+-->
+
+<div style="background-color: {{template == 'true' ? '#F0FFFF' : '#FFFFFF'}}" class="view form-horizontal form-group col-lg-{{width}} col-md-{{width}} col-sm-{{width}}" widgetId="{{id}}" containerId="{{containerId}}"  canEditFlag="widgetEditElement">
 	<label class="control-label input-sm col-lg-4 col-md-4 col-sm-4 field-title no-padding-right blue" for="{{id}}">{{label}}</label>
 	<div class="input-group col-lg-8 col-md-8 col-sm-8 field-input" style="padding-left:15px;padding-right:15px">
 		<input class="date-picker col-xs-12" type="text" name="{{name}}" data-date-format="{{format}}" value="{{initvalue}}"/>

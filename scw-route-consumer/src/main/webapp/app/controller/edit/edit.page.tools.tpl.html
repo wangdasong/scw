@@ -68,84 +68,12 @@
                       <li style="display: none;" class="boxes" id="elmBase">
                           <!-- 新文本框 -->
                           <div widget-text  id="@text" initvalue=""  widgettype="@text" template="true" class="box box-element ui-draggable"></div>
-                          <!-- 单选框  -->
-                          <div class="col-lg-6 col-md-6 col-sm-6 box box-element ui-draggable">
-                              <div class="configuration">
-	                          	<span class="drag label"><i class="icon-move"></i>拖动</span>
-	                              <a href="#close" class="remove label label-important"><i class="icon-remove icon-white"></i>删除</a>
-                                  <button type="button" class="btn btn-minier" data-target="#editorModal" role="button" data-toggle="modal">存档</button>
-                                  <span class="btn-group">
-                                      <a class="btn btn-minier dropdown-toggle" data-toggle="dropdown">属性 <span class="caret"></span></a>
-                                      <ul class="dropdown-menu">
-                                          <li class="active"><a href="#" rel="">默认</a></li>
-                                          <li class=""><a href="#" rel="text-left">靠左</a></li>
-                                          <li class=""><a href="#" rel="text-center">居中</a></li>
-                                          <li class=""><a href="#" rel="text-right">靠右</a></li>
-                                      </ul>
-                                  </span>
-                              </div>
-                              <div class="preview">单选框 <span class="drag label"><i class="icon-move"></i>拖动</span></div>
-                              <div class="view" style="padding-top:0px;">
-	                              <div ng-hide="isHidden" class="form-horizontal form-group" widgetid="43C2964E5459760EE0530100007FFF6B" addelement="true" caneditflag="widgetEditElement">
-									<label class="control-label input-sm col-lg-4 col-md-4 col-sm-4 field-title no-padding-right blue ng-binding">
-										<input class="widget-label-edit" name="a" value="默认单选框"/>
-									</label>
-									<div class="input-group col-lg-8 col-md-8 col-sm-8 field-input" style="padding-left:15px;padding-right:15px">
-										<label  class="ng-scope">
-											<div class="radio" style="padding-top:0px;">
-												<label>
-													<input id="input43C2C1AFEBA5798FE0530100007F0762" name="gender" ng-checked="element.checked" value="1" class="ace" ng-click="changeValue(element.id)" type="radio">
-													<span class="lbl ng-binding" id="span43C2C1AFEBA5798FE0530100007F0762">
-													<input class="widget-label-edit" value="选项1"/>
-													</span>
-												</label>
-											</div>
-										</label>
-										<label class="ng-scope">
-											<div class="radio" style="padding-top:0px;">
-												<label>
-													<input id="input43C2C1AFEBA6798FE0530100007F0762" name="gender" ng-checked="element.checked" value="0" class="ace" ng-click="changeValue(element.id)" type="radio">
-													<span class="lbl ng-binding" id="span43C2C1AFEBA6798FE0530100007F0762"><input class="widget-label-edit" value="选项2"/></span>
-												</label>
-											</div>
-										</label>
-									</div>
-								  </div>
-                              </div>
-                          </div>
-                          <!-- 日期范围框  -->
-                          <div class="col-lg-6 col-md-6 col-sm-6 box box-element ui-draggable">
-                              <div class="configuration">
-	                          	<span class="drag label"><i class="icon-move"></i>拖动</span>
-	                              <a href="#close" class="remove label label-important"><i class="icon-remove icon-white"></i>删除</a>
-                                  <button type="button" class="btn btn-minier" data-target="#editorModal" role="button" data-toggle="modal">存档</button>
-                                  <span class="btn-group">
-                                      <a class="btn btn-minier dropdown-toggle" data-toggle="dropdown">属性 <span class="caret"></span></a>
-                                      <ul class="dropdown-menu">
-                                          <li class="active"><a href="#" rel="">默认</a></li>
-                                          <li class=""><a href="#" rel="text-left">靠左</a></li>
-                                          <li class=""><a href="#" rel="text-center">居中</a></li>
-                                          <li class=""><a href="#" rel="text-right">靠右</a></li>
-                                      </ul>
-                                  </span>
-                              </div>
-                              <div class="preview">日期范围 <span class="drag label"><i class="icon-move"></i>拖动</span></div>
-                              <div class="view" style="padding-top:0px;">
-	                              <div ng-hide="isHidden" class="form-horizontal form-group" widgetid="43C2964E5459760EE0530100007FFF6B" addelement="true" caneditflag="widgetEditElement">
-									<label class="control-label input-sm col-lg-4 col-md-4 col-sm-4 field-title no-padding-right blue ng-binding">
-										<input class="widget-label-edit" name="a" value="模板-日期范围"/>
-									</label>
-									<div class="input-group col-lg-8 col-md-8 col-sm-8 field-input" style="padding-left:15px;padding-right:15px">
-										<input id="inputDataRangeSample" class="date-picker col-xs-12" data-date-format="YYYY-MM-DD HH:mm:ss" value="" type="text">
-										<input id="inputDataRangeSampleStart" value="" name="trainDateStart" type="hidden">
-										<input id="inputDataRangeSampleEnd" value="" name="trainDateEnd" type="hidden">
-										<span class="input-group-addon" ng-click="clearData();" style="cursor:pointer" title="clear data">
-											<i class="icon-calendar"></i>
-										</span>
-									</div>
-								  </div>
-                              </div>
-                          </div>
+                          <!-- 日期选择框 -->
+                          <div widget-date  id="@datepicker" initvalue=""  widgettype="@datepicker" template="true" class="box box-element ui-draggable"></div>
+                          <!-- 日期范围选择框 -->
+                          <div widget-date-range  id="@daterangepicker" initvalue=""  widgettype="@daterangepicker" template="true" class="box box-element ui-draggable"></div>
+                          <!-- 下拉菜单 -->
+                          <div widget-select  id="@select" initvalue=""  widgettype="@select" template="true" class="box box-element ui-draggable"></div>
                       </li>
                   </ul>
               </div>

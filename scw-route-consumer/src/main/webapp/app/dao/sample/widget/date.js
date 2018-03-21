@@ -1,8 +1,8 @@
 
-function WidgetTextSample(){
+function WidgetDateSample(){
 }
 
-WidgetTextSample.prototype = {
+WidgetDateSample.prototype = {
     currWidget:null,
     createObject : function (containerId, widgetId) {
         if(widgetId == null || widgetId == ""){
@@ -10,12 +10,13 @@ WidgetTextSample.prototype = {
         }
         this.currWidget = new Widget();
         this.currWidget.id = widgetId;
-        this.currWidget.code = "CITY_MNG_INPUT_CITY_CODE";
-        this.currWidget.name = "nameChar";
-        this.currWidget.type = "text";
+        this.currWidget.code = "SAMPLE_DATE_WIDGET";
+        this.currWidget.name = "sampleDate";
+        this.currWidget.type = "datepicker";
         this.currWidget.sort = 999;
         this.currWidget.tmpFlg = "true";
         this.currWidget.containerId = containerId;
+        /*
         //设置消息
         var attMessage = new AttConfig();
         attMessage.code = "INPUT_MESSAGE";
@@ -34,12 +35,23 @@ WidgetTextSample.prototype = {
         attRegular.belongId = widgetId;
         attRegular.belongType = "2";
         this.currWidget.addAttribute(attRegular);
+        */
+
+        //设置格式
+        var attFormat = new AttConfig();
+        attFormat.type = "format";
+        attFormat.name = "显示格式";
+        attFormat.code = "INPUT_FORMAT";
+        attFormat.attValue = "yyyy-mm-dd hh:ii:ss";
+        attFormat.belongId = widgetId;
+        attFormat.belongType = "2";
+        this.currWidget.addAttribute(attFormat);
         //设置标签属性
         var attLabel = new AttConfig();
         attLabel.type = "label";
         attLabel.name = "控件标签";
         attLabel.code = "INPUT_LABEL";
-        attLabel.attValue = "样例文本框";
+        attLabel.attValue = "样例日期输入框";
         attLabel.belongId = widgetId;
         attLabel.belongType = "2";
         this.currWidget.addAttribute(attLabel);
@@ -48,7 +60,7 @@ WidgetTextSample.prototype = {
         attName.type = "name";
         attName.name = "控件名称";
         attName.code="INPUT_NAME";
-        attName.attValue="nameChar";
+        attName.attValue="sampleDate";
         attName.belongId = widgetId;
         attName.belongType = "2";
         this.currWidget.addAttribute(attName);
@@ -57,7 +69,7 @@ WidgetTextSample.prototype = {
         attType.type = "type";
         attType.name = "控件类型";
         attType.code="INPUT_TYPE";
-        attType.attValue="text";
+        attType.attValue="datetimepicker";
         attType.belongId = widgetId;
         attType.belongType = "2";
         this.currWidget.addAttribute(attType);
