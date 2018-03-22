@@ -26,6 +26,14 @@ Widget.getWidgetByType = function(type, containerId, widgetId) {
         var widgetSelectSample = new WidgetSelectSample();
         return widgetSelectSample.createObject(containerId, widgetId);
     }
+    if(type == "@radio"){
+        var widgetRadioSample = new WidgetRadioSample();
+        return widgetRadioSample.createObject(containerId, widgetId);
+    }
+    if(type == "@check"){
+        var widgetCheckSample = new WidgetCheckSample();
+        return widgetCheckSample.createObject(containerId, widgetId);
+    }
 }
 Widget.getWidgetSample = function (type, widget) {
     if(type == "@text"){
@@ -47,6 +55,16 @@ Widget.getWidgetSample = function (type, widget) {
         var widgetSelectSample = new WidgetSelectSample();
         widgetSelectSample.currWidget = widget;
         return widgetSelectSample;
+    }
+    if(type == "@radio"){
+        var widgetRadioSample = new WidgetRadioSample();
+        widgetRadioSample.currWidget = widget;
+        return widgetRadioSample;
+    }
+    if(type == "@check"){
+        var widgetCheckSample = new WidgetCheckSample();
+        widgetCheckSample.currWidget = widget;
+        return widgetCheckSample;
     }
 }
 
