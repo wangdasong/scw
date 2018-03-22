@@ -11,5 +11,6 @@ public interface WidgetService extends BaseService<Widget>{
 	public Pagination getMyAttConfigPage(int pageNo, int size, String sort, Widget widget);
 	public List<AttConfig> getMyAttConfigList(Widget widget);
 	public Widget saveOrUpdateWidget(Widget widget);
+	public Widget saveWidgetInfoAll(Widget widget);
 	public Widget copyElementAttsFromTemplet(Widget templetWidget, Widget myWidget);
 }

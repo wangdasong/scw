@@ -91,7 +91,7 @@ public class WidgetController {
 	@RequestMapping(value = Constants.REST_WIDGET_SAVE)
 	@ResponseBody
 	public Widget saveOrUpdateForJson(@RequestBody Widget widget){
-		widget = widgetService.saveOrUpdateWidget(widget);
+		widget = widgetService.saveWidgetInfoAll(widget);
 		return widget;
 	}
 

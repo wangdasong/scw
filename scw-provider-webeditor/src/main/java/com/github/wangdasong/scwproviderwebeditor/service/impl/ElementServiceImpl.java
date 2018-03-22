@@ -134,7 +134,7 @@ public class ElementServiceImpl extends BaseServiceImpl<Element> implements Data
 	}
 
 	@Override
-	public void addElement(Element element) {
+	public Element addElement(Element element) {
 		element.setCreateDate(new Date());
 		element.setUpdateDate(new Date());
 		BaseEntity user = ThreadVariable.getUser();
@@ -152,6 +152,7 @@ public class ElementServiceImpl extends BaseServiceImpl<Element> implements Data
 			container.setPageId(widgetId);
 			containerService.addEntity(container);
 		}*/
+		return element;
 	}
 
 	@Override

@@ -129,19 +129,38 @@ public class WidgetServiceImpl extends BaseServiceImpl<Widget> implements DataSr
 		//正常插入控件数据到DB
 		if(widget.getId() == null || "".equals(widget.getId())){
 			addEntity(widget);
-		}else if(widget.getId().indexOf("@") > -1){
-			//页面编辑创建控件
-			widget.setId(null);
-			widget.setTmpFlg("false");
-			widget = addEntity(widget);
-			if(widget.getAttConfigs() != null){
-				for(AttConfig ac : widget.getAttConfigs()){
-					ac.setBelongId(widget.getId());
-					attConfigService.addEntity(ac);
-				}
-			}
 		}else{
 			editEntity(widget);
+		}
+		return widget;
+	}
+
+	@Override
+	public Widget saveWidgetInfoAll(Widget widget) {
+		//页面编辑创建控件
+		widget.setId(null);
+		widget.setTmpFlg("false");
+		widget = addEntity(widget);
+		if(widget.getAttConfigs() != null){
+			for(AttConfig ac : widget.getAttConfigs()){
+				ac.setBelongId(widget.getId());
+				attConfigService.addEntity(ac);
+			}
+		}
+		if(widget.getElements() != null){
+			for(Element element : widget.getElements()){
+				element.setId(null);
+				element.setWidgetId(widget.getId());
+				element.setParentId(widget.getId());
+				List<AttConfig> elementAttConfigs = element.getAttConfigs();
+				element = elementService.addEntity(element);
+				if(elementAttConfigs != null){
+					for(AttConfig ace : elementAttConfigs){
+						ace.setBelongId(element.getId());
+						attConfigService.addEntity(ace);
+					}
+				}
+			}
 		}
 		return widget;
 	}

@@ -5,6 +5,36 @@
 	<span class="drag label"><i class="icon-move"></i>拖动</span>
 	<a href="#close" class="remove label label-important"><i class="icon-remove icon-white"></i>删除</a>
 	<button type="button" class="btn btn-minier" data-target="#editorModal" role="button" data-toggle="modal" ng-click="saveWidgetInfo(id)">存档</button>
+
+	<span class="btn-group">
+		<a class="btn btn-minier dropdown-toggle" data-toggle="dropdown">固定元素 <span class="caret"></span></a>
+		<ul class="dropdown-menu  multi-level"  role="menu"  aria-labelledby="dropdownMenu">
+	  		<li class="dropdown-submenu" ng-repeat="element in elements">
+				<a href="javascript:void(0);" rel="">{{element.label}}</a>
+				<ul class="dropdown-menu">
+					<form>
+						<li>
+						   <label>选项标签</label>
+						   <input type="button" ng-click="updateElementAttData(id, element.id, 'ELEMENT_LABEL', element.label)" value="确认"/>
+							<input type="text" name=""  ng-model="element.label">
+						</li>
+						<li>
+						   <label>选项值</label>
+						   <input type="button" ng-click="updateElementAttData(id, element.id, 'ELEMENT_VALUE', element.value)" value="确认"/>
+						   <input type="text" name=""  ng-model="element.value">
+						</li>
+						<li>
+						   <input type="reset" value="重置">
+						</li>
+					</form>
+				</ul>
+			</li>
+	  		<li>
+				<button class="col-lg-12 col-md-12 col-sm-12 btn-info" ng-click="addSampleElementToWidget(id);">添加</button>
+			</li>
+		</ul>
+	</span>
+
 	<span class="btn-group">
 	<a class="btn btn-minier dropdown-toggle" data-toggle="dropdown">属性 <span class="caret"></span></a>
 	<ul class="dropdown-menu  multi-level"  role="menu"  aria-labelledby="dropdownMenu">

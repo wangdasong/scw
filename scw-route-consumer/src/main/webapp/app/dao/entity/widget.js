@@ -1,13 +1,13 @@
 function Widget (){
-    id = "";
-    code = "";
-    name = "",
-    containerId = "";
-    type = "";
-    sort = 0;
-    tmpFlg = "true";
-    attConfigs = new Array();
-    elements = new Array();
+    this.id = "";
+    this.code = "";
+    this.name = "";
+    this.containerId = "";
+    this.type = "";
+    this.sort = 0;
+    this.tmpFlg = "true";
+    this.attConfigs = new Array();
+    this.elements = new Array();
 };
 Widget.getWidgetByType = function(type, containerId, widgetId) {
     if(type == "@text"){
@@ -75,6 +75,9 @@ Widget.prototype = {
     },
     getAttConfigs: function () {
         return this.attConfigs;
+    },
+    getElements: function () {
+        return this.elements;
     },
     addAttribute: function (attConfig) {
         if(this.attConfigs == null){

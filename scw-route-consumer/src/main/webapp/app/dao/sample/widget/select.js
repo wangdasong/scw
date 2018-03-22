@@ -80,6 +80,10 @@ WidgetSelectSample.prototype = {
         attCascade.belongType = "2";
         this.currWidget.addAttribute(attCascade);
 
+        // this.currWidget.addElement(this.createSampleElement(widgetId));
+        return this;
+    },
+    createSampleElement : function (widgetId) {
         //设置模板元素
         var elementSample = new Element();
         elementSample.id = COMMON.createUUID();
@@ -104,8 +108,7 @@ WidgetSelectSample.prototype = {
         attElementValue.belongId = elementSample.id;
         attElementValue.belongType = "2";
         elementSample.addAttribute(attElementValue);
-        this.currWidget.addElement(elementSample);
-        return this;
+        return elementSample;
     },
     plain : function () {
         return this.currWidget;

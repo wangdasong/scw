@@ -3,6 +3,7 @@ angular.module('controller.webpage.container.widget.select', [])
     	var reloadScope = function (scope, element, attrs, data) {
             var currWidgetId = attrs.id;
             scope.labelValue = "";
+            scope.code = data.code;
             scope.containerId =  data.containerId;
             scope.attConfigs = data.attConfigs;
             scope.template = data.tmpFlg;
@@ -194,38 +195,43 @@ angular.module('controller.webpage.container.widget.select', [])
                 });
                 //无数据源的控件，根据自己的元素渲染选项信息
             }else{
-                for(i=0; i< data.elements.length; i ++ ){
+                scope.elements = [];
+                for(var i=0; i< data.elements.length; i ++ ){
                 	var currElement = data.elements[i];
                     var currElementId = currElement.id;
                     var currElementValue, currElementLabel;
                     var loadElementAttribute =function (eleAttConfigs) {
-                        for(index2 in eleAttConfigs){
+                        var currElementForPage = {};
+                        currElementForPage.id = currElementId;
+                        for(var index2 in eleAttConfigs){
                             var currEleAttConfig = eleAttConfigs[index2];
                             var currEleAttConfigType = currEleAttConfig.type;
                             if(currEleAttConfigType == "label"){
                                 currElementLabel = currEleAttConfig.attValue;
-                                $("#"+currEleAttConfig.belongId).html(currElementLabel);
+                                currElementForPage.label = currElementLabel;
                             }
                             if(currEleAttConfigType == "value"){
                                 currElementValue = currEleAttConfig.attValue;
                                 if(currElementValue == scope.initvalue){
-                                    $("#"+currEleAttConfig.belongId).attr("selected", true);
+                                    currElementForPage.selected = true;
                                 }
-                                $("#"+currEleAttConfig.belongId).val(currElementValue);
+                                currElementForPage.value = currElementValue;
                             }
                         }
-                    }
+                        scope.elements.push(currElementForPage);
+                    };
                     //没有元素属性数据，去后台加载
                     if(currElement.attConfigs == null || currElement.attConfigs.length == 0){
                         DataService.getAttConfigsByBelongId(currElementId).then(function (response){
-                            var eleAttConfigs = response.plain();
-                            loadElementAttribute(eleAttConfigs);
+                            var  currAttConfigs = response.plain();
+                            loadElementAttribute(currAttConfigs);
                         });
 					}else {
                     	//存在元素属性（模板数据）直接使用元素属性
-                        setTimeout(function () {
-                            loadElementAttribute(currElement.attConfigs);
-                        },100);
+						var reloadAndApplay = function (currElementThis) {
+                            loadElementAttribute(currElementThis.attConfigs);
+                        }
+                        setTimeout(reloadAndApplay(currElement),100);
 					}
                 }
             }
@@ -250,6 +256,17 @@ angular.module('controller.webpage.container.widget.select', [])
                 scope.updateWidgetData = function (widgetId, name, value) {
                     var data = Session.updateWidgetData(widgetId, name, value);
                     reloadScope(scope, element, attrs, data);
+                };
+                scope.updateElementAttData = function (widgetId, elementId, attCode, attValue) {
+                    var data = Session.updateElementAttData(widgetId, elementId, attCode, attValue);
+                    reloadScope(scope, element, attrs, data);
+                };
+                scope.addSampleElementToWidget = function (widgetId) {
+                    var widgetSelectSample = new WidgetSelectSample();
+                    var sampleElement = widgetSelectSample.createSampleElement(widgetId);
+                    var currWidget = Session.getWidgetObjectById(widgetId);
+                    currWidget.addElement(sampleElement);
+                    reloadScope(scope, element, attrs, currWidget);
                 };
                 scope.saveWidgetInfo = function (widgetId) {
                     DataService.saveWidgetInfo(widgetId).then(function (response) {
