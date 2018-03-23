@@ -34,6 +34,14 @@ Widget.getWidgetByType = function(type, containerId, widgetId) {
         var widgetCheckSample = new WidgetCheckSample();
         return widgetCheckSample.createObject(containerId, widgetId);
     }
+    if(type == "@file"){
+        var widgetFileSample = new WidgetFileSample();
+        return widgetFileSample.createObject(containerId, widgetId);
+    }
+    if(type == "@selecttree"){
+        var widgetSelectTreeSample = new WidgetSelectTreeSample();
+        return widgetSelectTreeSample.createObject(containerId, widgetId);
+    }
 }
 Widget.getWidgetSample = function (type, widget) {
     if(type == "@text"){
@@ -65,6 +73,16 @@ Widget.getWidgetSample = function (type, widget) {
         var widgetCheckSample = new WidgetCheckSample();
         widgetCheckSample.currWidget = widget;
         return widgetCheckSample;
+    }
+    if(type == "@file"){
+        var widgetFileSample = new WidgetFileSample();
+        widgetFileSample.currWidget = widget;
+        return widgetFileSample;
+    }
+    if(type == "@selecttree"){
+        var widgetSelectTreeSample = new WidgetSelectTreeSample();
+        widgetSelectTreeSample.currWidget = widget;
+        return widgetSelectTreeSample;
     }
 }
 
