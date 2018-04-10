@@ -1,5 +1,136 @@
-<div class="form-group form-horizontal col-lg-{{width}} col-md-{{width}} col-sm-{{width}}" widgetId="{{id}}" canEditFlag="widgetEditElement">
+<!--
+模板控件部分代码-----开始
+-->
+<div ng-if="template == 'true'" class="configuration">
+	<span class="drag label"><i class="icon-move"></i>拖动</span>
+	<a href="#close" class="remove label label-important"><i class="icon-remove icon-white"></i>删除</a>
+	<button type="button" class="btn btn-minier" data-target="#editorModal" role="button" data-toggle="modal" ng-click="saveWidgetInfo(id)">存档</button>
+	<span class="btn-group">
+	<a class="btn btn-minier dropdown-toggle" data-toggle="dropdown">属性 <span class="caret"></span></a>
+	<ul class="dropdown-menu  multi-level"  role="menu"  aria-labelledby="dropdownMenu">
+	  <li class="dropdown-submenu">
+		  <a href="javascript:void(0);" rel="">控件标签</a>
+		  <ul class="dropdown-menu">
+			  <form>
+			   <li><input type="text" name=""  ng-model="label"></li>
+			   <li><input type="reset" value="重置">
+				   <input type="button" ng-click="updateWidgetAttData(id, 'INPUT_BUTTON_LABEL', label)" value="确认"/></li>
+			  </form>
+		  </ul>
+	  </li>
+	  <li class="dropdown-submenu">
+		  <a href="javascript:void(0);" rel="">按钮大小</a>
+		  <ul class="dropdown-menu">
+			  <form>
+			   <li><input type="text" name="" ng-model="sizeStr"></li>
+			   <li><input type="reset" value="重置">
+				   <input type="button" ng-click="updateWidgetAttData(id, 'INPUT_BUTTON_SIZE', sizeStr)" value="确认"/></li>
+			  </form>
+		  </ul>
+	  </li>
+	  <li class="dropdown-submenu">
+		  <a href="#" rel="">排序</a>
+		  <ul class="dropdown-menu">
+			  <form>
+			   <li><input type="text" name=""  ng-model="sort"></li>
+			   <li><input type="reset" value="重置">
+				   <input type="button" value="确认" ng-click="updateWidgetData(id, 'sort', sort)" /></li>
+			  </form>
+		  </ul>
+	  </li>
+	  <li class="dropdown-submenu">
+		  <a href="javascript:void(0);" rel="">控件长度</a>
+		  <ul class="dropdown-menu">
+			  <form>
+			   <li><input type="text" name=""  ng-model="width"></li>
+			   <li><input type="reset" value="重置">
+				   <input type="button" value="确认" ng-click="updateWidgetAttData(id, 'INPUT_BUTTON_WIDTH', width)" /></li>
+			  </form>
+		  </ul>
+	  </li>
+	  <li class="dropdown-submenu">
+		  <a href="javascript:void(0);" rel="">事件输入</a>
+		  <ul class="dropdown-menu">
+			  <form>
+			   <li><input type="text" name=""  ng-model="input"></li>
+			   <li>
+				   <input type="reset" value="重置">
+				   <input type="button" value="确认" ng-click="updateWidgetAttData(id, 'INPUT_BUTTON_INPUT', input)" />
+			   </li>
+			  </form>
+		  </ul>
+	  </li>
+	  <li class="dropdown-submenu">
+		  <a href="javascript:void(0);" rel="">按钮事件</a>
+		  <ul class="dropdown-menu">
+			  <form>
+			   <li><input type="text" name="" ng-model="action"></li>
+			   <li><input type="reset" value="重置">
+				   <input type="button" value="确认" ng-click="updateWidgetAttData(id, 'INPUT_BUTTON_ACTION', action)" /></li>
+			  </form>
+		  </ul>
+	  </li>
+	  <li class="dropdown-submenu">
+		  <a href="javascript:void(0);" rel="">按钮输出</a>
+		  <ul class="dropdown-menu">
+			  <form>
+			   <li>
+				   <select name="" ng-model="outputType">
+					   <option value="datatable">数据表格</option>
+					   <option value="container">容器</option>
+					   <option value="reflushPage">刷新页面</option>
+					   <option value="excel">Excel表格文件</option>
+					   <option value="popup">弹出页面</option>
+					   <option value="closeMe">关闭弹出</option>
+				   </select>
+			   </li>
+			   <li>
+				   ID      ：<input type="text" name="" ng-model="outputId"/>
+			   </li>
+			   <li>
+				   服务名称：<input type="text" name="" ng-model="outputServiceName"/>
+			   </li>
+			   <li>
+				   <input type="reset" value="重置">
+				   <input type="button" value="确认" ng-click="updateWidgetAttData(id, 'INPUT_BUTTON_OUTPUT', outputType + ':' + outputId + ':' + outputServiceName)" />
+			   </li>
+			  </form>
+		  </ul>
+	  </li>
+	  <li class="dropdown-submenu">
+		  <a href="javascript:void(0);" rel="">按钮情景</a>
+		  <ul class="dropdown-menu">
+			  <form>
+			   <li>
+				   <select name="" ng-model="situation" ng-change="updateWidgetAttData(id, 'INPUT_BUTTON_SIT', situation)">
+					   <option value="info">普通</option>
+					   <option value="warning">警告</option>
+					   <option value="danger">危险</option>
+					   <option value="inverse">相反</option>
+					   <option value="light">明亮</option>
+					   <option value="white">白色</option>
+					   <option value="purple">紫色</option>
+					   <option value="grey">灰色</option>
+					   <option value="yellow">黄色</option>
+					   <option value="pink">粉红</option>
+				   </select>
+			   </li>
+			   <!--<li><input type="reset" value="重置">
+				   <input type="button" value="确认"  ng-click="updateWidgetAttData(id, 'INPUT_BUTTON_SIT', situation)"/>
+			   </li>-->
+			  </form>
+		  </ul>
+	  </li>
+	</ul>
+	</span>
+</div>
+<div  ng-if="template == 'true'" class="preview">按钮控件<span class="drag label"><i class="icon-move"></i>拖动</span></div>
+<!--
+模板控件部分代码-----结束
+-->
+
+<div style="background-color: {{template == 'true' ? '#F0FFFF' : '#FFFFFF'}}" class="view form-group form-horizontal col-lg-{{width}} col-md-{{width}} col-sm-{{width}}" widgetId="{{id}}" containerId="{{containerId}}" canEditFlag="widgetEditElement">
 	<div class="col-lg-12 col-md-12 col-sm-12 field-input">
-		<button class="btn {{size}} {{situation}}" id="button{{id}}">{{label}}</button>
+		<button class="btn {{size}} {{situationDis}}" id="button{{id}}">{{label}}</button>
     </div>
 </div>

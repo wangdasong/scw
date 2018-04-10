@@ -36,7 +36,7 @@ angular.module('controller.webpage.container.widget.date.range', [])
                     scope.type = currAttConfig.attValue;
                 }
             }
-            var elm = $('input', $(element));
+            var elm = $('.date-picker', $(element));
             //设置默认类型值
             if(!scope.type){
                 scope.type = "datetimerangepicker"

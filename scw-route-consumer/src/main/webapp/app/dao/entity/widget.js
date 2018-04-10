@@ -42,6 +42,10 @@ Widget.getWidgetByType = function(type, containerId, widgetId) {
         var widgetSelectTreeSample = new WidgetSelectTreeSample();
         return widgetSelectTreeSample.createObject(containerId, widgetId);
     }
+    if(type == "@button"){
+        var widgetButtonSample = new WidgetButtonSample();
+        return widgetButtonSample.createObject(containerId, widgetId);
+    }
 }
 Widget.getWidgetSample = function (type, widget) {
     if(type == "@text"){
@@ -83,6 +87,11 @@ Widget.getWidgetSample = function (type, widget) {
         var widgetSelectTreeSample = new WidgetSelectTreeSample();
         widgetSelectTreeSample.currWidget = widget;
         return widgetSelectTreeSample;
+    }
+    if(type == "@button"){
+        var widgetButtonSample = new WidgetButtonSample();
+        widgetButtonSample.currWidget = widget;
+        return widgetButtonSample;
     }
 }
 

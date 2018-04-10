@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/scw-auth-server/scw-auth-server.iml" filepath="$PROJECT_DIR$/scw-auth-server/scw-auth-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/scw-base-core/scw-base-core.iml" filepath="$PROJECT_DIR$/scw-base-core/scw-base-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/scw-config-server/scw-config-server.iml" filepath="$PROJECT_DIR$/scw-config-server/scw-config-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/scw-eureka-server/scw-eureka-server.iml" filepath="$PROJECT_DIR$/scw-eureka-server/scw-eureka-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/scw-provider-webeditor/scw-provider-webeditor.iml" filepath="$PROJECT_DIR$/scw-provider-webeditor/scw-provider-webeditor.iml" />
       <module fileurl="file://$PROJECT_DIR$/scw-route-consumer/scw-route-consumer.iml" filepath="$PROJECT_DIR$/scw-route-consumer/scw-route-consumer.iml" />

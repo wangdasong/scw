@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="scw-auth-server" />
         <module name="scw-base-core" />
+        <module name="scw-config-server" />
         <module name="scw-eureka-server" />
         <module name="scw-provider-webeditor" />
         <module name="scw-route-consumer" />
@@ -15,12 +16,12 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="scw-auth-server" target="1.7" />
-      <module name="scw-base-core" target="1.7" />
-      <module name="scw-eureka-server" target="1.7" />
-      <module name="scw-parent" target="1.7" />
-      <module name="scw-provider-webeditor" target="1.7" />
-      <module name="scw-route-consumer" target="1.7" />
-      <module name="scwparent" target="1.7" />
+      <module name="scw-base-core" target="1.8" />
+      <module name="scw-config-server" target="1.8" />
+      <module name="scw-eureka-server" target="1.8" />
+      <module name="scw-provider-webeditor" target="1.8" />
+      <module name="scw-route-consumer" target="1.8" />
+      <module name="scwparent" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
