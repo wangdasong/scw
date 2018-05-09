@@ -15,7 +15,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="scw-auth-server" target="1.7" />
+      <module name="scw-auth-server" target="1.8" />
       <module name="scw-base-core" target="1.8" />
       <module name="scw-config-server" target="1.8" />
       <module name="scw-eureka-server" target="1.8" />
