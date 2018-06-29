@@ -47,10 +47,11 @@ public class ScwAuthServerApplication extends WebMvcConfigurerAdapter  {
 		registry.addViewController("/login").setViewName("login");
 	}
 
-	@Bean
+
 	/**
 	 * 设置FreeMarker解析器
 	 */
+	@Bean
 	public FreeMarkerViewResolver freeMarkerViewResolver() {
 		FreeMarkerViewResolver resolver = new FreeMarkerViewResolver();
 		resolver.setPrefix("");
