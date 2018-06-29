@@ -52,7 +52,12 @@
 
   <insert id="save" parameterType="com.github.wangdasong.scwproviderwebeditor.dao.entity.Page" >
     <selectKey keyProperty="id" resultType="java.lang.String" order="BEFORE">
-        SELECT SYS_GUID() AS ID FROM DUAL
+        <if test="@com.github.wangdasong.scwproviderwebeditor.dao.entity.Element@dbDialog=='oracle'">
+            SELECT SYS_GUID() AS ID FROM DUAL
+        </if>
+        <if test="@com.github.wangdasong.scwproviderwebeditor.dao.entity.Element@dbDialog=='mysql'">
+            SELECT REPLACE(UUID(),'-','') FROM DUAL;
+        </if>
     </selectKey>
     insert into SMS_PAGE
     	<trim prefix="(" suffix=")" suffixOverrides="," >

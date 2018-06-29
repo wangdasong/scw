@@ -1,0 +1,44 @@
+spring:
+  application:
+    name: scw-auth-server
+  cloud:
+    config:
+      discovery:
+        enabled:  true
+        service-id: scw-config-server
+  profiles:
+    active: dev
+eureka:
+  instance:
+    prefer-ip-address: true
+
+
+---
+#dev frofile
+spring:
+  profiles: dev
+  cloud:
+    config:
+#      profile: dev
+      label: for-out-dev
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:1111/eureka/
+
+
+---
+#test frofile
+spring:
+  profiles: test
+  cloud:
+    config:
+      profile: dev
+      label: for-test
+eureka:
+  client:
+    service-url:
+      defaultZone: http://192.169.1.182:1111/eureka/
+
+
+
