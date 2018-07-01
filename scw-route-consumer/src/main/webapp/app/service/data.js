@@ -138,7 +138,7 @@ angular.module('service.data', ['ngResource', 'restangular'])
                     		var tableHeight = tableDiv.height();
                             LoadingService.show(X, Y, tableWidth, tableHeight);
                     	}else{
-                            LoadingService.show();
+                            // LoadingService.show();
                     	}
                 	}
                     return {
