@@ -1,0 +1,973 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- saved from url=(0018)http://www.gov.cn/ -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type="text/css" title="audiojs">
+        .audiojs audio { position: absolute; left: -1px; }
+		.audiojs { width: 460px; height: 36px; background: #404040; overflow: hidden; font-family: monospace; font-size: 12px;
+		background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #444), color-stop(0.5, #555), color-stop(0.51, #444), color-stop(1, #444));
+		background-image: -moz-linear-gradient(center top, #444 0%, #555 50%, #444 51%, #444 100%);
+		-webkit-box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.3); -moz-box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.3);
+		-o-box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.3); box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.3); }
+		.audiojs .play-pause { width: 25px; height: 40px; padding: 4px 6px; margin: 0px; float: left; overflow: hidden; border-right: 1px solid #000; }
+		.audiojs p { display: none; width: 25px; height: 40px; margin: 0px; cursor: pointer; }
+		.audiojs .play { display: block; }
+		.audiojs .scrubber { position: relative; float: left; width: 280px; background: #5a5a5a; height: 14px; margin: 10px; border-top: 1px solid #3f3f3f; border-left: 0px; border-bottom: 0px; overflow: hidden; }         .audiojs .progress { position: absolute; top: 0px; left: 0px; height: 14px; width: 0px; background: #ccc; z-index: 1;           background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #ccc), color-stop(0.5, #ddd), color-stop(0.51, #ccc), color-stop(1, #ccc));
+		background-image: -moz-linear-gradient(center top, #ccc 0%, #ddd 50%, #ccc 51%, #ccc 100%); }
+		.audiojs .loaded { position: absolute; top: 0px; left: 0px; height: 14px; width: 0px; background: #000;
+		background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #222), color-stop(0.5, #333), color-stop(0.51, #222), color-stop(1, #222));
+		background-image: -moz-linear-gradient(center top, #222 0%, #333 50%, #222 51%, #222 100%); }
+		.audiojs .time { float: left; height: 36px; line-height: 36px; margin: 0px 0px 0px 6px; padding: 0px 6px 0px 12px; border-left: 1px solid #000; color: #ddd; text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5); }         .audiojs .time em { padding: 0px 2px 0px 0px; color: #f9f9f9; font-style: normal; }
+		.audiojs .time strong { padding: 0px 0px 0px 2px; font-weight: normal; }
+		.audiojs .error-message { float: left; display: none; margin: 0px 10px; height: 36px; width: 400px; overflow: hidden; line-height: 36px; white-space: nowrap; color: #fff;
+		text-overflow: ellipsis; -o-text-overflow: ellipsis; -icab-text-overflow: ellipsis; -khtml-text-overflow: ellipsis; -moz-text-overflow: ellipsis; -webkit-text-overflow: ellipsis; }
+		.audiojs .error-message a { color: #eee; text-decoration: none; padding-bottom: 1px; border-bottom: 1px solid #999; white-space: wrap; }
+		.audiojs .play { background: url("/govweb/xhtml/js/player-graphics.gif") -2px -1px no-repeat; margin-top:0px; }
+		.audiojs .loading { background: url("/govweb/xhtml/js/player-graphics.gif") -2px -31px no-repeat; }
+		.audiojs .error { background: url("/govweb/xhtml/js/player-graphics.gif") -2px -61px no-repeat; }
+		.audiojs .pause { background: url("/govweb/xhtml/js/player-graphics.gif") -2px -91px no-repeat; }
+		.playing .play, .playing .loading, .playing .error { display: none; }
+		.playing .pause { display: block; margin-top:0px; }
+		.loading .play, .loading .pause, .loading .error { display: none; }
+		.loading .loading { display: block; }
+		.error .time, .error .play, .error .pause, .error .scrubber, .error .loading { display: none; }
+		.error .error { display: block; }         .error .play-pause p { cursor: auto; }
+		.error .error-message { display: block; }
+		</style>
+		<script type="text/javascript" async="" src="./mainsite_files/atrk.js"></script>
+		<noscript><img src="./mainsite_files/atrk.gif" height="1" width="1" alt="" style="display: none;"></noscript>
+		<script id="allmobilize" charset="utf-8" src="./mainsite_files/allmobilize.min.js"></script>
+		<style type="text/css"></style><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="alternate" media="handheld" href="#">
+
+<link rel="bookmark"  type="image/x-icon"  href="http://219.143.7.217:1234/thirdparty/assets/avatars/ico.png"/>
+<link rel="shortcut icon" href="http://219.143.7.217:1234/thirdparty/assets/avatars/ico.png">
+<link rel="icon" href="http://219.143.7.217:1234/thirdparty/assets/avatars/ico.png">
+<title>石园北区信息化平台</title>
+<meta name="others" content="页面生成时间 2018-07-02 11:35:18">
+<meta http-equiv="X-UA-Compatible" content="IE=8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=1100">
+<meta name="keywords" content="石园北区信息化平台">
+<meta name="description" content="石园北区信息化平台">
+  <meta name="lanmu" content="石园北区信息化平台首页">
+<meta name="filepath" content="/index.htm">
+<meta name="catalog" content="2016govs">
+<meta name="filetype" content="0">
+<meta name="publishedtype" content="1">
+<meta name="pagetype" content="2">
+<meta name="uctk" content="enabled">
+<link rel="stylesheet" type="text/css" href="./mainsite_files/base.css">
+<link rel="stylesheet" type="text/css" href="./mainsite_files/common.css">
+<link rel="stylesheet" type="text/css" href="./mainsite_files/focus.css">
+<link rel="stylesheet" type="text/css" href="./mainsite_files/index.css">
+<link rel="stylesheet" type="text/css" href="./mainsite_files/date.css">
+<link rel="stylesheet" type="text/css" href="./mainsite_files/index_flexslider.css">
+<link rel="stylesheet" type="text/css" href="./mainsite_files/animate.min.css">
+
+<link rel="stylesheet" type="text/css" href="./mainsite_files/index_new_scroll.css">
+<link rel="stylesheet" type="text/css" href="./mainsite_files/FZYouHK_512B.css">
+<link rel="stylesheet" type="text/css" href="./mainsite_files/FZZHUNYSK.css">
+<script src="./mainsite_files/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="./mainsite_files/audio.min.js"></script>
+<script type="text/javascript" src="./mainsite_files/menu.js"></script>
+<script type="text/javascript" src="./mainsite_files/hoverIndex.js"></script>
+    <!--加载meta IE兼容文件-->
+    <!--[if lt IE 9]>  
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>  
+<![endif]-->
+ <!--[if lte IE 6]> 
+  <script type="text/javascript" src="/govweb/xhtml/2016gov/js/ie6PNG.js"></script>
+<script type="text/javascript">
+DD_belatedPNG.fix('.D1fBt a,.play,background,.slidesjs-next,background,.slidesjs-previous,background');
+</script>
+<![endif]--> 
+<style>
+
+.hd_lb{width:295px;height:370px;  position:relative;}
+#hd{}
+.look-talk{
+  width:310px;
+}
+.column3mi5 ul{
+  padding-top:0px;}
+.cxlist li{
+  float: left;
+  width: 98px;
+  height: 115px;
+  margin: 0px 6px;
+  list-style: none;
+}
+.column3ri{width:249px; background:#dcdcdd; float:right; padding:0 13px 7px;}
+.column3ri3{margin-bottom:2px;}
+.column3ri3 ul{margin-top:0px;}
+.cxlist li img{
+  width:64px;
+  height:64px;
+  margin:10px 20px;
+}
+.cxlist li a{
+  display: block;
+  text-align:center;
+  height:auto;
+  line-height:17px;
+  padding-left:0px;
+  color: #000;
+  font-size: 14px;
+  text-decoration: none;
+}
+.cxlist li a:hover{
+  background:none;
+  height:auto;  
+  color: #000;
+  }
+.h90{height:117px; overflow:hidden;}
+.h125{margin-top:3px;height:125px; overflow:hidden;}
+ul.h90{margin-top:10px; margin-bottom:15px;}
+ul.h90 li{ font-size:15px; line-height:24px;font-family:"微软雅黑","宋体";background:url(/govweb/xhtml/2016gov/images/public/icon_10.jpg) no-repeat 0 13px; padding-left:10px;}
+ul.h90 a{color:#000;}
+ul.h90 li a:hover{color:#025194;}
+.lmtit a.a_line {
+    background: url(/govweb/xhtml/2016gov/images/public/line.jpg) no-repeat right;
+    padding-right: 15px;
+    margin-right: 12px;
+    float: left;
+}
+.sth .lmtit img{ position: relative;top:3px;}
+.column3ri{width:249px; background:#dcdcdd; float:right; padding:0 13px 10px;}
+.column3ri1{ margin-bottom:0px; padding-top:20px;}
+ul.h57{ margin-bottom:0px; margin-top:0px;}
+.mb30{ margin-bottom:30px;}
+.column3ri1 .lmtit{border-bottom:1px solid #bababa;}
+
+
+/*推荐主题*/
+.box20180503{
+  position: relative;
+  height: 97px;
+  overflow: hidden;
+  margin-top: 10px;
+  margin-bottom:10px;
+}
+.two_rmfl_box{
+  position: absolute;
+  left: 0;
+  top: 0;
+  
+}
+.two_rmfl_box li{
+  float: left;
+  width: 249px;
+  height: 97px;
+}
+.hot_title_nav20180517{
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+  
+}
+.hot_title_nav20180517 a{
+  float: left;
+  width: 17px;
+  height: 15px;
+  background: #0074bf;
+  text-align: center;
+  line-height: 15px;
+  margin-right: 1px;
+  color: #fff;
+  font-family: "microsoft yahei";
+  font-size: 12px;
+}
+.hot_title_nav20180517 a.active{
+  background: #ffba34;
+}
+/*热门应用*/
+
+.tit{height: 36px;line-height: 36px;border-bottom: 1px solid #bababa;}
+.tit span{float: left;color: #000000;font-size: 20px;font-family:"FZZHUNYSK","微软雅黑","宋体";border-bottom: 2px solid #015293;position: relative;top: -1px;}
+.tit span a{color: #000000;font-size: 20px;font-family:"FZZHUNYSK","微软雅黑","宋体";}
+.tit.yyphb a{ display:inline-block; float:left;font-size: 16px;color: #999999;margin: 0 9px;font-family:"微软雅黑"; cursor:pointer;}
+.tit.yyphb b{border-right: 1px solid #999999;}
+ul.two_yyphb_box{margin: 10px 0 10px;
+    height: 251px;
+  *+height: 255px;
+    overflow: hidden;
+  border-radius:5px;
+  background-color:#fff;
+  border:1px solid ##cfcfd0;
+}
+
+@-moz-document url-prefix() {
+    ul.two_yyphb_box{
+      height: 255px;
+    }
+}
+ul.two_yyphb_box li {
+  height:42px;
+  overflow:hidden;
+    margin: 0px 10px;
+    padding: 6px 0;
+    border-bottom: 1px solid #bfbfbf;
+    position: relative;
+}
+ul.two_yyphb_box li .num{float: left;width: 20px;height: 20px;line-height: 20px;text-align: center;color: #fff;background: #959595;border-radius: 2px;margin: 20px 15px 0 10px;}
+ul.two_yyphb_box li .pic{float: left;margin-right:10px; position:relative;*+margin-top:-3px;}
+ul.two_yyphb_box li .txt p a.h_tit{color: #000;font-size: 15px; font-family: "微软雅黑","宋体";line-height: 22px; font-weight:normal;}
+ul.two_yyphb_box li .txt p a{font-size: 14px;font-weight: inherit;}
+ul.two_yyphb_box li .txt h3 span a{color: #0078d7;font-size: 16px;}
+ul.two_yyphb_box li .txt p{height: auto;overflow: hidden;}
+ul.two_yyphb_box li .txt p span{float: left; margin-right:10px;font-size: 14px;height: 18px;border: 1px solid #999999;text-align: center;line-height: 16px;color: #020202;border-radius: 5px;padding:0 3px;}
+ul.two_yyphb_box li .txt p b a{color: #666666;font-size: 14px; font-family:"微软雅黑"; font-weight:normal;}
+ul.two_yyphb_box li .txt p b{color: #666666;font-size: 14px; font-family:"微软雅黑"; font-weight:normal; cursor:pointer;}
+.yyphb span {border-bottom: 0;}
+.yyphb span.on {border-bottom: 2px solid #015293;}
+.yyphb a.on {color: #000;
+border-bottom: 2px solid #015293;
+}
+/*应用排行新加样式*/
+.two_yyphb_box li .pic .yd_ewm{position: absolute;
+
+    top: -20px;
+    display: none;
+    left: -35px;
+    z-index: 9999;    border: 5px solid #fff;}
+.two_yyphb_box li .yyph_ewm_ct{    position: absolute;
+    bottom: 33px;
+    z-index: 99999;
+    left: 45px;
+    display: none;
+    }
+
+            
+/*最新应用*/
+.two_zxyy_box{height: auto;overflow: hidden;margin-top:15px;}
+.two_zxyy_box a{float: left;width:120px; height:136px;text-align: center;font-size:14px;margin:0px 2px 5px 2px;font-family:"微软雅黑";}
+.two_zxyy_box a img{display: block;margin: 0 auto 5px;}
+.two_zxyy_box a span{display: block;line-height: 22px;color: #000000;}
+.two_zxyy_box a b{font-weight: normal;color: #0078d7;letter-spacing: -0.02em;overflow:hidden; font-family:"微软雅黑";}
+.zx_pop{position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    background: rgba(0, 0, 0, 0.701961);
+    display: none;
+    color: rgb(255, 255, 255);
+    font-size: 12px;
+    font-style: normal;
+    padding-top: 120px;
+    box-sizing: border-box;
+    font-family: 微软雅黑;}
+ .two_zxyy_box a img.ewm_ct{    position: absolute;
+    left: 65px;
+    top: 47px;
+    z-index: 9999;display: none;}
+/*检索开始*/
+.ser_search{width:257px;margin: 0 auto 10px;height: auto;overflow: hidden;}
+.ser_search .left{width: 250px;}
+.ser_search .left .zhetie ul{ z-index:9999;background: #fff;position: absolute;width: 79px;border: 1px solid #005393;box-sizing: border-box;display: none;}
+.ser_search .left .zhetie ul li{box-sizing: border-box;padding: 0.3rem 0 0.3rem 0.5rem;font-size:14px;border-bottom: 1px dashed #005393;}
+.ser_search .left .zhetie h3{width:79px;height:25px;overflow: hidden; margin-bottom:1px; background-color:#015293; color:#fff; font-size:14px; line-height:25px; text-align:center; cursor:pointer;}
+.ser_search .zhetie .left h3 a{float: left;color: #1b1b1b;padding: 0 7px;height: 30px;line-height: 30px;margin-right: 15px; font-size:14px;}
+.ser_search .zhetie .left h3 a.on{color: #fff;background: #015293;}
+.ser_search .left div{height: auto;overflow: hidden;border: 1px solid #015293;background: url(http://103.66.33.30/images/8/fw_2.jpg) no-repeat 190px center #015293;   -moz-border-radius:5px; /* Firefox */
+  -webkit-border-radius:5px; /* Safari 和 Chrome */
+  border-radius:5px; /* Opera 10.5+, 以及使用了IE-CSS3的IE浏览器 */}
+.ser_search .left div input[type=text]{    width: 180px;
+    float: left;
+    height: 18px;
+    border: 0;
+    padding: 5px 5px;}
+.ser_search .left div input[type=button]{float: right;width: 56px;height: 26px;border: 0;background: none;cursor: pointer;}
+.ser_search .left p{color: #333333;position: relative; margin-top:5px;}
+.ser_search .left p a{color: #333333;font-size: 12px;font-family: "宋体";padding-right: 10px;}
+.ser_search .left p b{font-weight: normal;font-size: 12px;font-family: "宋体";}
+.ser_search .left p .more{position: absolute;right: 0;color: #878787;font-size: 12px;font-family: "宋体";padding: 0;top: 4px;}
+.ser_search .right{margin-top: 20px;}
+.right{float: right;}
+.column3ri1_2{ background:none;}
+.mb15{ margin-bottom:15px;}
+.mb22{ margin-bottom:22px;} 
+.two_fwzt_slide{margin-top: 20px;position: relative;}
+.two_fwzt_slide .prev{width: 6px;height: 55px;background: url(/govweb/xhtml/2016gov/public/pic20181229/larrow.png) no-repeat center;display: block;position: absolute;left: -2px;top: 0;}
+.two_fwzt_slide .next{width: 6px;height: 55px;background:url(/govweb/xhtml/2016gov/public/pic20181229/rarrow.png) no-repeat center;display: block;position: absolute;right: -2px;top: 0;}
+.two_fwzt_slide .bd{width:229px;margin: 0 auto 10px;overflow: hidden;}
+ul.sjcx{clear:both;list-style:none; margin-top:15px;}
+ul.sjcx li{ float:left;margin:0px 3px 0px 3px; list-style:none;}
+ul.sjcx li a{color:#0078d7; font-size:16px;}
+.column3ri2{padding-top:5px;}
+.column3ri2_1{height:100px;}
+.column3ri2_1 ul li{ background:none;}
+.column3ri2_2 li{line-height:23px;}
+.dys_mb15{
+  
+}
+.column3mi6 li{line-height: 24px; }
+
+.logoLianghui{position: absolute;width:512px;height:62px;background:url(/govweb/xhtml/zhuanti/2018lhzfgzbg/images/logoLianghui.png) no-repeat;left:50%;margin-left:49px;top:13px;z-index: 3;}
+.cloud{position: absolute; width:100%;height:100%;*height:1226px;top:0px;right:0px; background:url(/govweb/xhtml/zhuanti/2018lhzfgzbg/images/cloud.png) no-repeat top center;-webkit-background-size:cover;
+background-size:cover;background-size:100% 100%\9;*background-size:100% 100%;z-index:-2;}
+.cloud2{opacity:0.4;right:0px;background-position:0 50% }
+.closeBg{position:absolute;width:28px;height:45px;top:7px;right:0px;z-index:999;cursor: pointer;
+}
+
+/*服务右侧全国政务服务总门户*/
+.qgzwfwzmh20180530{
+  float: right;
+  font-family: "微软雅黑","宋体";
+  font-size: 14px;
+  display: block;
+  line-height: 30px;
+  color: #888888;
+  font-weight: lighter;
+}
+</style>
+<style type="text/css">
+.header_right{width:310px; margin-right:37px;}
+.search{ width:300px; height:22px; position:relative;}
+.search_mi{ width:263px; height:22px; line-height:22px; border:none; position:absolute; left:0; padding-left:14px; padding-right:23px;background:url(/govweb/xhtml/2016gov/images/public/sousuok.png) no-repeat; }
+</style>
+
+<!--用户系统单点css修改部分开始  -->
+<style>
+.yeslogin ul,li{
+    list-style-type:none;   
+    padding:0;    
+    margin:0;   
+}   
+.yeslogin{
+  position:relative;
+  z-index:100;
+}
+.yeslogin ul li{
+  float:none; 
+  line-height: 34px;
+  margin-left: 15px;
+  width: 50px;
+} 
+.yeslogin ul li a{
+  color:#7B7B7B; 
+}
+.usercenter{
+  margin-top:10px;
+  border-bottom: 1px solid #F0F0F0;
+} 
+.yeslogin ul{
+    top:20px;
+    left:-20px;
+    position:absolute;  
+    display:none;
+    width:80px;
+    background-image: url("https://user.www.gov.cn/static/images/outborder.png");
+}   
+.yeslogin:hover ul{   
+  display:block;    
+} 
+.morphext > .animated {
+  display: inline-block;
+}
+
+.dys_fudong{
+  position: relative;
+  float: left;
+  width: 60px;
+}
+
+.dys_fudong span{
+  padding: 0;
+}
+.column3mi2 .lmtit {
+    height:28px;
+    margin-bottom: 10px;
+} 
+.two_fwzt_slide .bd{
+  height:56px;
+}
+.dyschangemt18{
+  margin-top: 18px;
+}
+.lmtit.jdmd.changedys20180330height{
+  height: 25px;
+}
+.column3lp_1 span{
+    float: right;
+    font-family: "微软雅黑","宋体";
+    font-size: 14px;
+    display: block;
+    line-height: 30px;
+}
+.column3lp_1 .lmtit span a {
+    float: right;
+    font-family: "微软雅黑","宋体";
+    font-size: 14px;
+    display: block;
+    line-height: 30px;
+    color: #888888;
+    font-weight: lighter;
+}
+.column3lp_1 .lmtit span a:hover{
+  color: #566a9d;
+}
+</style>
+
+<body>
+
+
+<div class="main">
+<div class="header" id="ifr_top">
+    <div class="header_top">
+      <!--logo左侧开始-->
+        <div class="header_left fl">
+        <img class="logo" src="http://219.143.7.217:1234/thirdparty/assets/avatars/ico.png" width="44" height="47">
+		<img src="./mainsite_files/title.png" width="402" height="49">
+        </div>
+      <!--logo左侧结束-->
+      <!--logo右侧开始-->
+
+      <!--logo右侧结束-->
+      
+      </div>
+      <div class="clear"></div>
+      <!--导航-->
+      <div class="nav">
+        <div class="nav_home">
+           <div class="nav_left"><a href="http://www.gov.cn/index.htm"><img src="./mainsite_files/icon_9.jpg" width="61" height="25"></a></div>
+           <div id="menu">
+<ul id="nav">
+    <li class="mainlevel bolf" id="mainlevel_02"><a target="_blank" href="#">团队人员</a>
+      <ul class="sub_nav_011" style="display: none;">
+        <li class="li1"><span>主　　任</span><a href="" target="_blank">董主任</a></li>
+        <li class="li3">
+        </li>
+        <li class="li4">
+			<span style="padding-right:0px;">副</span><span style="padding:0;margin-left:9px; margin-right:5px;">主</span><span style="padding:0;margin-left:4px; margin-right:20px;">任</span>
+			<a href="#" target="_blank">韩X</a>
+			<a href="#" target="_blank">孙XX</a>
+        <li class="li5"><span>社区工作者</span>
+		<a href="#" target="_blank">魏凤和</a>
+		<a href="#" target="_blank">王勇</a>
+		<a href="#" target="_blank">王毅</a>
+		<a href="#" target="_blank">肖捷</a>
+		<a href="#" target="_blank">赵克志</a>
+		</li>
+      </ul>
+    </li>    
+    <li class="mainlevel"><a target="_blank" href="#">组织机构</a>
+      <ul style="display: none;" class="sub_nav_022">
+        <li><a href="#" target="_blank">党建</a></li>
+        <li><a href="#" target="_blank">综治</a></li>
+        <li><a href="#" target="_blank">城建</a></li>
+        <li><a href="#" target="_blank">安全</a></li>
+        <li><a href="#" target="_blank">义工</a></li>
+        <li><a href="#" target="_blank">民政</a></li>
+        <li><a href="#" target="_blank">精神文明</a></li>
+        <li><a href="#" target="_blank">计划生育</a></li>
+       </ul>
+    </li>
+    
+    <li class="mainlevel"><a target="_blank" href="http://219.143.7.217:1234">登录管理平台</a>
+    </li>
+    
+    
+</ul>
+</div>
+        </div>
+      </div>
+      <div class="clear"></div>
+      
+  </div>
+<!--[if IE 6]>
+<script>
+DD_belatedPNG.fix("*,img");
+</script><![endif]-->
+<!--公共头结束-->
+  <div class="content">
+<!--第一部分头条开始-->
+ <div class="column1">
+     <link rel="stylesheet" href="./mainsite_files/govwf_fzzhunysk_ys.css">
+ 
+
+       <div class="column1_1">
+         <a style="font-family:&#39;govwf_fzzhunysk_ys&#39;" href="http://www.gov.cn/xinwen/2018-07/06/content_5304188.htm" target="_blank">我们的社区我们的家</a>
+       </div>
+       <div class="column1_2">
+         <a href="http://www.gov.cn/govwebctest/2018-07/07/content_5304339.htm" target="_blank"></a><a href="http://www.gov.cn/xinwen/2018-07/06/content_5304188.htm" target="_blank">活动中的我们</a> | <a href="http://www.gov.cn/xinwen/2018-07/06/content_5304188.htm" target="_blank">街道办主任出席</a>
+       </div>
+     
+     </div>
+<!--第一部分头条结束-->
+<!--第二部分banner开始-->
+   <div class="column2 index_focus">
+      <div class="lft_pic"> 
+        <div class="slider-carousel" style="overflow: hidden;">
+             
+              <div class="slidesjs-container" style="overflow: hidden; position: relative; width: 1100px; height: 617.872px;"><div class="slidesjs-control" style="position: relative; left: 0px; width: 1100px; height: 617.872px;"><div class="item slidesjs-slide" style="position: absolute; top: 0px; left: 0px; width: 100%; z-index: 10; display: none;" slidesjs-index="0">
+                <div class="pannel-image"><a href="http://www.gov.cn/xinwen/2018-07/06/content_5304188.htm" target="_blank"> <img style="opacity: 1;" src="./mainsite_files/timg.jfif"> </a></div> 
+                <div class="titBg">&nbsp;</div> 
+                <div class="subtitle"> 
+                  <h6><a href="http://www.gov.cn/xinwen/2018-07/06/content_5304188.htm" target="_blank">习近平主持召开中央全面深化改革委员会第三次会议（资料图）</a></h6>
+                </div>
+              </div><div class="item slidesjs-slide" style="position: absolute; top: 0px; left: 0px; width: 100%; z-index: 0; display: none;" slidesjs-index="1">
+                <div class="pannel-image"><a href="#" target="_blank"> <img style="opacity: 1;" src="./mainsite_files/timg.jfif"> </a></div> 
+                <div class="titBg">&nbsp;</div> 
+                <div class="subtitle"> 
+                  <h6><a href="#" target="_blank">李克强抵达柏林主持第五轮中德政府磋商并对德国进行正式访问</a></h6>
+                </div>
+              </div><div class="item slidesjs-slide" style="position: absolute; top: 0px; left: 0px; width: 100%; z-index: 0;" slidesjs-index="2">
+                <div class="pannel-image"><a href="#" target="_blank"> <img style="opacity: 1;" src="./mainsite_files/timg.jfif"> </a></div> 
+                <div class="titBg">&nbsp;</div> 
+                <div class="subtitle"> 
+                  <h6><a href="#" target="_blank">我们组织了一项活动</a></h6>
+                </div>
+              </div><div class="item slidesjs-slide" style="display: none; position: absolute; top: 0px; left: 0px; width: 100%; z-index: 0;" slidesjs-index="3">
+                <div class="pannel-image"><a href="#" target="_blank"> <img style="opacity: 1;" src="./mainsite_files/timg.jfif"> </a></div> 
+                <div class="titBg">&nbsp;</div> 
+                <div class="subtitle"> 
+                  <h6><a href="#" target="_blank">“群众办事百项堵点疏解行动”第三批启动</a></h6>
+                </div>
+              </div><div class="item slidesjs-slide" style="display: block; position: absolute; top: 0px; left: -1100px; width: 100%; z-index: 0;" slidesjs-index="4">
+                <div class="pannel-image"><a href="#" target="_blank"> <img style="opacity: 1;" src="./mainsite_files/timg.jfif"> </a></div> 
+                <div class="titBg">&nbsp;</div> 
+                <div class="subtitle"> 
+                  <h6><a href="#" target="_blank">中国探月科技与“月球博物馆”特展在京举行</a></h6>
+                </div>
+              </div></div>
+			  </div>
+              
+
+        <a class="slidesjs-previous slidesjs-navigation" href="http://www.gov.cn/#" title="Previous" style="display: inline;">Previous</a>
+		<a class="slidesjs-next slidesjs-navigation" href="http://www.gov.cn/#" title="Next" style="display: inline;">Next</a>
+			<ul class="slidesjs-pagination">
+				<li class="slidesjs-pagination-item"><a href="http://www.gov.cn/#" data-slidesjs-item="0" class="">1</a></li>
+				<li class="slidesjs-pagination-item"><a href="http://www.gov.cn/#" data-slidesjs-item="1" class="">2</a></li>
+				<li class="slidesjs-pagination-item"><a href="http://www.gov.cn/#" data-slidesjs-item="2" class="active">3</a></li>
+				<li class="slidesjs-pagination-item"><a href="http://www.gov.cn/#" data-slidesjs-item="3">4</a></li>
+				<li class="slidesjs-pagination-item"><a href="http://www.gov.cn/#" data-slidesjs-item="4">5</a></li>
+			</ul>
+		</div> 
+      </div>
+      
+   </div>
+   <!--<div style="width:1100px;height:51px;margin:0px auto;clear:both;"><iframe id="ifr_zhaopin.htm" src="http://www.gov.cn/zhuanti/2016zhaopinwenzi/zhaopin.html" frameborder="0" scrolling="no" height="51" width="1100" height="51"></iframe></div>-->
+<!--第二部分banner结束-->
+<div class="clear"></div>
+
+<!--主体正文开始-->
+</div>
+<!--公共尾开始-->
+<iframe id="ifr_foot.htm" src="./mainsite_files/bottom.html" width="100%" height="525" scrolling="no" marginheight="0" frameborder="0"></iframe>
+<iframe src="http://47.94.140.228:9999/AnyChatClient/index.html?token=5ffdefd0e1104ebdbc49cc6de538b669"></iframe>
+<!--公共尾结束-->
+</div>
+
+<script src='thirdparty/jquery/js/jquery.min.js'></script>
+<script type="text/javascript">
+$(function(){
+  $('.date_picker').date_input();
+  })
+</script>
+<script type="text/javascript" src="./mainsite_files/slides1.js"></script>
+<script type="text/javascript" src="./mainsite_files/flexslider1.js"></script>
+ <script src="./mainsite_files/2018scrollImg.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+
+$(function(){   
+    /*focus*/
+    var sliderElement = $('.slider-carousel');
+    
+    var slidernav = sliderElement.find('.slidesjs-navigation');
+    sliderElement.hover(function() {
+        slidernav.stop().show()
+    },function() {
+        slidernav.stop().hide()
+    });
+  
+  slidernav.hover(function(){
+    $(this).show();
+  }),function(){
+    $(this).show();
+  }
+  
+
+    $(".flexslider").each(function(){
+        $(this).hover(function(){
+            $(this).find(".flex-direction-nav").fadeIn("slow")
+        },function(){
+            $(this).find(".flex-direction-nav").hide()
+        })
+    })
+});
+
+</script>
+<script type="text/javascript">
+  ;(function ($) {
+    
+    console.log($('.left_right_sroll_father'));
+      $('.left_right_sroll_father').slideshow({
+          //按钮事件
+      
+            //滚动的容器
+            bigImgScroll_list:'.left_right_sroll',
+            //幻灯片小按钮
+            bigImgScroll_btn:'.bigImgScroll_btn',
+            //每一个li的margin
+            bigImgScroll_listItem_margin:0,
+            //滚动间隔时间
+            scrollTime:500,
+            //左边按钮
+          
+            isAuto:true,
+            
+            //是否浮动布局
+            isFloat:true
+      });
+      
+        var $box_0001_width=$('.left_right_sroll .box_0001').outerWidth(true);
+    
+        
+        var $box_0001_length=$('.left_right_sroll .box_0001').length;
+        
+        $('.left_right_sroll').width($box_0001_width*$box_0001_length);
+        
+  })(jQuery);
+</script>
+<script type="text/javascript">
+
+      jQuery(function(){
+      if (!$('#hdPic')[0]) 
+      return;
+      var i = 0, p = $('#hdPic ul'), pList = $('#hdPic ul li'), len = pList.length;
+      var elePrev = $('#prev'), eleNext = $('#next');
+      //var firstClick = false;
+      var w = 100, num = 3;
+      p.css('width',w*len);
+      if (len <= num) 
+      eleNext.addClass('gray');
+      function prev(){
+      if (elePrev.hasClass('gray')) {
+        
+      //alert('已经是第一张了');
+      return;
+      }
+      p.animate({
+      marginTop:-(--i) * w
+      },500);
+      if (i < len - num) {
+      eleNext.removeClass('gray');
+
+      }
+      if (i == 0) {
+      elePrev.addClass('gray');
+    
+      }
+      }
+      function next(){
+      if (eleNext.hasClass('gray')) {
+        
+      //alert('已经是最后一张了');
+
+      return;
+      }
+      //p.css('margin-left',-(++i) * w);
+      p.animate({
+      marginTop:-(++i) * w
+      },500);
+      if (i != 0) {
+      elePrev.removeClass('gray');
+      }
+      if (i == len - num) {
+      eleNext.addClass('gray');
+      }
+      }
+      elePrev.bind('click',prev);
+      eleNext.bind('click',next);
+      pList.each(function(n,v){
+      $(this).click(function(){
+      if(n-i == 2){
+      next();
+      }
+      if(n-i == 0){
+      prev()
+      }
+      $('#hdPic ul li.cur').removeClass('cur');
+      $(this).addClass('cur');
+      show(n);
+      }).mouseover(function(){
+      $(this).addClass('hover');
+      }).mouseout(function(){
+      $(this).removeClass('hover');
+      })
+      });
+      
+      });
+</script>
+
+<script src="./mainsite_files/jquery.SuperSlide.2.1.js" type="text/javascript"></script>
+<script type="text/javascript">
+    jQuery(".two_fwzt_slide").slide({
+        mainCell: ".bd ul",
+        autoPlay: true,
+        delayTime:2000,
+        triggerTime:500,
+        interTime:5000
+      });
+
+
+  </script>
+
+ <script src="./mainsite_files/jquery.xdomainrequest.min.js" type="text/javascript" charset="utf-8"></script>
+ <script src="./mainsite_files/yh-idm5.0.0.js"></script>
+<script>
+
+  function getRootPath(){
+      //获取当前网址，
+      var curPath=window.document.location.href;
+      //获取主机地址之后的目录，
+      var pathName=window.document.location.pathname;
+      var pos=curPath.indexOf(pathName);
+      //获取主机地址
+      var localhostPaht=curPath.substring(0,pos);
+      //获取带"/"的项目名，
+      var projectName=pathName.substring(0,pathName.substr(1).indexOf('/')+1);
+      return(localhostPaht+projectName);
+  }
+   function GetQueryString(name)
+  {
+       var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+       var r = decodeURI(window.location.search).substr(1).match(reg);
+       if(r!=null)return  r[2]; return null;
+  }
+  var servicecode = GetQueryString("servicecode");
+  var gourl = document.referrer;
+  var time = GetQueryString("time");
+  var sign = GetQueryString("sign");
+  var showname = GetQueryString("showname");
+  var ip = getRootPath();
+  /* if(servicecode==null||servicecode==""||time==null||time==""||sign==null||sign==""){
+    servicecode = "idm";
+    time = "20171010121212";
+    sign = "7c4b1d93fa33e1fe51ba119bea0a56aa";
+  } */
+  if(servicecode==null||servicecode==""||time==null||time==""||sign==null||sign==""){
+    servicecode = "zfw";
+    time = "20171010121212";
+    sign = "18403a6fefb59a54620a22e3609fe213";
+  }
+  idm.config({
+    debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert
+    url:'https://user.www.gov.cn/',   // 必填，idm地址
+      servicecode: servicecode,         // 必填，接入代码
+      time: time,
+    sign: sign, // 必填，签名
+    success:function(){ // 回调函数（成功）
+      islogin();
+    },
+    fail:function(r)  { // 回调函数(失败)
+      $(".nologin").removeClass("hide");
+    }
+  });  
+  
+  
+   
+   $(function(){
+    /*  if(showname!=null&&showname!=""&&showname.length>0){
+      //注意 这个脱敏手机号进行了修改 页面上显示只能达到八个字符
+      if(showname.length==11){
+        showname = showname.replace('****','*');
+      }else{
+        showname = "  "+showname;
+      }
+      $("#showname").html(showname);
+      $(".yeslogin").removeClass("hide");
+      $(".nologin").addClass("hide");
+     } */
+     
+     
+    //注册页面
+    $('#userreg').click(function(){
+      idm.user.openreg ({
+        redirect:true,
+        gourl: gourl,// 业务地址：非必填。回调总入口将以sp参数返回
+        extargs: ''   // 扩展参数：非必填。回调将回传
+      });
+    })
+    //登录页面
+    $('#userlogin').click(function(){
+      idm.user.openlogin ({
+        redirect:true,
+        gourl: gourl,// 业务地址：非必填。回调总入口将以sp参数返回
+        extargs: ''   // 扩展参数：非必填。回调将回传
+      });
+    })
+    
+    //个人中心
+    $('#usercenter').click(function(){
+       idm.user.openedit ({
+          gourl: gourl  // 票据：非必填。
+      }); 
+    })
+      //退出登录
+    $("#logout").click(function(){
+      
+      /* $.post(logoutUrl,function(){
+        location.reload();
+      }); */
+       idm.user.logout({
+        success:function(){ // 回调函数（成功）
+          if(gourl!=null&&gourl!=""){
+            window.location.href = gourl;
+          }else{
+            window.location.href = "https://user.www.gov.cn/";
+          }
+          
+        },
+        fail:function(r)  { // 回调函数(失败)
+          
+        }
+      }) 
+    })
+  })
+   
+    
+  
+  function islogin(){
+    idm.user.islogin ({
+    success:function(r){  // 回调函数（成功）
+      var showname = r.showname;
+      if(showname==undefined){
+        showname = "****";
+      }
+      //注意 这个脱敏手机号进行了修改 页面上显示只能达到八个字符
+      if(showname.length==11){
+        showname = showname.replace('****','*');
+      }else{
+        showname = "  "+showname;
+      }
+      $("#showname").html(showname);
+      $(".yeslogin").removeClass("hide");
+      $(".nologin").addClass("hide");
+    },
+    fail:function(r)  { // 回调函数(失败)
+      $(".nologin").removeClass("hide");
+      $(".yeslogin").addClass("hide");
+    }
+    });
+  } 
+</script> 
+
+
+  
+  <script src="./mainsite_files/morphext.min.js" type="text/javascript"></script>
+<script>$("#js-rotating3").Morphext({
+  animation: "lightSpeedIn"
+});</script>       
+<script type="text/javascript" src="./mainsite_files/gs.js"></script>
+<!--右边服务-->
+<script type="text/javascript">
+  ;(function ($) {
+    
+    $('.dys_fudong').hover(
+      function () {
+        $(this).animate({
+          top:-5
+        });
+      },
+      function () {
+        $(this).animate({
+          top:0
+        });
+      }
+    );
+    
+    
+  })(jQuery);
+</script>
+<!--推荐主题上面的jquery判断去掉border-bottom-->
+<script type="text/javascript">
+  (function ($) {
+      var $fuwulenght=$('.two_yyphb_box li').length;
+      
+      switch ($fuwulenght){
+        case 1:$('.two_yyphb_box li').eq(0).css('border-bottom', 'none');
+          break;
+        case 2:
+          $('.two_yyphb_box li').eq(1).css('border-bottom', 'none');
+          
+          break;
+        case 3:
+          $('.two_yyphb_box li').eq(2).css('border-bottom', 'none');
+          
+          break;
+        default:
+          break;
+      }
+  })(jQuery);
+</script>
+<script src="./mainsite_files/jquery.slider.20180517.js" type="text/javascript" charset="utf-8"></script>
+<!--热门主题滚动效果-->
+
+<script type="text/javascript">
+      /*滚动插件slider*/
+      /*调用$().slider({})*/
+      ;(function ($) {
+        $('.box20180503').slider({
+          //显示的子元素个数
+          showNum:1,
+          //滚动的个数
+          scrollNum:1,
+          //子元素间隔
+          scrollItemSpacing:1,
+          //是否自动滚动
+          isAuto:false,
+          //滚动的容器
+          sliderContainer:'.two_rmfl_box',
+          //幻灯片导航
+          sliderNav:'.hot_title_nav20180517',
+          //滚动间隔时间
+          scrollTime:1000
+       
+        });
+        
+      })(jQuery);
+      
+    </script>
+<div style="display:none">
+<script type="text/javascript">document.write(unescape("%3Cscript src='http://stat.www.gov.cn/webdig.js?z=1' type='text/javascript'%3E%3C/script%3E"));</script><script src="./mainsite_files/webdig.js" type="text/javascript"></script>
+<script type="text/javascript">wd_paramtracker("_wdxid=000000000000000000000000000000000000000000")</script>
+</div>
+<script type="text/javascript">
+(function() {
+    var N = 100;
+    var P = 0.9;
+    var R = N * P;
+    var X = Math.floor(Math.random() * N);
+    if (R >= X) {
+        _atrk_opts = {
+            atrk_acct: "noGfn1aMp4107i",
+            domain: "www.gov.cn",
+            dynamic: true
+        }; 
+        (function() {
+            var as = document.createElement("script");
+            as.type = "text/javascript";
+            as.async = true;
+            as.src = "https://d31qbv1cthcecs.cloudfront.net/atrk.js";
+            var s = document.getElementsByTagName("script")[0];
+            var ns = document.createElement("noscript");
+            var img = document.createElement("img");
+            img.src ="https://d5nxst8fruw4z.cloudfront.net/atrk.gif?account=noGfn1aMp4107i";
+            img.style="display:none";
+            img.height = 1;
+            img.width = 1;
+            img.alt = "";
+            s.parentNode.insertBefore(as, s);
+            s.parentNode.insertBefore(ns, s);
+            var nso = document.getElementsByTagName("noscript")[0];
+            nso.appendChild(img);
+        })();
+    }
+})();
+</script>
+ 
+</body></html>
