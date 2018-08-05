@@ -8,9 +8,11 @@ package com.github.wangdasong.scwproviderwebeditor.dao.entity;
 
 import com.github.wangdasong.scwbasecore.dao.entity.base.BaseEntity;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Element extends BaseEntity {
+public class Element extends BaseEntity  implements Serializable {
+	private static final long serialVersionUID = 7991552216614088458L;
 
     private String name;
     private String parentId;

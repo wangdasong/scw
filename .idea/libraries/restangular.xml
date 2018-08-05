@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="restangular">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/scw-route-consumer/src/main/webapp/thirdparty/angularjs/restangular/dist/restangular.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

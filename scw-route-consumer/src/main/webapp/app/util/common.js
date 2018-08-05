@@ -132,10 +132,10 @@ if (typeof COMMON == "undefined") {
 
 COMMON.getProviderCode = function() {
 	var providerCode = COMMON.Cookie.get("subsysCode");
-    if(providerCode == "common" || $("#webpage-editor-flag").length > 0){
+    if($("#webpage-editor-flag").length > 0){
         providerCode = "api-webeditor/";
     }
-    if(providerCode == "api-auth"){
+    if(providerCode == "common" || providerCode == "api-auth"){
         providerCode = "api-auth/uaa/";
     }
 	return providerCode;

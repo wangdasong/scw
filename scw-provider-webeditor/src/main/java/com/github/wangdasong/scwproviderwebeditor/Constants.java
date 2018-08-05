@@ -49,7 +49,7 @@ public class Constants {
 	public static final String REST_PROVIDER_EDIT = "/edit";
 	public static final String REST_PROVIDER_ADD = "/add";
 	public static final String REST_PROVIDER_DEL = "/del";
-	
+
 	/**
 	 * 用户角色相关请求
 	 */

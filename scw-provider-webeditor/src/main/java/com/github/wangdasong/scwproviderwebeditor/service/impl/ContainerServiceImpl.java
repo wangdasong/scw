@@ -41,7 +41,16 @@ public class ContainerServiceImpl extends BaseServiceImpl<Container> implements 
 	@Override
 	public List<Container> getSubContainers(String containerId) {
 		//取得容器列表
-		List<Container> containerList = containerMapper.getListByParentId(containerId);
+		List<Container> containerOrgList = containerMapper.getListByParentId(containerId);
+		List<Container> containerList = new ArrayList<Container>();
+		for(Container currContainer : containerOrgList){
+			try {
+				containerList.add((Container) currContainer.deepCopy());
+			}catch (Exception e){
+				containerList.add(new Container());
+				e.printStackTrace();
+			}
+		}
 		ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
 		HttpServletRequest request =  attributes.getRequest();
 		Cookie[] cookies = request.getCookies();

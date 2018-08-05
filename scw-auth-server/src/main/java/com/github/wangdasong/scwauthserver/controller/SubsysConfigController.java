@@ -1,12 +1,10 @@
-package com.github.wangdasong.scwproviderwebeditor.controller.webpage;
+package com.github.wangdasong.scwauthserver.controller;
 
+import com.github.wangdasong.scwauthserver.Constants;
+import com.github.wangdasong.scwauthserver.dao.entity.SubsysConfig;
+import com.github.wangdasong.scwauthserver.service.SubsysConfigService;
 import com.github.wangdasong.scwbasecore.controller.base.BaseController;
 import com.github.wangdasong.scwbasecore.utils.paging.Pagination;
-import com.github.wangdasong.scwproviderwebeditor.Constants;
-import com.github.wangdasong.scwproviderwebeditor.dao.entity.SubsysConfig;
-import com.github.wangdasong.scwproviderwebeditor.dao.entity.Widget;
-import com.github.wangdasong.scwproviderwebeditor.service.SubsysConfigService;
-import com.github.wangdasong.scwproviderwebeditor.service.WidgetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 
 /**
  * 服务提供者配置操作相关
@@ -25,8 +22,8 @@ import java.util.List;
 public class SubsysConfigController extends BaseController {
 	@Autowired
 	SubsysConfigService subsysConfigService;
-	@Autowired
-	WidgetService widgetService;
+//	@Autowired
+//	WidgetService widgetService;
 //	@Autowired
 //	ProviderConfigService providerConfigService;
 //
@@ -65,17 +62,13 @@ public class SubsysConfigController extends BaseController {
 		rep.addCookie(subsysCodeCookie);
 		SubsysConfig subsysConfig = new SubsysConfig();
 		subsysConfig.setCode(subsysCode);
-		List<SubsysConfig> subsysConfigList = subsysConfigService.getEntityListByCondition(subsysConfig);
-		if(subsysConfigList != null && subsysConfigList.size() > 0){
-			subsysConfig = subsysConfigService.getEntityListByCondition(subsysConfig).get(0);
-		}
-
+		subsysConfig = subsysConfigService.getEntityListByCondition(subsysConfig).get(0);
 		return subsysConfig;
 	}
-
-	/**
+/*
+	*//**
 	 * 修改
-	 */
+	 *//*
 	@RequestMapping(value = Constants.REST_SUBSYS_EDIT)
 	@ResponseBody
 	public SubsysConfig edit(SubsysConfig subsysConfig){
@@ -89,17 +82,17 @@ public class SubsysConfigController extends BaseController {
 			currWidget.setCode(subsysConfig.getCode());
 			widgetService.editEntity(currWidget);
 		}
-		/*List<ProviderConfig> providerConfigList = providerConfigService.getProviderConfigsByCode(oldSubsysConfig.getCode());
+		*//*List<ProviderConfig> providerConfigList = providerConfigService.getProviderConfigsByCode(oldSubsysConfig.getCode());
 		for(ProviderConfig providerConfig : providerConfigList ){
 			providerConfig.setCode(subsysConfig.getCode());
 			providerConfigService.edit(providerConfig);
-		}*/
+		}*//*
 		subsysConfigService.edit(subsysConfig);
 		return subsysConfig;
 	}
-	/**
+	*//**
 	 * 新增
-	 */
+	 *//*
 	@RequestMapping(value = Constants.REST_SUBSYS_ADD)
 	public SubsysConfig add(SubsysConfig subsysConfig){
 		if("".equals(subsysConfig.getId())){
@@ -114,9 +107,9 @@ public class SubsysConfigController extends BaseController {
 		widgetService.addEntity(widget);
 		return subsysConfig;
 	}
-	/**
+	*//**
 	 * 删除
-	 */
+	 *//*
 	@RequestMapping(value = Constants.REST_SUBSYS_DEL)
 	@ResponseBody
 	public SubsysConfig del(SubsysConfig subsysConfig){
@@ -141,6 +134,7 @@ public class SubsysConfigController extends BaseController {
 		subsysConfigService.del(subsysConfig.getId());
 		return subsysConfig;
 	}
+	*/
 //	/**
 //	 * 重新加载服务
 //	 */

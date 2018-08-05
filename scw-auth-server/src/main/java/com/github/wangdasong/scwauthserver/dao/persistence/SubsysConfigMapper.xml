@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.github.wangdasong.scwauthserver.dao.persistence.SubsysConfigMapper" >
+  <resultMap id="BaseResultMap" type="com.github.wangdasong.scwauthserver.dao.entity.SubsysConfig" >
+    <id column="SSC_ID" property="id" />
+    <result column="SSC_CODE" property="code" />
+    <result column="SSC_NAME" property="name" />
+    <result column="SSC_LOGO" property="logo" />
+    <result column="SSC_DESCRIPTION" property="description" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    SSC.ID AS SSC_ID,
+    SSC.CODE AS SSC_CODE,
+    SSC.NAME AS SSC_NAME,
+    SSC.LOGO AS SSC_LOGO,
+    SSC.DESCRIPTION AS SSC_DESCRIPTION
+  </sql>
+
+  <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select   <include refid="Base_Column_List" />
+    from SMS_SUBSYS_CONFIG SSC
+    where SSC.ID= #{id}
+  </select>
+  <select id="getAllData" resultMap="BaseResultMap">
+    select   <include refid="Base_Column_List" />
+    from SMS_SUBSYS_CONFIG SSC
+  </select>
+
+
+
+    <sql id="Find_List_Base_Sql" >
+        FROM SMS_SUBSYS_CONFIG SSC
+        <where>
+            <trim prefixOverrides="AND |OR ">
+                <if test="id!=null">
+                    AND SSC.ID='${id}'
+                </if>
+                <if test="code!=null">
+                    AND SSC.CODE='${code}'
+                </if>
+                <if test="name!=null">
+                    AND SSC.NAME='${name}'
+                </if>
+                <if test="logo!=null">
+                    AND SSC.LOGO='${logo}'
+                </if>
+                <if test="description!=null">
+                    AND SSC.DESCRIPTION='${description}'
+                </if>
+            </trim>
+        </where>
+    </sql>
+<select id="getListByCondition" resultMap="BaseResultMap" parameterType="com.github.wangdasong.scwauthserver.dao.entity.SubsysConfig">
+    select   <include refid="Base_Column_List" />
+    <include refid="Find_List_Base_Sql" />
+</select>
+
+
+
+
+  <delete id="deleteById" parameterType="java.lang.String" >
+    delete from SMS_SUBSYS_CONFIG
+    where ID = #{id}
+  </delete>
+
+  <insert id="save" parameterType="com.github.wangdasong.scwauthserver.dao.entity.SubsysConfig" >
+    <selectKey keyProperty="id" resultType="java.lang.String" order="BEFORE">
+        <if test="@com.github.wangdasong.scwauthserver.dao.entity.SubsysConfig@dbDialog=='oracle'">
+        SELECT SYS_GUID() AS ID FROM DUAL
+        </if>
+        <if test="@com.github.wangdasong.scwauthserver.dao.entity.SubsysConfig@dbDialog=='mysql'">
+        SELECT REPLACE(UUID(),'-','') FROM DUAL;
+        </if>
+    </selectKey>
+    insert into SMS_SUBSYS_CONFIG
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                    ID,
+            </if>
+            <if test="code != null" >
+                    CODE,
+            </if>
+            <if test="name != null" >
+                    NAME,
+            </if>
+            <if test="logo != null" >
+                    LOGO,
+            </if>
+            <if test="description != null" >
+                    DESCRIPTION,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                    #{id},
+            </if>
+            <if test="code != null" >
+                    #{code},
+            </if>
+            <if test="name != null" >
+                    #{name},
+            </if>
+            <if test="logo != null" >
+                    #{logo},
+            </if>
+            <if test="description != null" >
+                    #{description},
+            </if>
+        </trim>
+  </insert>
+
+  <update id="update" parameterType="com.github.wangdasong.scwauthserver.dao.entity.SubsysConfig" >
+    update SMS_SUBSYS_CONFIG
+    <set>
+      <if test="code != null" > 
+        CODE = #{code},
+      </if> 
+      <if test="name != null" > 
+        NAME = #{name},
+      </if> 
+      <if test="logo != null" > 
+        LOGO = #{logo},
+      </if> 
+      <if test="description != null" > 
+        DESCRIPTION = #{description},
+      </if> 
+    </set>
+    where ID = #{id}
+  </update>
+
+    <sql id="Find_Page_Base_Sql" >
+        FROM SMS_SUBSYS_CONFIG SSC
+        <where>
+            <trim prefixOverrides="AND |OR ">
+                <if test="options.id!=null">
+                    AND SSC.ID='${options.id}'
+                </if>
+                <if test="options.code!=null">
+                    AND SSC.CODE='${options.code}'
+                </if>
+                <if test="options.name!=null">
+                    AND SSC.NAME='${options.name}'
+                </if>
+                <if test="options.logo!=null">
+                    AND SSC.LOGO='${options.logo}'
+                </if>
+                <if test="options.description!=null">
+                    AND SSC.DESCRIPTION='${options.description}'
+                </if>
+            </trim>
+        </where>
+    </sql>
+
+    <sql id="Sort_Page_Base_Sql" >
+        <if test="pageSort!=null">
+            order by 
+            <foreach item="item" index="index" collection="pageSortArray" separator="," >
+                <if test="item=='id'">
+                    ID
+                </if>
+                <if test="item=='id desc'">
+                    ID DESC
+                </if>
+                <if test="item=='code'">
+                    CODE
+                </if>
+                <if test="item=='code desc'">
+                    CODE DESC
+                </if>
+                <if test="item=='name'">
+                    NAME
+                </if>
+                <if test="item=='name desc'">
+                    NAME DESC
+                </if>
+                <if test="item=='logo'">
+                    LOGO
+                </if>
+                <if test="item=='logo desc'">
+                    LOGO DESC
+                </if>
+                <if test="item=='description'">
+                    DESCRIPTION
+                </if>
+                <if test="item=='description desc'">
+                    DESCRIPTION DESC
+                </if>
+            </foreach>
+        </if>
+    </sql>
+
+    <select id="findPageData" parameterType="com.github.wangdasong.scwbasecore.utils.paging.Pagination" resultMap="BaseResultMap">
+        <if test="@com.github.wangdasong.scwauthserver.dao.entity.SubsysConfig@dbDialog=='oracle'">
+        	<include refid="oraclesplit_prefix" />
+        </if>
+	    <if test="@com.github.wangdasong.scwauthserver.dao.entity.SubsysConfig@dbDialog=='mysql'">
+        	select
+        </if>
+        <include refid="Base_Column_List" />
+        <include refid="Find_Page_Base_Sql" />
+		<include refid="Sort_Page_Base_Sql" />
+		<if test="@com.github.wangdasong.scwauthserver.dao.entity.SubsysConfig@dbDialog=='oracle'">
+        	<include refid="oraclesplit_suffix" />
+        </if>
+		<if test="@com.github.wangdasong.scwauthserver.dao.entity.SubsysConfig@dbDialog=='mysql'">
+        	<include refid="mysqlsplit_suffix" />
+        </if>
+    </select>
+    <sql id="oraclesplit_prefix">
+        select * from ( select row_.*, rownum rownum_ from (select 
+    </sql>
+    <sql id="oraclesplit_suffix">
+        )row_ where rownum &lt;= #{oracle_maxrow}) where rownum_ > #{oracle_minrow}
+    </sql>
+    <sql id="mysqlsplit_suffix">
+    	limit #{oracle_minrow}, #{pageSize}
+    </sql>
+    <select id="getCount" parameterType="com.github.wangdasong.scwbasecore.utils.paging.Pagination" resultType="int">
+        select count(*) 
+        <include refid="Find_Page_Base_Sql" />
+    </select>
+
+
+</mapper>

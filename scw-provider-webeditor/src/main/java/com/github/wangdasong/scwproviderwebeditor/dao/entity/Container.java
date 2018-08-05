@@ -8,10 +8,12 @@ package com.github.wangdasong.scwproviderwebeditor.dao.entity;
 
 import com.github.wangdasong.scwbasecore.dao.entity.base.BaseEntity;
 
+import java.io.*;
 import java.util.Date;
 import java.util.List;
 
-public class Container extends BaseEntity {
+public class Container extends BaseEntity implements Serializable {
+    private static final long serialVersionUID = -8834559347461591191L;
 
     private String code;
     private String name;
@@ -164,6 +166,15 @@ public class Container extends BaseEntity {
 		this.width = width;
 	}
 
-
+    public Object deepCopy() throws Exception{
+        //将该对象序列化成流,因为写在流里的是对象的一个拷贝，而原对象仍然存在于JVM里面。所以利用这个特性可以实现对象的深拷贝
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        ObjectOutputStream oos = new ObjectOutputStream(bos);
+        oos.writeObject(this);
+        //将流序列化成对象
+        ByteArrayInputStream bis = new ByteArrayInputStream(bos.toByteArray());
+        ObjectInputStream ois = new ObjectInputStream(bis);
+        return ois.readObject();
+    }
 
 }
