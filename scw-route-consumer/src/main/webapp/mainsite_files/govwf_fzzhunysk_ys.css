@@ -1,0 +1,14 @@
+@font-face {
+    font-family:"govwf_fzzhunysk_ys";
+    src:url("govwf_fzzhunysk_ys.woff") format("woff"), /* chrome, firefox */
+    url("govwf_fzzhunysk_ys.ttf") format("truetype"), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+    url("govwf_fzzhunysk_ys.svg#govwf_fzzhunysk_ys") format("svg"); /* iOS 4.1- */
+    font-style: normal;
+    font-weight: normal;
+}
+@font-face {
+    font-family:"govwf_fzzhunysk_ys";
+    src: url("govwf_fzzhunysk_ys.eot"); /* IE9 */
+    font-style: normal;
+    font-weight: normal;
+}

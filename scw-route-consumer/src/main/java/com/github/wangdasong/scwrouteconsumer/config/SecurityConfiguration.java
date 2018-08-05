@@ -21,7 +21,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 //除了以下url其他地址都要进行权限认证
                 .authorizeRequests()
-                .antMatchers( "/demo-ace/**", "/login", "/app/**", "/thirdparty/**").permitAll()
+                .antMatchers( "/demo-ace/**","/home.html", "/mainsite_files/**", "/login", "/app/**", "/thirdparty/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 //资源可作为iframe内容使用

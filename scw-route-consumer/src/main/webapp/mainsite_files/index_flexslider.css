@@ -1,0 +1,51 @@
+@charset "utf-8";
+/* 专题滚动 */
+.flexslider {
+	margin:5px auto 22px;
+	position: relative;
+	width: 285px;
+	height: 57px;
+	overflow: hidden;
+	zoom: 1;
+}
+.flex-viewport {
+	max-height: 2000px;
+	-webkit-transition: all 1s ease;
+	-moz-transition: all 1s ease;
+	transition: all 1s ease;
+}
+.flexslider .slides {
+	zoom: 1;
+}
+.flexslider .slides li {
+	width: 285px;
+	overflow: hidden;
+	float: left;
+}
+.flexslider .slides li img {
+	width: 285px;
+	height: 57px;
+}
+.flex-direction-nav {
+	display: none;
+}
+.flex-direction-nav a {
+	width: 11px;
+	height: 20px;
+	line-height: 99em;
+	overflow: hidden;
+	margin: 0;
+	display: block;
+	position: absolute;
+	bottom: 17px;
+	z-index: 10;
+	cursor: pointer;
+}
+.flex-direction-nav .flex-prev {
+	background:url(/govweb/xhtml/2016gov/images/index/zt_left.png) no-repeat;
+	left:8px;
+}
+.flex-direction-nav .flex-next {
+	background:url(/govweb/xhtml/2016gov/images/index/zt_right.png) no-repeat;
+	left:269px;
+}
