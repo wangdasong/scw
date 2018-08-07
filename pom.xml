@@ -6,7 +6,16 @@
 	<groupId>com.github.wangdasong</groupId>
 	<artifactId>scw-parent</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>pom</packaging>
+    <modules>
+        <module>scw-auth-server</module>
+        <module>scw-base-core</module>
+        <module>scw-config-server</module>
+        <module>scw-eureka-server</module>
+        <module>scw-provider-webeditor</module>
+        <module>scw-route-consumer</module>
+        <module>scw-base-task</module>
+    </modules>
+    <packaging>pom</packaging>
 
 	<name>scw-parent</name>
 	<description>Demo project for Spring Boot</description>

@@ -12,6 +12,7 @@
         <module name="scw-eureka-server" />
         <module name="scw-provider-webeditor" />
         <module name="scw-route-consumer" />
+        <module name="scwbasetask" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -22,6 +23,7 @@
       <module name="scw-parent" target="1.7" />
       <module name="scw-provider-webeditor" target="1.7" />
       <module name="scw-route-consumer" target="1.7" />
+      <module name="scwbasetask" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>
