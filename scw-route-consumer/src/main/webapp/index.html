@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta charset="utf-8"/>
-    <title>社区数据收集展示信息化平台</title>
+    <title>CLCT信息化平台</title>
 
     <meta name="description" content="User login page"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
@@ -256,7 +256,7 @@
 					<i class="icon-desktop"></i>
 					</small>
 					<small id="subsys_name">
-						社区数据收集展示信息化平台
+						CLCT信息化平台
 					</small>
 				</a><!-- /.brand -->
 			</div><!-- /.navbar-header -->
@@ -524,9 +524,9 @@ function getSubsysList(){
 	            		var code = currSubsysConfig.code;
 	            		var name = currSubsysConfig.name;
 	            		var logo = currSubsysConfig.logo;
-	            		var active = currSubsysConfig.active;
 	            		var activeStr = "";
-	            		if(active){
+                        var currSubsysCode = Cookies.get('subsysCode');
+	            		if(currSubsysCode == code){
 	            			activeStr = "active";
 	            		}
 	            		var currNodeHtml = '<li class="' + activeStr + '"><a data-toggle="tab" onclick=gotoSubsys("/api-webeditor/subsys/change?subsysCode=' + code + '") href="#"><i class="green ' + logo + ' bigger-110"></i>' + name + '</a></li>';

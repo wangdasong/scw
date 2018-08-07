@@ -12,10 +12,8 @@ public interface WidgetMapper extends BaseDaoMapper<Widget> {
 	@CacheEvict(value="pageDataCache", allEntries=true)
     public void save(Widget entity)throws RuntimeException;
 
-	@CacheEvict(value="pageDataCache", allEntries=true)
     public void update(Widget entity)throws RuntimeException;
 
-	@CacheEvict(value="pageDataCache", allEntries=true)
     public void deleteById(String id)throws RuntimeException;
 }
 

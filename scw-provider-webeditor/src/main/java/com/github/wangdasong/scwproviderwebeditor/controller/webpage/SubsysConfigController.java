@@ -69,6 +69,7 @@ public class SubsysConfigController extends BaseController {
 		if(subsysConfigList != null && subsysConfigList.size() > 0){
 			subsysConfig = subsysConfigService.getEntityListByCondition(subsysConfig).get(0);
 		}
+		subsysConfig.setActive(true);
 
 		return subsysConfig;
 	}

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * 服务提供者配置操作相关
@@ -62,7 +63,11 @@ public class SubsysConfigController extends BaseController {
 		rep.addCookie(subsysCodeCookie);
 		SubsysConfig subsysConfig = new SubsysConfig();
 		subsysConfig.setCode(subsysCode);
-		subsysConfig = subsysConfigService.getEntityListByCondition(subsysConfig).get(0);
+		List<SubsysConfig> subsysConfigList = subsysConfigService.getEntityListByCondition(subsysConfig);
+		if(subsysConfigList != null && subsysConfigList.size() > 0){
+			subsysConfig = subsysConfigService.getEntityListByCondition(subsysConfig).get(0);
+		}
+		subsysConfig.setActive(true);
 		return subsysConfig;
 	}
 /*

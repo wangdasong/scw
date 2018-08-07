@@ -15,6 +15,7 @@ import com.github.wangdasong.scwproviderwebeditor.dao.entity.Widget;
 import com.github.wangdasong.scwproviderwebeditor.dao.persistence.WidgetMapper;
 import com.github.wangdasong.scwproviderwebeditor.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -125,6 +126,7 @@ public class WidgetServiceImpl extends BaseServiceImpl<Widget> implements DataSr
 	}
 
 	@Override
+	@CacheEvict(value="pageDataCache", key="#entity.getId()", allEntries=true)
 	public Widget saveOrUpdateWidget(Widget widget) {
 		//正常插入控件数据到DB
 		if(widget.getId() == null || "".equals(widget.getId())){
@@ -136,6 +138,7 @@ public class WidgetServiceImpl extends BaseServiceImpl<Widget> implements DataSr
 	}
 
 	@Override
+	@CacheEvict(value="pageDataCache", key="#entity.getId()", allEntries=true)
 	public Widget saveWidgetInfoAll(Widget widget) {
 		//页面编辑创建控件
 		widget.setId(null);
@@ -250,6 +253,7 @@ public class WidgetServiceImpl extends BaseServiceImpl<Widget> implements DataSr
 	}
 
 	@Override
+	@CacheEvict(value="pageDataCache", allEntries=true)
 	public Widget delEntity(String id) {
 		Widget widgetDetail = this.getEntityDetailById(id);
 		for(Element element : widgetDetail.getElements()){
